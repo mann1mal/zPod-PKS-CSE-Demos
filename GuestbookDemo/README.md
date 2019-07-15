@@ -2,18 +2,18 @@
 
 The guestbook app demo helps demonstrate the usage of persistent storage, which is automated via the vSphere Cloud Provider, as well as the creation of NSX-T Load Balancer for external application access. We will also showcase the built-in ingress controller offered per cluster in NSX-T.
 
-1. Navigate to the "demofiles/guestbook" directory on the cse-client server:
+Navigate to the "demofiles/guestbook" directory on the cse-client server:
 ~~~
 $ cd ~/demofiles/guestbook
 ~~~
-2. Use kubectl to deploy the storage class and persistent volume claim we will use to provide persistent storage to the guestbook app:
+Use kubectl to deploy the storage class and persistent volume claim we will use to provide persistent storage to the guestbook app:
 ~~~
 $ kubectl create -f redis-master-claim.yaml
 $ kubectl create -f redis-slave-claim.yaml
 $ kubectl create -f redis-sc.yaml
 ~~~
 
-3. View the storage resources we just created:
+View the storage resources we just created:
 ~~~
 $ kubectl get sc
 $ kubectl describe sc thin-disk
@@ -29,12 +29,12 @@ Log in to the PKS vcsa (vcsa.pks.zpod.io), navigate to the "NFS-02" datastore an
 ![Screen Shot 2019-07-02 at 9 08 46 AM](https://user-images.githubusercontent.com/32826912/61248204-9d381080-a720-11e9-8c18-15f41296829e.png)
 
 
-4. Create the components of the guestbook app and watch for the pods to be created:
+Create the components of the guestbook app and watch for the pods to be created:
 ~~~
 $ kubectl create -f guestbook-aio.yaml
 $ kubectl get pods -o wide -w
 ~~~
-5. List the services we created for the guestbook app and take note of the 10.96.59.X IP address for the LoadBalancer service. We will use this IP to access the guestbook app in the browser:
+List the services we created for the guestbook app and take note of the 10.96.59.X IP address for the LoadBalancer service. We will use this IP to access the guestbook app in the browser:
 ~~~
 $ kubectl get services
 ~~~
@@ -56,7 +56,7 @@ $ kubectl get pods -l tier=frontend -o wide
 
 All of this automation is made possible by the NSX-T Container Plugin.
 
-6. If you haven't already, navigate to the homepage of the GuestBook app (IP of the LoadBalancer service from step 5.) and enter a couple of entries. We will then delete the backend database and cache.
+If you haven't already, navigate to the homepage of the GuestBook app (IP of the LoadBalancer service from step 5.) and enter a couple of entries. We will then delete the backend database and cache.
 ~~~
 $ kubectl get pod -l tier=frontend
 $ kubectl get pod -l tier=backend
@@ -65,7 +65,7 @@ $ kubectl get pod -w
 ~~~
 The redis master and slave pods will be automatically created because they are part of a kubernetes deployment, which ensures there is always at least X number of instance of these pods running (in our case, X=1). Wait for the pods to return to the "Started" state and refresh the webpage to ensure the previous guestbook entries are still present.
 
-7. Let's scale our frontend pods to 5 instead of 3 and monitor what happens in NSX-T:
+Let's scale our frontend pods to 5 instead of 3 and monitor what happens in NSX-T:
 ~~~
 $ kubectl get deployments
 $ kubectl scale deployments frontend --replicas=5
@@ -77,7 +77,7 @@ Now we should have 5 pods for the frontend deployment, up from 3. If we look in 
 
 <img width="1194" alt="Screen Shot 2019-07-08 at 9 22 11 PM" src="https://user-images.githubusercontent.com/32826912/61248463-1cc5df80-a721-11e9-855a-c7bba203405d.png">
 
-8. Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T if you'd like):
+Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T if you'd like):
 ~~~
 $ kubectl scale deployments frontend --replicas=3
 ~~~
@@ -86,25 +86,25 @@ $ kubectl scale deployments frontend --replicas=3
 
 As you may notice, if we use the service type of "LoadBalancer" to expose an app to external connections, we would still need to manually add DNS records for each NSX-T Load Balancer IP created so that external connections could resolve on a hostname. If we use a service type of "Ingress" instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly from the kubernetes cluster via the Ingress controller that is automatically deployed in NSX-T on cluster creation.
 
-1. Change the "frontend" service from "LoadBalancer" type to "ClusterIP" type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
+Change the "frontend" service from "LoadBalancer" type to "ClusterIP" type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
 ~~~
 $ kubectl edit svc frontend
 ~~~
 
 <img width="514" alt="Screen Shot 2019-07-10 at 10 28 59 AM" src="https://user-images.githubusercontent.com/32826912/61248498-2d765580-a721-11e9-8a09-87601e39ac8b.png">
 
-2. Verify the "frontend" service is now type "ClusterIP"
+Verify the "frontend" service is now type "ClusterIP"
 ~~~
 $ kubectl get svc
 ~~~
 Now we are ready to create our ingress service to expose the guestbook app via FQDN. In the lab environment, we have set up a DNS wildcard that resolves "*.app.pks.zpod.io" to the IP address of the NSX-T load balancer that is automatically created by PKS to serve as an ingress controller (per cluster). This allows our developers to deploy new apps and use the ingress service type in kubernetes to define DNS hostnames that can resolve to the IP of the NSX-T load balancer that is serving as the ingress controller instead of having to update DNS records for each of our apps exposed to the external net. 
 
-3. Review the frontend-ingress.yaml file and note the "host:" entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
+Review the frontend-ingress.yaml file and note the "host:" entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
 ~~~
 $ kubectl create -f frontend-ingress.yaml 
 $ kubectl get ingress
 ~~~
-4. Navigate to the URL displayed in the output of the above command to verify connectivity:
+Navigate to the URL displayed in the output of the above command to verify connectivity:
 
 <img width="827" alt="Screen Shot 2019-07-10 at 11 19 43 AM" src="https://user-images.githubusercontent.com/32826912/61248575-5f87b780-a721-11e9-870f-9761277a5690.png">
 
