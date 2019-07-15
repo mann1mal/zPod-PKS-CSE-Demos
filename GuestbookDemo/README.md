@@ -1,4 +1,4 @@
-## Guestbook Demo Workflow
+# Guestbook Demo Workflow
 
 The guestbook app demo helps demonstrate the usage of persistent storage, which is automated via the vSphere Cloud Provider, as well as the creation of NSX-T Load Balancer for external application access. We will also showcase the built-in ingress controller offered per cluster in NSX-T.
 
