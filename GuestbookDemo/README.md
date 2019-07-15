@@ -24,9 +24,6 @@ Log in to the PKS vcsa (vcsa.pks.zpod.io), navigate to the "NFS-02" datastore an
 
 
 
-
-
-
 Create the components of the guestbook app and watch for the pods to be created:
 ~~~
 $ kubectl create -f guestbook-aio.yaml
