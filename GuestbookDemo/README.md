@@ -81,33 +81,5 @@ Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T 
 ~~~
 $ kubectl scale deployments frontend --replicas=3
 ~~~
-
-# Change LoadBalancer to Ingress Controller
-
-As you may notice, if we use the service type of "LoadBalancer" to expose an app to external connections, we would still need to manually add DNS records for each NSX-T Load Balancer IP created so that external connections could resolve on a hostname. If we use a service type of "Ingress" instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly from the kubernetes cluster via the Ingress controller that is automatically deployed in NSX-T on cluster creation.
-
-Change the "frontend" service from "LoadBalancer" type to "ClusterIP" type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
-~~~
-$ kubectl edit svc frontend
-~~~
-
-<img width="514" alt="Screen Shot 2019-07-10 at 10 28 59 AM" src="https://user-images.githubusercontent.com/32826912/61248498-2d765580-a721-11e9-8a09-87601e39ac8b.png">
-
-Verify the "frontend" service is now type "ClusterIP"
-~~~
-$ kubectl get svc
-~~~
-Now we are ready to create our ingress service to expose the guestbook app via FQDN. In the lab environment, we have set up a DNS wildcard that resolves "*.app.pks.zpod.io" to the IP address of the NSX-T load balancer that is automatically created by PKS to serve as an ingress controller (per cluster). This allows our developers to deploy new apps and use the ingress service type in kubernetes to define DNS hostnames that can resolve to the IP of the NSX-T load balancer that is serving as the ingress controller instead of having to update DNS records for each of our apps exposed to the external net. 
-
-Review the frontend-ingress.yaml file and note the "host:" entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
-~~~
-$ kubectl create -f frontend-ingress.yaml 
-$ kubectl get ingress
-~~~
-Navigate to the URL displayed in the output of the above command to verify connectivity:
-
-<img width="827" alt="Screen Shot 2019-07-10 at 11 19 43 AM" src="https://user-images.githubusercontent.com/32826912/61248575-5f87b780-a721-11e9-870f-9761277a5690.png">
-
-Taadaa!!
-
+Proceed to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/Ingress%20and%20NSX-T%20Integration%20Demo/README.md) walkthrough to learn how to configure an ingress service of apps running in PKS k8 clusters
 
