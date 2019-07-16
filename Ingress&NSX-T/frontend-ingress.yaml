@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: guestbook.app.pks.zpod.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: frontend 
+          servicePort: 80
