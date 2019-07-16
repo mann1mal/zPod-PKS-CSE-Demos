@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: guestbook.app.pks.zpod.io
+  - host: guestbook.demo.pks.zpod.io
     http:
       paths:
       - path: /*
