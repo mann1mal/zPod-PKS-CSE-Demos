@@ -81,5 +81,5 @@ Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T 
 ~~~
 $ kubectl scale deployments frontend --replicas=3
 ~~~
-Proceed to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo) walkthrough to learn how to configure an ingress service of apps running in PKS k8 clusters
+Proceed to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Ingress%26NSX-T) walkthrough to learn how to configure an ingress service of apps running in PKS k8 clusters
 
