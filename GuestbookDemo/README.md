@@ -2,6 +2,20 @@
 
 The guestbook app demo helps demonstrate the usage of persistent storage, which is automated via the vSphere Cloud Provider, as well as the creation of NSX-T Load Balancer for external application access. We will also showcase the built-in ingress controller offered per cluster in NSX-T.
 
+**Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
+
+Before you start the demo, let's ensure we are accessing the `demo-cluster:`
+~~~
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
+
+$ vcd cse cluster config demo-cluster > ~/.kube/config
+
+$ kubectl get nodes
+NAME                                   STATUS   ROLES    AGE     VERSION
+0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
+713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
+8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
+~~~
 Navigate to the "demofiles/guestbook" directory on the cse-client server:
 ~~~
 $ cd ~/demofiles/guestbook
