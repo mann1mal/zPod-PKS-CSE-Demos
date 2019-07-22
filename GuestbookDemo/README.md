@@ -4,7 +4,7 @@ The guestbook app demo helps demonstrate the usage of persistent storage, which 
 
 **Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
 
-Before you start the demo, let's ensure we are accessing the `demo-cluster:`
+Before you start the demo, let's ensure we are accessing the `demo-cluster`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
 
