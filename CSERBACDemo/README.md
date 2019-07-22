@@ -64,7 +64,7 @@ $ vcd role add-right "k8deploy" "{cse}:PKS DEPLOY RIGHT"
 ~~~
 Now let's login to the vcd-cli with our dev1 user to test a cluster creation:
 ~~~
-$ vcd login director.vcd.zpod.io enterprise-dev-org dev1 -iwp Boshman1!
+$ vcd login director.vcd.zpod.io enterprise-dev-org dev1 -iwp VMware1!
 
 $ vcd cse cluster create dev1-cluster
 property                     value
