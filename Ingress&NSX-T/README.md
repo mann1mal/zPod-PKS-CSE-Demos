@@ -4,6 +4,8 @@ As you may remember from our [first demo](https://github.com/mann1mal/zPod-PKS-C
 
 If we use a service type of "Ingress" instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly at the kubernetes layer via the Ingress controller (layer 7 load balancer) that is automatically deployed in NSX-T upon cluster creation. This allows developers to fully manager the hostnames that resolve to multiple apps without having to create DNS records for each service they are looking to expose externally.
 
+**Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
+
 ## Configure Ingress Service for Guestbook App
 
 After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the "frontend" service from "LoadBalancer" type to "ClusterIP" type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
