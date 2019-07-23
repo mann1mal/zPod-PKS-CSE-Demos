@@ -147,7 +147,6 @@ spec:
   selector:
     app: guestbook
     tier: frontend
-  type: LoadBalancer
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
