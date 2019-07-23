@@ -18,9 +18,9 @@ NAME                                   STATUS   ROLES    AGE     VERSION
 713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
 8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
 ~~~
-Navigate to the "demofiles/guestbook" directory on the cse-client server:
+Navigate to the `~/zPod-PKS-CSE-Demos/GuestbookDemo/` directory on the cse-client server:
 ~~~
-$ cd ~/demofiles/guestbook
+$ cd cd ~/zPod-PKS-CSE-Demos/GuestbookDemo/
 ~~~
 Use kubectl to deploy the storage class and persistent volume claim we will use to provide persistent storage to the guestbook app:
 ~~~
