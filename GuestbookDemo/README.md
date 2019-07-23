@@ -7,9 +7,11 @@ The guestbook app demo helps demonstrate the usage of persistent storage, which 
 Before you start the demo, let's ensure we are accessing the `demo-cluster`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
-
+~~~
+~~~
 $ vcd cse cluster config demo-cluster > ~/.kube/config
-
+~~~
+~~~
 $ kubectl get nodes
 NAME                                   STATUS   ROLES    AGE     VERSION
 0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
