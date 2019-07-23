@@ -67,7 +67,8 @@ $ vcd role add-right "k8deploy" "{cse}:PKS DEPLOY RIGHT"
 Now let's login to the vcd-cli with our dev1 user to test a cluster creation:
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev1 -iwp VMware1!
-
+~~~
+~~~
 $ vcd cse cluster create dev1-cluster
 property                     value
 ---------------------------  ------------------------
@@ -102,7 +103,8 @@ NAME                                   STATUS   ROLES    AGE    VERSION
 While you wait for the cluster to create (you can check status with `vcd cse cluster info dev1-cluster`), let's make sure RBAC is working as expected by logging into the org with our dev3 user and trying to provision a cluster:
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev3 -iwp VMware1!
-
+~~~
+~~~
 $ vcd cse cluster create rbac-test
 Usage: vcd cse cluster create [OPTIONS] NAME
 Try "vcd cse cluster create -h" for help.
