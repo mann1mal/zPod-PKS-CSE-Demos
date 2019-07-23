@@ -35,11 +35,11 @@ $ kubectl create -f frontend-ingress.yaml
 ~~~
 $ kubectl get ingress
 NAME               HOSTS                        ADDRESS                     PORTS   AGE
-frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      32m
+frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      32m
 ~~~
 Navigate to the URL displayed in the output of the above command to verify connectivity:
 
-<img width="827" alt="Screen Shot 2019-07-10 at 11 19 43 AM" src="https://user-images.githubusercontent.com/32826912/61248575-5f87b780-a721-11e9-870f-9761277a5690.png">
+![Screen Shot 2019-07-23 at 2 24 39 PM](https://user-images.githubusercontent.com/32826912/61737232-c32f6780-ad55-11e9-8b89-a34e0f87a150.png)
 
 Let's hop over to the NSX-T Manager to view the L7 load balancer serving as our ingress controller for this cluster. Navigate to https://nsx.pks.zpod.io/ and login with the `audit` user's credentials (audit/VMware1!).
 
