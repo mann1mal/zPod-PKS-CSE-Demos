@@ -56,7 +56,7 @@ ent-dev-ovdc        enterprise-dev-org  ent-pks
 base-ovdc           base-org            none
 prod-ovdc           prod-org            ent-pks
 ~~~
-If we look at users in the `enterprise-dev-org,` we can see that two users (dev1 and dev2) have the custom `k8deploy` role while another user (dev3):
+If we look at users in the `enterprise-dev-org` in vCloud Director, we can see that two users (dev1 and dev2) have the custom `k8deploy` role while another user (dev3):
 
 ![Screen Shot 2019-07-22 at 5 17 21 PM](https://user-images.githubusercontent.com/32826912/61666075-9c652880-aca4-11e9-8177-e7bdc5ec0bdb.png)
 
