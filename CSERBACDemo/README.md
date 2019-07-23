@@ -15,7 +15,7 @@ VMware1!
 ~~~
 Once on the cse-client, run the clean-up script to ensure the `enterprise-dev-org` is not enabled to provision Enterprise PKS clusters:
 ~~~
-$ ./demofiles/onboarding-demo-cleanup.sh
+$ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
 ~~~
 Verify the `enterprise-dev-org` and it's corresponding OvDC is NOT enabled with a `k8 provider`
 ~~~
