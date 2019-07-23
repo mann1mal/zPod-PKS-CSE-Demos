@@ -1,4 +1,4 @@
-# CSE RBAC Functionality Demo
+# CSE Tenant On-Boarding and RBAC Functionality Demo
 
 ![Picture1](https://user-images.githubusercontent.com/32826912/61664863-b3564b80-aca1-11e9-8cbd-9f796bb29382.png)
 
