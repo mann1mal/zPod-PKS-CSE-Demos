@@ -82,6 +82,23 @@ name                         dev1-cluster
 worker_haproxy_ip_addresses
 ~~~
 
+**Note:** If you'd like to access this cluster via `kubectl` on the cse server, you'll need to add the `kubernetes_master_ips` (will only be available after the cluster provision is complete) and `kubernetes_master_host` values into the `/etc/hosts` file of the cse server so the hostname will resolve correctly.
+
+~~~
+$ sudo vi /etc/hosts
+
+#add the following line to the file
+<kubernetes_master_ip>  dev1-cluster.pks.zpod.io
+~~~
+~~~
+$ vcd cse cluster config dev1-cluster > ~/.kube/config
+~~~
+~~~
+$ kubectl get nodes
+NAME                                   STATUS   ROLES    AGE    VERSION
+0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   10m    v1.13.5
+~~~
+
 While you wait for the cluster to create (you can check status with `vcd cse cluster info dev1-cluster`), let's make sure RBAC is working as expected by logging into the org with our dev3 user and trying to provision a cluster:
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev3 -iwp VMware1!
