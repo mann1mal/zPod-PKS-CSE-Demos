@@ -84,11 +84,11 @@ NAME               HOSTS                        ADDRESS                     PORT
 frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      87m
 yelb-ingress       yelb.demo.pks.zpod.io        10.96.59.100,100.64.32.15   80      75m
 ~~~
-Note, the `10.96.59.100` is the same public IP for both hostnames. This is the IP of the L7 NSX-T load balancer that acts as the ingress controller for the cluster.
+Note, `10.96.59.100` is the same public IP for both hostnames. This is the IP of the L7 NSX-T load balancer that acts as the ingress controller for the cluster.
 
 Let's navigate to the hostname of our new app to ensure it is available:
 
-![Screen Shot 2019-07-23 at 2 46 10 PM](https://user-images.githubusercontent.com/32826912/61738653-c24c0500-ad58-11e9-95d1-6ca22c57a570.png)
+![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
 
 Voila! Now let's navigate back to the NSX-T manager to see what's happening on the NSX-T side. Again, navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. We should now see a new server pool entry ending in `...default-yelb-ui-80` with our `yelb-ui` pod name listed in the **Members/NSGroups** column:
 
@@ -99,3 +99,7 @@ $ kubectl get pods -l app=yelb-ui
 NAME                      READY   STATUS    RESTARTS   AGE
 yelb-ui-fc74d567f-vh2qb   1/1     Running   0          96m
 ~~~
+
+There is now an additional server pool within our virtual server tied to our L7 loadbalancer that will except request for the yelb UI at `yelb.demo.pks.zpod.io` and direct those connections to the `yelb-ui-fc74d567f-vh2qb` pod while the existing server pool will continue to direct requests coming in at `guestbook.demo.pks.zpod.io` to the `frontend-xxx` pods.
+
+So there we have it, the integration between NSX-T and Enterprise PKS provides a resource for our developers to easily expose their applications to external users via an FQDN without having to work with the infrastructure team to create resources to support access every time they spin up a new application.
