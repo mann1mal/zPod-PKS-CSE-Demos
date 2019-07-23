@@ -31,10 +31,30 @@ $ cd ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/
 Review the frontend-ingress.yaml file and note the `host:` entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI(frontend service) for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
 ~~~
 $ kubectl create -f frontend-ingress.yaml 
+~~~
+~~~
 $ kubectl get ingress
+NAME               HOSTS                        ADDRESS                     PORTS   AGE
+frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      32m
 ~~~
 Navigate to the URL displayed in the output of the above command to verify connectivity:
 
 <img width="827" alt="Screen Shot 2019-07-10 at 11 19 43 AM" src="https://user-images.githubusercontent.com/32826912/61248575-5f87b780-a721-11e9-870f-9761277a5690.png">
+
+Let's hop over to the NSX-T Manager to view the L7 load balancer serving as our ingress controller for this cluster. Navigate to https://nsx.pks.zpod.io/ and login with the `audit` user's credentials (audit/VMware1!).
+
+Navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. Here, we have (at least) 2 NSX-T load balancers per k8 cluster. The UUID of the demo-cluster is `6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50`. NSX-T assigns the UUID of the cluster to each load balancer it provisions for said. Locate the `pks-6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50-default...` server pool, and click on the integer in the **Members/NSGroups** section:
+
+![Screen Shot 2019-07-23 at 1 22 15 PM](https://user-images.githubusercontent.com/32826912/61733302-7d6ea100-ad4d-11e9-86b3-45bdbb01a8b7.png)
+
+
+We can then verify these are the pod names of the pods that are serving out our frontend WebUI for the guestbook app via the CLI of the cse server:
+~~~
+$ kubectl get pods -l tier=frontend,app=guestbook
+NAME                        READY   STATUS    RESTARTS   AGE
+frontend-7fb9745b88-8nx5k   1/1     Running   0          7m11s
+frontend-7fb9745b88-9zx6r   1/1     Running   0          7m11s
+frontend-7fb9745b88-gcjfd   1/1     Running   0          7m11s
+~~~
 
 ## Adding a Second App
