@@ -41,7 +41,7 @@ Navigate to the URL displayed in the output of the above command to verify conne
 
 ![Screen Shot 2019-07-23 at 2 24 39 PM](https://user-images.githubusercontent.com/32826912/61737232-c32f6780-ad55-11e9-8b89-a34e0f87a150.png)
 
-Let's hop over to the NSX-T Manager to view the L7 load balancer serving as our ingress controller for this cluster. Navigate to https://nsx.pks.zpod.io/ and login with the `audit` user's credentials (audit/VMware1!).
+Let's hop over to the NSX-T Manager to view the L7 load balancer serving as our ingress controller for this cluster. Navigate to https://nsx.pks.zpod.io/ and login with the `audit` user's credentials (`audit/VMware1!`).
 
 Navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. Here, we have (at least) 2 NSX-T load balancers per k8 cluster. The UUID of the demo-cluster is `6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50`. NSX-T assigns the UUID of the cluster to each load balancer it provisions for said. Locate the `pks-6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50-default...` server pool, and click on the integer in the **Members/NSGroups** section:
 
@@ -58,3 +58,44 @@ frontend-7fb9745b88-gcjfd   1/1     Running   0          7m11s
 ~~~
 
 ## Adding a Second App
+
+For our second scenario, our developers want to deploy an additional app in the cluster and expose the UI of the application to external users via an FQDN. Instead of reaching out to the infrastructure team to request an DNS A record creation for the new app, they can use the ingress controller provided to the cluster by NSX-T to serve out the app via FQDN.
+
+On the cse server, let's navigate to the `~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/` directory and review the `yelb-ingress.yaml` configuration file which houses the configuration of our new application components as well as an ingress resource.
+~~~
+$ ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/
+$ less yelb-ingress.yaml
+~~~
+
+Now we're ready to deploy the yelb application:
+~~~
+$ kubectl create -f yelb-ingress.yaml
+~~~
+Let's review the resources created to support the app:
+~~~
+$ kubectl get all -l app=yelb-appserver
+$ kubectl get all -l app=yelb-ui
+$ kubectl get all -l app=yelb-db
+~~~
+Let's also review the ingress resources available in the environment:
+~~~
+$ kubectl get ingress
+NAME               HOSTS                        ADDRESS                     PORTS   AGE
+frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      87m
+yelb-ingress       yelb.demo.pks.zpod.io        10.96.59.100,100.64.32.15   80      75m
+~~~
+Note, the `10.96.59.100` is the same public IP for both hostnames. This is the IP of the L7 NSX-T load balancer that acts as the ingress controller for the cluster.
+
+Let's navigate to the hostname of our new app to ensure it is available:
+
+![Screen Shot 2019-07-23 at 2 46 10 PM](https://user-images.githubusercontent.com/32826912/61738653-c24c0500-ad58-11e9-95d1-6ca22c57a570.png)
+
+Voila! Now let's navigate back to the NSX-T manager to see what's happening on the NSX-T side. Again, navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. We should now see a new server pool entry ending in `...default-yelb-ui-80` with our `yelb-ui` pod name listed in the **Members/NSGroups** column:
+
+![Screen Shot 2019-07-23 at 2 50 20 PM](https://user-images.githubusercontent.com/32826912/61738952-7057af00-ad59-11e9-9401-e9bf6a0600e5.png)
+
+~~~
+$ kubectl get pods -l app=yelb-ui
+NAME                      READY   STATUS    RESTARTS   AGE
+yelb-ui-fc74d567f-vh2qb   1/1     Running   0          96m
+~~~
