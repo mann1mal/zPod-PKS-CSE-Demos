@@ -61,7 +61,7 @@ List the services we created for the guestbook app and take note of the 10.96.59
 ~~~
 $ kubectl get services
 ~~~
-Before (or after) you access the app via the IP of the LoadBalancer service, log into the NSX-T manager (https://nsx.pks.zpod.io) and navigate to the "Advanced Network and Security" tab. Within the "Networking" category, select the "Load Balancers" option. Find your LB instance and locate the virtual server with the "-default-fronted" suffix, note the IP address (same as LoadBalancer service)
+Before (or after) you access the app via the IP of the LoadBalancer service, log into the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the "Advanced Network and Security" tab. Within the "Networking" category, select the "Load Balancers" option. Find your LB instance and locate the virtual server with the "-default-fronted" suffix, note the IP address (same as LoadBalancer service)
 
 ![Screen Shot 2019-07-02 at 9 13 10 AM](https://user-images.githubusercontent.com/32826912/61248270-ba6cdf00-a720-11e9-9e1d-08884c7ab78b.png)
 
