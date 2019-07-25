@@ -1,10 +1,10 @@
 # Kubernetes Network Policy and NSX-T DFW Integration
 
-In this demo, we are going to walk through the process of using the Kubernetes construct of [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to ensure workloads running in our Kubernetes clusters are secured from a network perspective. For those unfamiliar with the Network Policy construct in the Kubernetes world, they are essentially "firewall" rules that can be applied to certain services or pods to restrict pod to pod communication as well as communication between the external network and pods in the Kubernetes cluster.
+In this demo, we are going to walk through the process of using the Kubernetes construct of [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to ensure workloads running in a Kubernetes clusters are secured from a network perspective. For those unfamiliar with the Network Policy construct in the Kubernetes world, they are essentially "firewall" rules that can be applied to certain services or pods to restrict pod to pod communication as well as communication between the external network and pods in the Kubernetes cluster.
 
 ## The NSX Container Plugin
 
-As part of the integration between Enterprise PKS and NSX-T, the [NSX Container Plugin (NCP)](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.do) is responsible for reaching out to the NSX-T Manager API to create networking resources to correlate with the Kubernetes resources that are created by the developers via kubectl. For instance, back in our [second demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo), when we created a namespace to support our applications, the NCP instructed the NSX-T Manager to create a new /24 network and T1 router to support pods running in this new namespace.
+As part of the integration between Enterprise PKS and NSX-T, the [NSX Container Plugin (NCP)](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.do) is responsible for reaching out to the NSX-T Manager API to create networking resources to correlate with the Kubernetes resources that are created by the developers via kubectl. For instance, back in our [second demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo), when we created a namespace to support the applications, the NCP instructed the NSX-T Manager to create a new /24 network and T1 router to support pods running in this new namespace.
 
 Log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Switching** category if it isn't already selected. Type the UUID of the demo-cluster(`6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50`) into the search bar and you will see the NSX-T logical switches created for each namespace in the cluster, including the `appspace` namespace. You can also navigate to the **Routers** tab, search on the cluster UUID and point out the T1 routers for each namespace:
 
@@ -12,7 +12,7 @@ Log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Adv
 
 ![Screen Shot 2019-07-25 at 3 51 05 PM](https://user-images.githubusercontent.com/32826912/61904220-63bb8e00-aef4-11e9-9b2c-06a4f6b62e75.png)
 
-Among other things, the NCP also handles the creation of NSX-T Distributed Firewall Rules when developers create Network Policies in their kubernetes clusters to help extend the level of microsegmentation available to "traditional" compute resources into the kubernetes world. We will walk through this workflow in detail utilizing our Yelb app deployment in the demo below.
+Among other things, the NCP also handles the creation of NSX-T Distributed Firewall Rules when developers create Network Policies in their kubernetes clusters to help extend the level of microsegmentation available to "traditional" compute resources into the kubernetes world. We will walk through this workflow in detail utilizing the Yelb app deployment in the demo below.
 
 ## Network Policies and DFW Rules
 
@@ -24,6 +24,8 @@ $ kubectl config set-context --current --namespace=appspace
 $ kubectl create -f yelb-ingress.yaml
 ~~~
 Let's test connectivity to the Yelb UI at `yelb.demo.pks.zpod.io` to confirm the app deployed succesfully:
+
+**Note:** Chrome has been known to hold onto webpage cahce so may be a good idea to use incognito mode as we try to access the app before and after implementing the network polices
 
 ![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
 
@@ -57,9 +59,9 @@ yelb-ui-dcb8746fb-xf9g6           1/1     Running   0          15m   172.16.19.2
 ~~~
 The `172.16.19.0/24` network was created automatically (by the NCP) to be utilize by pods in the `appspace` namespace.
 
-Now that we confirmed we have blocked all traffic to all pods in the namespace, let's try to access the Yelb UI again. As expected, we can not access the webUI because our DFW rule is not allowing any traffic to reach the pods in the cluster. As a side note, the app itself is not functional as the deny-all network policy we have in place is not allowing the components of the app to communicate with each other.
+Now that we confirmed we have blocked all traffic to all pods in the namespace, let's try to access the Yelb UI again. As expected, we can not access the webUI because the DFW rule is not allowing any traffic to reach the pods in the cluster. As a side note, the app itself is not functional as the deny-all network policy we have in place is not allowing the components of the app to communicate with each other.
 
-So we've denied all communication by default, now we need to "poke holes" in the DFW to allow the required network connectivty to allow our app to run as expected and be accessed from without.
+So we've denied all communication by default, now we need to "poke holes" in the DFW to allow the required network connectivty to allow the app to run as expected and be accessed from without.
 
 For informational purposes, refer to the architecture of the Yelb app below to understand which pods need to communicate with each other:
 
@@ -69,7 +71,7 @@ The `yelb-allow-netpol.yaml` file contains 5 network policies to allow pod to po
 ~~~
 $ kubectl create -f yelb-allow-netpol.yaml
 ~~~
-Again, let's see what's happened in NSX-T. Navigate back to the "Distributed Firewall" section and notice we have new entries in the DFW table. Expand one of the new DFW rules and examine the contents:
+Again, let's see what's happened in NSX-T. Navigate back to the **Distributed Firewall** section and notice we have new entries in the DFW table. Expand one of the new DFW rules and examine the contents:
 
 ![Screen Shot 2019-07-25 at 4 36 16 PM](https://user-images.githubusercontent.com/32826912/61907166-e7787900-aefa-11e9-92b0-02c4452fa445.png)
 
@@ -79,17 +81,17 @@ In the example above, we are allowing ingress and egress traffic between two tar
 
 ![Screen Shot 2019-07-25 at 4 39 13 PM](https://user-images.githubusercontent.com/32826912/61907175-e9423c80-aefa-11e9-9ddd-1996a25b46b3.png)
 
-This rule is allowing traffic between our app server (`172.16.19.5`) and our redis cache (`172.16.19.3`). Feel free to review the rest of the DFW rules.
+This rule is allowing traffic between the `yelb-appserver` pod (`172.16.19.5`) and the `redis-server` pod (`172.16.19.3`). Feel free to review the rest of the DFW rules created from the network policies.
 
-Now let's test the availability of our app from the browser:
+Now let's test the availability of the Yelb app from the browser:
 
 ![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
 
 And we're back in business!!
 
-As a final test of our network policy configuration, let's make sure pods that aren't explicitly allowed to communicate with each other are, in fact, prevented from doing so.
+As a final test of the network policy configuration, let's make sure pods that aren't explicitly allowed to communicate with each other are, in fact, prevented from doing so.
 
-We are going to perform a couple of ping test from within our Yelb UI pod. First, we'll need to get the name of the pod:
+We are going to perform a couple of ping test from within the `yelb-ui` pod. First, we'll need to get the name of the pod:
 **Note:** Pod names and IP addresses of pods will probably be different than the output shown here.
 ~~~
 $ kubectl get pod -l app=yelb-ui
@@ -105,11 +107,11 @@ yelb-appserver-66b579569f-hrfzf   1/1     Running   0          15m   172.16.19.5
 yelb-db-76c6f5d6fb-nj4fc          1/1     Running   0          15m   172.16.19.4   
 yelb-ui-dcb8746fb-xf9g6           1/1     Running   0          15m   172.16.19.2   
 ~~~
-Access the shell of the Yelb UI pod:
+Access the shell of the `yelb-ui` pod:
 ~~~
 $ k exec -it yelb-ui-dcb8746fb-xf9g6 -- /bin/bash
 ~~~
-If we refer to the Yelb arch diagram above, our Yelb UI pod should allow traffic to/from the external internet as well as to/from the appserver pod. Let's confirm this by pinging the IP of the appserver pod as well as a public internet address:
+If we refer to the Yelb arch diagram above, the `yelb-ui` pod should allow traffic to/from the external internet as well as to/from the `yelb-appserver` pod. Let's confirm this by pinging the IP of the appserver pod as well as a public internet address:
 ~~~
 root@yelb-ui-dcb8746fb-xf9g6:/# ping 172.16.19.5   
 PING 172.16.19.5 (172.16.19.5): 56 data bytes
@@ -124,7 +126,7 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=51 time=4.081 ms
 2 packets transmitted, 2 packets received, 0% packet loss
 ~~~
-Awesome! But let's test to see if we can ping the IP of a pod that we shouldn't be able to communicate with, the database pod:
+Awesome! But let's test to see if we can ping the IP of a pod that we shouldn't be able to communicate with, the `yelb-db` pod:
 ~~~
 root@yelb-ui-dcb8746fb-xf9g6:/# ping 172.16.19.4  
 PING 172.16.19.4 (172.16.19.4): 56 data bytes
