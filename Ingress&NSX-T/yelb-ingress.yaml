@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
       - name: redis-server
-        image: harbor.pks.zpod.io/library/gb-redisslave:v1
+        image: harbor.pks.zpod.io/library/yelb-cache:0.5
         ports:
         - containerPort: 6379
 ---
