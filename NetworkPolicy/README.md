@@ -63,7 +63,7 @@ So we've denied all communication by default, now we need to "poke holes" in the
 
 For informational purposes, refer to the architecture of the Yelb app below to understand which pods need to communicate with each other:
 
-<img width="1243" alt="yelb-architecture (1)" src="https://user-images.githubusercontent.com/32826912/61906544-8bf9bb80-aef9-11e9-9fdd-d25604da7cf8.png">
+![Screen Shot 2019-07-25 at 4 44 29 PM](https://user-images.githubusercontent.com/32826912/61907462-83a28000-aefb-11e9-9ca8-667902b631a1.png)
 
 The `yelb-allow-netpol.yaml` file contains 5 network policies to allow pod to pod communication between all of the components as well as a policy that allows external access to the Yelb UI for external users. Deploy the policies:
 ~~~
