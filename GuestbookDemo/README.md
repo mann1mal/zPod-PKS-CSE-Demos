@@ -22,6 +22,13 @@ Navigate to the `~/zPod-PKS-CSE-Demos/GuestbookDemo/` directory on the cse-clien
 ~~~
 $ cd ~/zPod-PKS-CSE-Demos/GuestbookDemo/
 ~~~
+Before we create any workloads, let's create a namespace to host our applications and set our context to ensure we are deploying workloads into this new namespace by default:
+~~~
+$ kubectl create namespace appspace
+~~~
+~~~
+$ kubectl config set-context --current --namespace=appspace
+~~~
 Use kubectl to deploy the storage class and persistent volume claim we will use to provide persistent storage to the guestbook app:
 ~~~
 $ kubectl create -f redis-master-claim.yaml
