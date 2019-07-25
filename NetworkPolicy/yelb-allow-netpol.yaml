@@ -1,0 +1,97 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: appserver-allow-services
+  namespace: appspace
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-appserver
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: yelb-db
+    - podSelector:
+        matchLabels:
+          app: yelb-ui
+    - podSelector:
+        matchLabels:
+          app: redis-server
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: yelb-db
+    - podSelector:
+        matchLabels:
+          app: yelb-ui
+    - podSelector:
+        matchLabels:
+          app: redis-server
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: ui-allow-services
+  namespace: appspace
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-ui
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+    - ipBlock:
+        cidr: 0.0.0.0/0
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+    - ipBlock:
+        cidr: 0.0.0.0/0
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: db-allow-services
+  namespace: appspace
+spec:
+  podSelector:
+    matchLabels:
+      app: yelb-db
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: redis-allow-services
+  namespace: appspace
+spec:
+  podSelector:
+    matchLabels:
+      app: redis-server
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: yelb-appserver
+
