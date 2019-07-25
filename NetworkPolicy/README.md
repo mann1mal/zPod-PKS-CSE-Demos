@@ -135,3 +135,15 @@ PING 172.16.19.4 (172.16.19.4): 56 data bytes
 ~~~
 As expected, the Kubernetes network policies, backed by NSX-T distributed firewall rules, are preventing traffic between these pods as we did not explicitly allow communication between the entities.
 
+Now we can clean up the environment by deleting the network policies as well as the Yelb application resources:
+~~~
+$ kubectl delete -f appspace-deny-all.yaml 
+$ kubectl delete -f yelb-allow-netpol.yaml 
+$ kubectl delete -f yelb-ingress.yaml 
+~~~
+## Conclusion
+
+This demo showcases the tight integration between Enterprise PKS Kubernetes clusters and NSX-T with respect to utilizing Distributed Firewall rules to apply microsegmentation logic to Kubernetes workloads. With the NSX Container Plugin, developers can use native Kubernetes constructs to ensure their applications are secure while the creation of the firewall components are automated via the plugin.
+
+The next demo will take a look at the workflow for using the NCP in conjunction with Network Policies to provide network isolation per Kuberentes namespace.
+
