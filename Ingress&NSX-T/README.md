@@ -8,6 +8,10 @@ If we use a service type of `Ingress` instead, in conjunction with a DNS wildcar
 
 ## Configure Ingress Service for Guestbook App
 
+**Note:** Before proceeding, ensure your context is set to the `appspace` namespace:
+~~~
+$ kubectl config set-context --current --namespace=appspace
+~~~
 After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the `frontend` service from `LoadBalancer` type to `ClusterIP` type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
 ~~~
 $ kubectl edit svc frontend
