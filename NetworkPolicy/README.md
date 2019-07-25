@@ -92,6 +92,7 @@ And we're back in business!!
 As a final test of the Network Policy configuration, let's make sure pods that aren't explicitly allowed to communicate with each other are, in fact, prevented from doing so.
 
 We are going to perform a couple of ping test from within the `yelb-ui` pod. First, we'll need to get the name of the pod:
+
 **Note:** Pod names and IP addresses of pods will probably be different than the output shown here.
 ~~~
 $ kubectl get pod -l app=yelb-ui
