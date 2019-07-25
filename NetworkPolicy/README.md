@@ -87,6 +87,49 @@ Now let's test the availability of our app from the browser:
 
 And we're back in business!!
 
+As a final test of our network policy configuration, let's make sure pods that aren't explicitly allowed to communicate with each other are, in fact, prevented from doing so.
 
-
+We are going to perform a couple of ping test from within our Yelb UI pod. First, we'll need to get the name of the pod:
+**Note:** Pod names and IP addresses of pods will probably be different than the output shown here.
+~~~
+$ kubectl get pod -l app=yelb-ui
+NAME                      READY   STATUS    RESTARTS   AGE
+yelb-ui-dcb8746fb-xf9g6   1/1     Running   0          44m
+~~~
+Now, review all the IP addresses of the pods:
+~~~
+$ kubectl get pods -o wide
+NAME                              READY   STATUS    RESTARTS   AGE   IP 
+redis-server-86f48f4875-5kf62     1/1     Running   0          15m   172.16.19.3   
+yelb-appserver-66b579569f-hrfzf   1/1     Running   0          15m   172.16.19.5   
+yelb-db-76c6f5d6fb-nj4fc          1/1     Running   0          15m   172.16.19.4   
+yelb-ui-dcb8746fb-xf9g6           1/1     Running   0          15m   172.16.19.2   
+~~~
+Access the shell of the Yelb UI pod:
+~~~
+$ k exec -it yelb-ui-dcb8746fb-xf9g6 -- /bin/bash
+~~~
+If we refer to the Yelb arch diagram above, our Yelb UI pod should allow traffic to/from the external internet as well as to/from the appserver pod. Let's confirm this by pinging the IP of the appserver pod as well as a public internet address:
+~~~
+root@yelb-ui-dcb8746fb-xf9g6:/# ping 172.16.19.5   
+PING 172.16.19.5 (172.16.19.5): 56 data bytes
+64 bytes from 172.16.19.5: icmp_seq=0 ttl=64 time=2.319 ms
+64 bytes from 172.16.19.5: icmp_seq=1 ttl=64 time=0.565 ms
+2 packets transmitted, 2 packets received, 0% packet loss
+~~~
+~~~
+root@yelb-ui-dcb8746fb-xf9g6:/# ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8): 56 data bytes
+64 bytes from 8.8.8.8: icmp_seq=0 ttl=51 time=4.921 ms
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=51 time=4.081 ms
+2 packets transmitted, 2 packets received, 0% packet loss
+~~~
+Awesome! But let's test to see if we can ping the IP of a pod that we shouldn't be able to communicate with, the database pod:
+~~~
+root@yelb-ui-dcb8746fb-xf9g6:/# ping 172.16.19.4  
+PING 172.16.19.4 (172.16.19.4): 56 data bytes
+--- 172.16.19.4 ping statistics ---
+5 packets transmitted, 0 packets received, 100% packet loss
+~~~
+As expected, the Kubernetes network policies, backed by NSX-T distributed firewall rules, are preventing traffic between these pods as we did not explicitly allow communication between the entities.
 
