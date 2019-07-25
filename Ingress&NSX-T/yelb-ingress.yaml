@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
       - name: yelb-ui
-        image:  mreferre/yelb-ui:0.5
+        image:  harbor.pks.zpod.io/library/yelb-ui:0.3
         ports:
         - containerPort: 80
 ---
@@ -105,7 +105,7 @@ spec:
     spec:
       containers:
       - name: redis-server
-        image: redis:4.0.2
+        image: harbor.pks.zpod.io/library/gb-redisslave:v1
         ports:
         - containerPort: 6379
 ---
@@ -123,7 +123,7 @@ spec:
     spec:
       containers:
       - name: yelb-db
-        image:  mreferre/yelb-db:0.5
+        image:  harbor.pks.zpod.io/library/yelb-db:0.3
         ports:
         - containerPort: 5432
 ---
@@ -141,6 +141,6 @@ spec:
     spec:
       containers:
       - name: yelb-appserver
-        image:  mreferre/yelb-appserver:0.5
+        image:  harbor.pks.zpod.io/library/yelb-appserver:0.3
         ports:
         - containerPort: 4567
