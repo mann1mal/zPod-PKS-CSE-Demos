@@ -42,7 +42,7 @@ Navigate back to the NSX-T Manager webUI, select the **Advanced Network and Secu
 
 ![Screen Shot 2019-07-25 at 4 16 39 PM](https://user-images.githubusercontent.com/32826912/61905732-cbbfa380-aef7-11e9-97dc-0b587eb08213.png)
 
-Here we can see the NCP reached out to the NSX-T Manager to create a DFW rule to drop traffic from source `Any` to a target port group. If we click on the target port group, we can see this group is defined from a /24 network:
+Here we can see the NCP reached out to the NSX-T Manager to create a DFW rule to drop traffic from source `Any` to a target port group. If we click on the hyperlink for the target group, we can see this group is comprised of a /24 network. We can also see the name of the Kuberentes network policy present in the name of the target group:
 
 ![Screen Shot 2019-07-25 at 4 19 59 PM](https://user-images.githubusercontent.com/32826912/61905851-13dec600-aef8-11e9-9524-86f7ddd1308f.png)
 
@@ -55,8 +55,38 @@ yelb-appserver-66b579569f-hrfzf   1/1     Running   0          15m   172.16.19.5
 yelb-db-76c6f5d6fb-nj4fc          1/1     Running   0          15m   172.16.19.4   
 yelb-ui-dcb8746fb-xf9g6           1/1     Running   0          15m   172.16.19.2   
 ~~~
-The 172.16.19.0/24 network was created (by the NCP) automatically to be utilize by pods in the `appspace` namespace.
+The `172.16.19.0/24` network was created automatically (by the NCP) to be utilize by pods in the `appspace` namespace.
 
 Now that we confirmed we have blocked all traffic to all pods in the namespace, let's try to access the Yelb UI again. As expected, we can not access the webUI because our DFW rule is not allowing any traffic to reach the pods in the cluster. As a side note, the app itself is not functional as the deny-all network policy we have in place is not allowing the components of the app to communicate with each other.
+
+So we've denied all communication by default, now we need to "poke holes" in the DFW to allow the required network connectivty to allow our app to run as expected and be accessed from without.
+
+For informational purposes, refer to the architecture of the Yelb app below to understand which pods need to communicate with each other:
+
+<img width="1243" alt="yelb-architecture (1)" src="https://user-images.githubusercontent.com/32826912/61906544-8bf9bb80-aef9-11e9-9fdd-d25604da7cf8.png">
+
+The `yelb-allow-netpol.yaml` file contains 5 network policies to allow pod to pod communication between all of the components as well as a policy that allows external access to the Yelb UI for external users. Deploy the policies:
+~~~
+$ kubectl create -f yelb-allow-netpol.yaml
+~~~
+Again, let's see what's happened in NSX-T. Navigate back to the "Distributed Firewall" section and notice we have new entries in the DFW table. Expand one of the new DFW rules and examine the contents:
+
+![Screen Shot 2019-07-25 at 4 36 16 PM](https://user-images.githubusercontent.com/32826912/61907166-e7787900-aefa-11e9-92b0-02c4452fa445.png)
+
+In the example above, we are allowing ingress and egress traffic between two target groups. Select the target group from each section and compare with `kubectl` output:
+
+![Screen Shot 2019-07-25 at 4 36 43 PM](https://user-images.githubusercontent.com/32826912/61907171-e8a9a600-aefa-11e9-8732-efbb60c74635.png)
+
+![Screen Shot 2019-07-25 at 4 39 13 PM](https://user-images.githubusercontent.com/32826912/61907175-e9423c80-aefa-11e9-9ddd-1996a25b46b3.png)
+
+This rule is allowing traffic between our app server (`172.16.19.5`) and our redis cache (`172.16.19.3`). Feel free to review the rest of the DFW rules.
+
+Now let's test the availability of our app from the browser:
+
+![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
+
+And we're back in business!!
+
+
 
 
