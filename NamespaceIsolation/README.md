@@ -137,13 +137,13 @@ The NSX Container Plugin (NCP) automatically created this rule to allow traffic 
 
 ![Screen Shot 2019-07-25 at 9 39 04 PM](https://user-images.githubusercontent.com/32826912/61919966-dbee7780-af25-11e9-9909-0f2a991d65bf.png)
 
-As we can see from the screenshots, the `source` group and `destination` groups are both the same (the `172.16.23.0/24` network) which is tied to our `newspace` namespace. So this is the DFW rule that was created from our `newspace-isolate` Newtork Policy to allow pods within the `newspace` namespace to communicate with each other.
+As we can see from the screenshots, the `source` and `destination` groups are both the same (the `172.16.23.0/24` network): the network assigned to our `newspace` namespace. This is the DFW rule that was created from our `newspace-isolate` Newtork Policy to allow pods within the `newspace` namespace to communicate with each other.
 
 Let's look towards the bottom of the list and select one of the `pks-6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50...` rules. Hover over the rule name until you find the one ending in `...newspace-deny-all` and examine this rule. This rule drops all traffic from source of `Any` to a target group. If we select the target group, we can can confirm this rule is applied to the `172.16.23.0/24` as well:
 
 ![Screen Shot 2019-07-25 at 9 45 50 PM](https://user-images.githubusercontent.com/32826912/61919970-ddb83b00-af25-11e9-8590-661ddb45f731.png)
 
-So this DFW rule was created by the NCP when we created our `newspace-deny-all` Network Policy.
+This DFW rule was created by the NCP when we created our `newspace-deny-all` Network Policy.
 
 Now we're finally ready to test our work! Let's deploy another apline linux pod in the `appspace` namespace and try to query the nginx webpage in the `newspace` namespace from the shell of the apline pod. We can also try to access the nginx webpage being served up by our app in the `appspace` namespace as well:
 ~~~
@@ -179,6 +179,6 @@ Commercial support is available at
 </body>
 </html>
 ~~~
-So our policies are working as expecting, pods can communicate with other pods in their own namespace but not pods in other namespaces.
+Our policies are working as expecting, pods can communicate with other pods in their own namespace but not pods in other namespaces.
 
 ## Examining Pod to Pod Traffic with Traceflow
