@@ -54,7 +54,7 @@ Log in to the PKS vcsa (vcsa.pks.zpod.io), navigate to the "NFS-02" datastore an
 
 Create the components of the guestbook app and watch for the pods to be created:
 ~~~
-$ kubectl create -f guestbook-aio.yaml
+$ kubectl create -f guestbook-aio-lb.yaml
 $ kubectl get pods -o wide -w
 ~~~
 List the services we created for the guestbook app and take note of the 10.96.59.X IP address for the LoadBalancer service. We will use this IP to access the guestbook app in the browser:
