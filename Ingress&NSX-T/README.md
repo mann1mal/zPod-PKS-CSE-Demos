@@ -8,7 +8,22 @@ If we use a service type of `Ingress` instead, in conjunction with a DNS wildcar
 
 ## Configure Ingress Service for Guestbook App
 
-**Note:** Before proceeding, ensure your context is set to the `appspace` namespace:
+Before you start the demo, let's ensure we are accessing the `demo-cluster`:
+~~~
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
+~~~
+~~~
+$ vcd cse cluster config demo-cluster > ~/.kube/config
+~~~
+~~~
+$ kubectl get nodes
+NAME                                   STATUS   ROLES    AGE     VERSION
+0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
+713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
+8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
+~~~
+
+Also, ensure the context is set to the `appspace` namespace:
 ~~~
 $ kubectl config set-context --current --namespace=appspace
 ~~~
