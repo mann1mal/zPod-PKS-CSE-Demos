@@ -106,4 +106,8 @@ yelb-ui-fc74d567f-vh2qb   1/1     Running   0          96m
 
 There is now an additional server pool within our virtual server tied to our L7 loadbalancer that will except request for the yelb UI at `yelb.demo.pks.zpod.io` and direct those connections to the `yelb-ui-fc74d567f-vh2qb` pod while the existing server pool will continue to direct requests coming in at `guestbook.demo.pks.zpod.io` to the `frontend-xxx` pods.
 
+## Conclusion
+
 So there we have it, the integration between NSX-T and Enterprise PKS provides a resource for our developers to easily expose their applications to external users via an FQDN without having to work with the infrastructure team to create resources to support access every time they spin up a new application.
+
+In our [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NetworkPolicy), we will take a deeper dive into the integration between PKS and NSX-T to showcase the automatic creation of DFW rules to allow for microsegmentation of Kubernetes workloads.
