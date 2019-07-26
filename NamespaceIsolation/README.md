@@ -22,23 +22,23 @@ Also, if you haven't done the previous labs, create the `appspace` namespace as 
 ~~~
 $ kubectl create namespace appspace
 ~~~
-Let's create some apps we can use to test our policies in each namespace. We are going to deploy a nginx application and instruct Kubernetes to serve out the nginx homepage on port 80 within the cluster:
+Let's create some apps we can use to test our policies in each namespace. We are going to deploy a nginx application in each namespace and instruct Kubernetes to serve out the nginx homepage on port 80 within the cluster. We're also going to label each pod:
 ~~~
-$ kubectl run appspace-web --namespace appspace --image=nginx --labels=app=appspace-web --expose --port 80
-$ kubectl run newspace-web --namespace newspace --image=nginx --labels=app=newspace-web --expose --port 80
+$ kubectl run appspace-web --restart=Never --namespace appspace --image=nginx --labels=app=appspace-web --expose --port 80
+$ kubectl run newspace-web --restart=Never --namespace newspace --image=nginx --labels=app=newspace-web --expose --port 80
 ~~~
 Now before we set any network policies up, let's test whether or not the two pods can communicate with each other. 
 
 Let's get the name and IP address of each pod:
 ~~~
-$ kubectl get pods -n appspace -o wide
+$ kubectl get pods -n appspace-web -o wide
 NAME                            READY   STATUS    RESTARTS   AGE     IP      
-appspace-web-6dcd8fc6f4-wswpm   1/1     Running   0          2m58s   172.16.19.2
+appspace-web   1/1     Running   0          2m58s   172.16.19.2
 ~~~
 ~~~
-$ kubectl get pods -n newspace -o wide
+$ kubectl get pods newspace-web -n newspace -o wide
 NAME                            READY   STATUS    RESTARTS   AGE     IP            
-newspace-web-56b58657cd-c4p2g   1/1     Running   0          2m22s   172.16.23.2   
+newspace-web   1/1     Running   0          2m22s   172.16.23.2   
 ~~~
 So our `appspace-web` pod has an IP of `172.16.19.2` while our `newspace-web` pod has an IP of `172.16.23.2`. 
 
@@ -74,7 +74,9 @@ Commercial support is available at
 </body>
 </html>
 ~~~
-(Feel free to try this same test but the other way around as well, will work just the same)
+(Feel free to try this same test the other way around (alpine pod in `newspace` quering pod in `appspace`, will work just the same)
+
+Type `exit` to leave the alpine pod's shell and return to the cse-server's command prompt.
 
 As mentioned in our previous Network Policy demo, the default config in Kubernetes is to allow all traffic to all pods in the cluster which is why we can communicate across namespaces in the example above. Now we can focus on locking each namespace down.
 
