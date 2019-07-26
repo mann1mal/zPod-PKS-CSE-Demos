@@ -16,7 +16,14 @@ Among other things, the NCP also handles the creation of NSX-T Distributed Firew
 
 ## Network Policies and DFW Rules
 
-First thing's first, let's ensure we are operating in the correct namespace. Also, if you did not deploy the Yelb app from the previous demos, please deploy it now as well:
+First thing's first, let's ensure we are operating in the correct cluster and the correct namespace. Also, if you did not deploy the Yelb app from the previous demos, please deploy it now as well:
+
+~~~
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
+~~~
+~~~
+$ vcd cse cluster config demo-cluster > ~/.kube/config
+~~~
 ~~~
 $ kubectl config set-context --current --namespace=appspace
 ~~~
