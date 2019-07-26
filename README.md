@@ -9,3 +9,4 @@ This repo will serve as the staging area for demo scripts to deliver in the CSE/
 2. [Guestbook App Demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo)
 3. [Ingress and NSX-T Demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Ingress%26NSX-T)
 4. [Kubernetes Network Policy and NSX-T DFW Integration](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NetworkPolicy)
+5. [Namespace Network Isolation with Network Policies and NSX-T](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NamespaceIsolation)
