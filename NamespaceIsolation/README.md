@@ -221,6 +221,12 @@ networkpolicy.networking.k8s.io "newspace-isolate" deleted
 
 Now that we've deleted the Network Policies, which in turn instructed the NCP to delete the DFW rules, our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping our developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
 
+Now that we're done with our testing, let's head back over the CLI of the cse-server and delete our nginx pods:
+~~~
+$ kubectl delete pods -n newspace newspace-web
+$ kubectl delete pods -n appspace appspace-web
+~~~
+
 ## Conclusion
 
 In this demo, we walked through the creation of Network Policies that allow Kubernetes cluster admins to isolate traffic within namespaces. With the help of the NCP, the creation of these Network Policies in turn produce DFW rules in NSX-T to restrict network traffic in our Kubernetes cluster. We also showcased the usage of the Traceflow tool to troubleshoot network connectivity between resources in our environment.
