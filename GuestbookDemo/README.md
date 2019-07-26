@@ -104,4 +104,8 @@ Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T 
 ~~~
 $ kubectl scale deployments frontend --replicas=3
 ~~~
-Proceed to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Ingress%26NSX-T) to showcase how to configure the ingress controller provided by NSX-T to front multiple apps running in a PKS Kubernetes cluster.
+## Conclusion
+
+In this demo, we walked through the creation of an application that utilizes the vSphere Cloud Provider plugin to create persistent storage for the application. This application also utilizes the integration between PKS and NSX-T to automatically create an NSX-T load balancer to expose the application to external users outside of the Kubernetes cluster.
+
+Proceed to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Ingress%26NSX-T) to showcase how to configure the ingress controller provided by NSX-T to front multiple applications running in a PKS Kubernetes cluster.
