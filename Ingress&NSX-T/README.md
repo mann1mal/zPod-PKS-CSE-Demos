@@ -40,7 +40,7 @@ $ kubectl get svc
 ~~~
 **Note:** Because we changed the "frontend" service to `ClusterIP` type, note that the NSX-T load balancer from Demo 1 has been deleted from the NSX-T manager automatically.
 
-Now we are ready to create our ingress service to expose the guestbook app via FQDN. In the lab environment, we have set up a DNS wildcard that resolves "*.app.pks.zpod.io" to the IP address of the NSX-T load balancer that is automatically created by PKS to serve as the ingress controller.
+Now we are ready to create our ingress service to expose the guestbook app via FQDN. In the lab environment, we have set up a DNS wildcard that resolves `*.demo.pks.zpod.io` to the IP address of the NSX-T load balancer that is automatically created by PKS to serve as the ingress controller.
 
 Navigate to the `~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/` directory on the cse-client server:
 ~~~
