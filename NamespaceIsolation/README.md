@@ -190,3 +190,37 @@ Commercial support is available at
 Our policies are working as expecting, pods can communicate with other pods in their own namespace but not pods in other namespaces.
 
 ## Examining Pod to Pod Traffic with Traceflow
+
+The easiest way to troubleshoot connectivity between Pods or between Pods & VMs is to use NSX-T Traceflow. Traceflow could emulate any kind of traffic and it will show what is blocking it in case a Firewall Rule or a Kubernetes Network Policy is blocking that traffic. Let's emulate a traffic between our two nginx pods in seperate namespaces and see what happens.
+
+Log in to the [NSX-T manager](https://nsx.pks.zpod.io) and the navigate to the **Advanced Network and Security** tab. Expand the **Tools** section in the left hand menu and select **Traceflow**. Now we need instruct Traceflow to emulate traffic between the logical ports that are connected to the virtual interfaces of the pods.
+
+Under the **Source** section, select **Logical Port** from the dropdown menu. Then choose **VIF** as the attachment type as we are going to emulate traffic from the virtual interface of the pod. In the **Port** section, type `appspace-web` and select the logical port for our `appspace-web` pod:
+
+![Screen Shot 2019-07-26 at 3 32 10 PM](https://user-images.githubusercontent.com/32826912/61977491-93ce6400-afbc-11e9-90cf-62705b2b44a4.png)
+
+Repeat the proccess for **Destination** section but instead, reference the `appspace-web`'s virtual interface. Now select the **Trace** button:
+
+![Screen Shot 2019-07-26 at 3 41 14 PM](https://user-images.githubusercontent.com/32826912/61977492-93ce6400-afbc-11e9-9230-41f4abbca2c8.png)
+
+As we can see from the screenshot, the packet was dropped by our DFW rule, as expected. Now let's delete all of the network policies on the cluster and run the trace again by selecting the **Re-Trace** button in the top right hand corner:
+
+~~~
+$ cd ~/zPod-PKS-CSE-Demos/NamespaceIsolation
+~~~
+~~~
+$ kubectl delete -f .
+networkpolicy.networking.k8s.io "appspace-deny-all" deleted
+networkpolicy.networking.k8s.io "appspace-isolate" deleted
+networkpolicy.networking.k8s.io "newspace-deny-all" deleted
+networkpolicy.networking.k8s.io "newspace-isolate" deleted
+~~~
+
+![Screen Shot 2019-07-26 at 3 45 03 PM](https://user-images.githubusercontent.com/32826912/61977493-93ce6400-afbc-11e9-952a-d538feb5e074.png)
+
+
+Now that we've deleted the Network Policies, which in turn instructed the NCP to delete the DFW rules, our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping our developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
+
+## Conclusion
+
+In this demo, we walked through the creation of Network Policies that allow Kubernetes cluster admins to isolate traffic within namespaces. With the help of the NCP, the creation of these Network Policies in turn produce DFW rules in NSX-T to restrict network traffic in our Kubernetes cluster. We also showcased the usage of the Traceflow tool to troubleshoot network connectivity between resources in our environment.
