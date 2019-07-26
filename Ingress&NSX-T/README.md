@@ -47,7 +47,7 @@ Navigate to the `~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/` directory on the cse-clie
 $ cd ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/
 ~~~
 
-Review the frontend-ingress.yaml file and note the `host:` entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI(frontend service) for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
+Review the frontend-ingress.yaml file and note the `host:` entry. This is the hostname (`guestbook.app.pks.zpod.io`) the ingress controller will redirect to the service offering up the web UI (`frontend` service) for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
 ~~~
 $ kubectl create -f guestbook-ingress.yaml 
 ~~~
