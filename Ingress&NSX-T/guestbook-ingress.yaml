@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: guestbook-ingress
+spec:
+  rules:
+  - host: guestbook.demo.pks.zpod.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: frontend 
+          servicePort: 80
