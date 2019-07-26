@@ -109,7 +109,7 @@ spec:
   - from:
     - podSelector: {}
 ~~~
-Again, because `spec.podSelector.matchLabels` is blank, this applies to all pods within the `appspace` namespace just like the deny all policy but in this example, we set a value for `spec.ingress.from.podSelector`, but leave it blank to allow ingress from ALL pods within the `appspace` namespace.
+Again, because `spec.podSelector.matchLabels` is blank, this applies to all pods within the `appspace` namespace just like the deny all policy but in this example, we set a value for `spec.ingress.from.podSelector`, but leave it blank to allow ingress to ALL pods within the `appspace` namespace.
 
 Now we are ready to deploy the 4 Network Policies in our cluster:
 ~~~
