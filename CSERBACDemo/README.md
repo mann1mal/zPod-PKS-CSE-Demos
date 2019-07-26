@@ -140,7 +140,7 @@ CSE will delete the DFW rule create to isolate the cluster while the PKS control
 
 In this demo, we walked through the onboarding of a new organization that wishes to deploy Enterprise PKS clusters via the Container Service Extention, granted users within the tenant org access to provision clusters, and demoed the creation of a cluster via CSE.
 
-We also examined the work CSE does to isolate network traffic per cluster via NSX-T DFW rules any time a cluster is created.
+We also examined the work CSE does to isolate network traffic per cluster via NSX-T DFW rules any time a cluster is created via CSE. Move on to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo) to start to deploy applications in PKS Kubernetes clusters.
 
 
 
