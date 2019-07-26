@@ -146,5 +146,5 @@ $ kubectl delete -f yelb-ingress.yaml
 
 This demo showcases the tight integration between Enterprise PKS Kubernetes clusters and NSX-T with respect to utilizing Distributed Firewall rules to apply microsegmentation logic to Kubernetes workloads. With the NSX Container Plugin, developers can use native Kubernetes constructs to ensure their applications are secure while the creation of the firewall components are automated via the plugin.
 
-The next demo will take a look at the workflow for using the NCP in conjunction with Network Policies to provide network isolation per Kuberentes namespace.
+The [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NamespaceIsolation) will take a look at the workflow for using the NCP in conjunction with Network Policies to provide network isolation per Kuberentes namespace.
 
