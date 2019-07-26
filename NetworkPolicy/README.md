@@ -64,17 +64,17 @@ yelb-appserver-66b579569f-hrfzf   1/1     Running   0          15m   172.16.19.5
 yelb-db-76c6f5d6fb-nj4fc          1/1     Running   0          15m   172.16.19.4   
 yelb-ui-dcb8746fb-xf9g6           1/1     Running   0          15m   172.16.19.2   
 ~~~
-The `172.16.19.0/24` network was created automatically (by the NCP) to be utilize by pods in the `appspace` namespace.
+The `172.16.19.0/24` network was created automatically when we created the namespace(by the NCP) to be utilize by pods in the `appspace` namespace. This network block was pulled from the `172.16.0.0/16` pool, which we assigned to be used for pod networks when we installed Enterprise PKS.
 
 Now that we confirmed we have blocked all traffic to all pods in the namespace, let's try to access the Yelb UI again. As expected, we can not access the webUI because the DFW rule is not allowing any traffic to reach the pods in the cluster. As a side note, the app itself is not functional as the deny-all Network Policy we have in place is not allowing the components of the app to communicate with each other.
 
-So we've denied all communication by default, now we need to "poke holes" in the DFW to allow the required network connectivty the app can function as expected and be accessed from without.
+So we've denied all communication by default, now we need to "poke holes" in the DFW to allow the required network connectivty the app requires to function as expected and also allow access from from outside the cluster.
 
 For informational purposes, refer to the architecture of the Yelb app below to understand which pods need to communicate with each other:
 
 ![Screen Shot 2019-07-25 at 4 44 29 PM](https://user-images.githubusercontent.com/32826912/61907462-83a28000-aefb-11e9-9ca8-667902b631a1.png)
 
-The `yelb-allow-netpol.yaml` file contains 5 Network Policies to allow pod to pod communication between all of the components as well as a policy that allows external access to the Yelb UI for external users. Feel free to review the .yaml file to understand more about each policy. Deploy the policies:
+The `yelb-allow-netpol.yaml` file contains 5 Network Policies to allow pod to pod communication between all of the components as well as a policy that allows external access to the Yelb UI for external users. Feel free to review the `.yaml` file to understand more about each policy. Deploy the policies:
 ~~~
 $ kubectl create -f yelb-allow-netpol.yaml
 ~~~
@@ -141,7 +141,7 @@ PING 172.16.19.4 (172.16.19.4): 56 data bytes
 --- 172.16.19.4 ping statistics ---
 5 packets transmitted, 0 packets received, 100% packet loss
 ~~~
-As expected, the Kubernetes Network Policies, backed by NSX-T distributed firewall rules, are preventing traffic between these pods as we did not explicitly allow communication between the entities.
+As expected, the Kubernetes Network Policies, backed by NSX-T distributed firewall rules, are preventing traffic between these pods as we did not explicitly allow communication between the entities. Type `exit` to leave the shell of the pod and return to the cse-client command prompt.
 
 Now we can clean up the environment by deleting the Network Policies as well as the Yelb application resources:
 ~~~
