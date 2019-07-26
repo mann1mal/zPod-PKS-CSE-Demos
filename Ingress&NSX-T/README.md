@@ -49,12 +49,12 @@ $ cd ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/
 
 Review the frontend-ingress.yaml file and note the `host:` entry. This is the hostname (guestbook.app.pks.zpod.io) the ingress controller will redirect to the service offering up the Web UI(frontend service) for our guestbook portal. Create the ingress controller from the frontend-ingress.yaml file in the guestbook directory and verify the hostname of the app is accessible via the Web UI:
 ~~~
-$ kubectl create -f frontend-ingress.yaml 
+$ kubectl create -f guestbook-ingress.yaml 
 ~~~
 ~~~
 $ kubectl get ingress
 NAME               HOSTS                        ADDRESS                     PORTS   AGE
-frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      32m
+guestbook-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      32m
 ~~~
 Navigate to the URL displayed in the output of the above command to verify connectivity:
 
@@ -100,7 +100,7 @@ Let's also review the ingress resources available in the environment:
 ~~~
 $ kubectl get ingress
 NAME               HOSTS                        ADDRESS                     PORTS   AGE
-frontend-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      87m
+guestbook-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80      87m
 yelb-ingress       yelb.demo.pks.zpod.io        10.96.59.100,100.64.32.15   80      75m
 ~~~
 Note, `10.96.59.100` is the same public IP for both hostnames. This is the IP of the L7 NSX-T load balancer that acts as the ingress controller for the cluster.
