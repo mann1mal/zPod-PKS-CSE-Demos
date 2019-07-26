@@ -7,8 +7,14 @@ One option is to utilize Network Policies to ensure network traffic can not trav
 As detailed in the [previous demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NetworkPolicy) Enterprise PKS Kubernetes clusters using NSX-T as the Container Network Interface (CNI) will have DFW rules automatically created in NSX-T when we create Network Policies. We will showcase this functionality again in this demo to isolate namespace network traffic.
 
 ## Testing Default Kubernetes Pod-to-Pod Network Connectivity
-
-First, let's create our new namespace for our new team of developers:
+Before you start the demo, let's ensure we are accessing the `demo-cluster`:
+~~~
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
+~~~
+~~~
+$ vcd cse cluster config demo-cluster > ~/.kube/config
+~~~
+Let's create our new namespace for our new team of developers:
 ~~~
 $ kubectl create namespace newspace
 ~~~
