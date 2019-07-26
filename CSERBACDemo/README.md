@@ -4,6 +4,8 @@
 
 In this demo, we'll walk through the process of onboarding a tenant in vCD to deploy Enterprise PKS clusters via the Container Service Extension. We'll also utilize the RBAC funcitonality provided by CSE to ensure only certain users within the org can provision clusters. We are going to utilize the `enterprise-dev-org` tenant for this demo.
 
+For future demos, there is a cluster (`demo-cluster`) provisioned with 3 worker nodes that you can use to deploy applications. This demo showcases the workflow for deploying a cluster via CSE. This cluster will only have 1 worker node to ensure the cluster provisions quickly. This cluster should not be used for the app demos as it may not have enough resources to support multiple applications.
+
 **Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
 
 ## Prepare Tenant Org
@@ -112,3 +114,34 @@ Try "vcd cse cluster create -h" for help.
 Error: Access Forbidden. Missing required rights.
 ~~~
 Perfect! So our dev3 user does not have the `"{cse}:PKS DEPLOY RIGHT"` granted to their role so they aren't able to deploy clusters within the org.
+
+## CSE and NSX-T Integration
+
+Whenever a PKS Kubernetes cluster is created via CSE, the CSE server reaches out directly to the NSX-T API upon cluster creation completion to create a Distributed Firewall rule to prevent any traffic from entering cluster from other clusters deployed in the environment.
+
+To verify this, after the `dev1-cluster` cluster creation is completed, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab and then the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the `isolate-dev1-cluster...` DFW stanza and expand it to examine the 2 rules created:
+
+![Screen Shot 2019-07-26 at 11 29 38 AM](https://user-images.githubusercontent.com/32826912/61963590-f8c49280-af99-11e9-8298-c2cd4eefead0.png)
+
+Examine the rules to understand what each one specifies. The first rule (Allow cluster node-pod to cluster node-pod communication), ensures that all pods within the `dev1-cluster` can communicate with each other. The second rule (Block cluster node-pod to all-node-pod communication) ensures that pods running in other clusters (`ALL_NODES_PODS`) can not reach the pods running in the `dev1-cluster`. We can examine the target groups these rules are applied to by selecting the hyperlink for each group within the rule:
+
+![Screen Shot 2019-07-26 at 11 29 59 AM](https://user-images.githubusercontent.com/32826912/61963591-f8c49280-af99-11e9-8f0a-37f0565c1442.png)
+
+![Screen Shot 2019-07-26 at 11 30 17 AM](https://user-images.githubusercontent.com/32826912/61963592-f8c49280-af99-11e9-9488-1231505662a1.png)
+
+Please delete the cluster after you finish this demo (you will use the `demo-cluster` for subsequest demo workflows):
+
+~~~
+$ vcd cse cluster delete dev1-cluster
+~~~
+CSE will delete the DFW rule create to isolate the cluster while the PKS control plane will handle deleting all additional NSX-T resources created to support the cluster.
+
+## Conclusion
+
+In this demo, we walked through the onboarding of a new organization that wishes to deploy Enterprise PKS clusters via the Container Service Extention, granted users within the tenant org access to provision clusters, and demoed the creation of a cluster via CSE.
+
+We also examined the work CSE does to isolate network traffic per cluster via NSX-T DFW rules any time a cluster is created.
+
+
+
+
