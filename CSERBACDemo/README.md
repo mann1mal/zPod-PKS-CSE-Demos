@@ -19,6 +19,13 @@ Once on the cse-client, run the clean-up script to ensure the `enterprise-dev-or
 ~~~
 $ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
 ~~~
+
+Log in with the system admin user of the vCloud Director environment: 
+
+(**Note**: please reach out to Joe Mann or ping in the `#zpod-feedback` slack channel for access credentials for the system admin user for this demo.)
+~~~
+$ vcd login director.vcd.zpod.io system administrator -iw
+~~~
 Verify the `enterprise-dev-org` and it's corresponding OvDC is NOT enabled with a `k8 provider`
 ~~~
 $ vcd cse ovdc list
