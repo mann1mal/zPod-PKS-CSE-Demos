@@ -41,11 +41,7 @@ prod-ovdc           prod-org            ent-pks
 
 ## Enable the enterprise-dev-org for Enterprise PKS k8 Cluster Creation via CSE
 
-First, we need to intruct the vcd-cli to "use" our `cse-enterprise-org`:
-~~~
-$ vcd org use cse-enterprise-org
-~~~
-Now we can add the right that allows an org to support Enterprise PKS clusters to our `enterprise-dev-org`:
+First, we have to add the right that allows an org to support Enterprise PKS clusters to our `enterprise-dev-org`:
 ~~~
 $ vcd right add "{cse}:PKS DEPLOY RIGHT" -o enterprise-dev-org
 ~~~
@@ -73,7 +69,13 @@ If we look at users in the `enterprise-dev-org` in vCloud Director, we can see t
 
 ![Screen Shot 2019-07-22 at 5 17 21 PM](https://user-images.githubusercontent.com/32826912/61666075-9c652880-aca4-11e9-8177-e7bdc5ec0bdb.png)
 
-We need to add the `"{cse}:PKS DEPLOY RIGHT"` right to the `k8deploy` role in order for our dev1 and 2 users to be able to deploy k8 clusters in this org:
+We need to add the `"{cse}:PKS DEPLOY RIGHT"` right to the `k8deploy` role in order for our dev1 and 2 users to be able to deploy k8 clusters in this org.
+
+First, we need to intruct the vcd-cli to "use" our `enterprise-dev-org`:
+~~~
+$ vcd org use enterprise-dev-org
+~~~
+Now we can add the Enterprise PKS cluster deploy right to our custom role:
 ~~~
 $ vcd role add-right "k8deploy" "{cse}:PKS DEPLOY RIGHT"
 ~~~
