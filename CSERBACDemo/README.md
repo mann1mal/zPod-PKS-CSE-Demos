@@ -41,7 +41,11 @@ prod-ovdc           prod-org            ent-pks
 
 ## Enable the enterprise-dev-org for Enterprise PKS k8 Cluster Creation via CSE
 
-First, we need to add the right that allows an org to support Enterprise PKS clusters to our `enterprise-dev-org`:
+First, we need to intruct the vcd-cli to "use" our `cse-enterprise-org`:
+~~~
+$ vcd org use cse-enterprise-org
+~~~
+Now we can add the right that allows an org to support Enterprise PKS clusters to our `enterprise-dev-org`:
 ~~~
 $ vcd right add "{cse}:PKS DEPLOY RIGHT" -o enterprise-dev-org
 ~~~
