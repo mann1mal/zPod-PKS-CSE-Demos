@@ -47,11 +47,11 @@ $ vcd right add "{cse}:PKS DEPLOY RIGHT" -o enterprise-dev-org
 ~~~
 Now, we need to ensure we are using the correct org and then enable the OvDC to support Enterprise PKS cluster creation with the following command:
 ~~~
-$ vcd cse ovdc enable ent-dev-ovdc -o enterprise-dev-org -k ent-pks --pks-plan "x-small" --pks-cluster-domain "pks.zpod.io"
+$ vcd cse ovdc enable ent-dev-ovdc -o enterprise-dev-org -k ent-pks --pks-plan "dev-plan" --pks-cluster-domain "pks.zpod.io"
 ~~~
 where `-k` is the k8 provider in question, `--pks-plan` is the PKS cluster [plan](https://docs.pivotal.io/pks/1-4/installing-pks-vsphere.html#plans) CSE will reference when a user provisions a cluster in this envrionment, and `--pks-cluster-domain` is the subdomain that we'll use for the hostname for kubernetes master API access whe a cluster is created.
 
-Note: the `x-small` plan is just 1 master/1 worker, so nice and small for cluster creation demo.
+Note: the `dev-plan` plan is just 1 master/1 worker, used for cluster creation demo as it only takes about 8 minutes to deploy.
 
 Now let's verify the `enterprise-dev-org` tenant and the OvDC are enabled for Enterprise PKS cluster creation:
 ~~~
