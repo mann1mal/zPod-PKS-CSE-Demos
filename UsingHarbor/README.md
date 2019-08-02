@@ -60,6 +60,11 @@ hello-ingress   hello.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      56s
 
 < screenshot >
 
+6. Clean up
+~~~
+$ kubectl delete -f nginx-hello.yaml
+~~~
+
 ## Using Private Projects
 
 1. Create new project, create user, add user to project as project admin
@@ -126,12 +131,53 @@ $ kubectl describe po private-hello-app-7844dc7479-bl7jn
 rpc error: code = Unknown desc = Error response from daemon: unknown: The severity of vulnerability of the image: "high" is equal or higher than the threshold in project setting: "medium".
 ---output omitted---
 ~~~
+11. Go back to web UI and disable policy, try again.
+~~~
+$ kubectl delete -f private-nginx-hello.yaml 
+~~~
+~~~
+$ kubectl create -f private-nginx-hello.yaml 
+~~~
+~~~
+$ kubectl get po
+NAME                                 READY   STATUS         RESTARTS   AGE
+private-hello-app-7844dc7479-ljrrc   0/1     ErrImagePull   0          34s
+~~~
+~~~
+$ kubectl describe po private-hello-app-7844dc7479-ljrrc
+---output omitted---
+Failed to pull image "harbor.pks.zpod.io/private-demo/hello:v1": rpc error: code = Unknown desc = Error response from daemon: pull access denied for harbor.pks.zpod.io/private-demo/hello, repository does not exist or may require 'docker login'
+---output omitted---
+~~~
 10. create secret to allow image to be pulled
 ~~~
 $ kubectl create secret generic private-demo-secret \
 > --from-file=.dockerconfigjson=/home/joe/.docker/config.json \
 > --type=kubernetes.io/dockerconfigjson
 ~~~
-
-11. attempt to deploy application
-
+11. Add secret to pod spec:
+~~~
+---output omitted---
+    spec:
+      containers:
+      - image: harbor.pks.zpod.io/private-demo/hello:v1
+        name: private-hello
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: private-demo-secret
+---output omitted---
+12. Deploy app again
+~~~
+$ kubectl create -f private-nginx-hello.yaml 
+~~~
+~~~
+$ kubectl get pods -w
+private-hello-app-77564f9459-w2hz8   1/1     Running   0          8s
+~~~
+~~~
+$ kubectl get ingress
+NAME            HOSTS                            ADDRESS                     PORTS   AGE
+hello-ingress   private-hello.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      56s
+~~~
+<screenshot>
