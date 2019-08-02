@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: hello-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: hello
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-ingress
+spec:
+  rules:
+  - host: hello.demo.pks.zpod.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: hello-app
+          servicePort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hello
+  name: hello-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello
+    spec:
+      containers:
+      - image: harbor.pks.zpod.io/public-demo/hello:v1
+        name: hello
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
