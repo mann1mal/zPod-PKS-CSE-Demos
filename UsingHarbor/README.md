@@ -117,19 +117,19 @@ $ kubectl delete -f nginx-hello.yaml
 
 ## Using Private Projects
 
-In this exercise, we are going to create a private project, which can only be accessed by users who are specifically granted access. This allows admins to control which teams have access to which set of resources being offered by Harbor. This private project will only be accessed by our `dev1` development team.
+In this exercise, we are going to create a private project, which can only be accessed by users who are specifically granted access. This allows admins to control which teams have access to which set of resources being offered by Harbor. This private project will only be accessed by our `private-demo-dev1` development team.
 
 First, we'll need to navigate back to the home page of Harbor web UI, click the `New Project` button, define our project name (`private-demo`), and ensure the `Public` check box is NOT selected:
 
 <img width="1440" alt="Screen Shot 2019-08-02 at 9 15 55 PM" src="https://user-images.githubusercontent.com/32826912/62405391-c3f0a680-b56a-11e9-9d74-019e5392caef.png">
 
-After creating the project, we need to add our `dev1` user to Harbor's local user directory and add that user to our private project to grant them access. 
+After creating the project, we need to add our `private-demo-dev1` user to Harbor's local user directory and add that user to our private project to grant them access. 
 
 Select the `Users` tab in the `Administration` section on the left-hand menu. Select the `New-User` button and fill in the requested credentials as detailed in the screenshot below:
 
 ![Screen Shot 2019-08-02 at 3 57 00 PM](https://user-images.githubusercontent.com/32826912/62405464-6446cb00-b56b-11e9-9d32-c91e8200fa09.png)
 
-After adding the user, select the `Projects` tab in the left-hand menu. Select the link for the `private-project` and select the `Members` tab. Select the `+ User` button and add the `dev1` user as `Project Admin`, which will allow them to manage the private project:
+After adding the user, select the `Projects` tab in the left-hand menu. Select the link for the `private-project` and select the `Members` tab. Select the `+ User` button and add the `private-demo-dev1` user as `Project Admin`, which will allow them to manage the private project:
 
 **Note**: You must select the username from the drop down. Begin typing `private-demo..` and select the username from the dropdown menu
 
