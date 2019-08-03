@@ -2,9 +2,11 @@
 
 The guestbook app demo helps demonstrate the usage of persistent storage, which is automated via the vSphere Cloud Provider, as well as the creation of NSX-T Load Balancer for external application access. We will also showcase the built-in ingress controller offered per cluster in NSX-T.
 
-**Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-Before you start the demo, let's ensure we are accessing the `demo-cluster`:
+<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+
+Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
 ~~~
