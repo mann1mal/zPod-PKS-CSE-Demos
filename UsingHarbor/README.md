@@ -135,11 +135,11 @@ After adding the user, select the `Projects` tab in the left-hand menu. Select t
 
 ![Screen Shot 2019-08-02 at 3 53 19 PM](https://user-images.githubusercontent.com/32826912/62405466-6872e880-b56b-11e9-84b5-67152b4154c7.png)
 
-Now that we've added our user to our private project, let's enable soome additional security feature for this project. Navigate to the `Configuration` tab and ensure both the `Automatically scan images on push` and `Prevent vulnerable images from running` options are enabled. Set the threshold for image vulnerability to `Medium`:
+Now that we've added our user to our private project, let's enable some additional security feature for this project. Navigate to the `Configuration` tab and ensure both the `Automatically scan images on push` and `Prevent vulnerable images from running` options are enabled. Set the threshold for image vulnerability to `Medium`:
 
 ![Screen Shot 2019-08-02 at 3 50 42 PM](https://user-images.githubusercontent.com/32826912/62405535-986ebb80-b56c-11e9-8242-f5cb750175a9.png)
 
-This will ensure that any time an image is pushed to the project, it is automatically scanned for CVE vulnerabilities. Harbor utilizes [Clair](https://coreos.com/clair/docs/latest/) to scan images for vulnerabilites. We also set a process in place to prevent an image from being pulled if it has medium or higher level severities reported.
+This will ensure that any time an image is pushed to the project, it is automatically scanned for CVE vulnerabilities. Harbor utilizes [Clair](https://coreos.com/clair/docs/latest/) to scan images for vulnerabilites. We also set a process in place to prevent an image from being pulled if it has `Medium` or higher level severities reported.
 
 Let's head back over to the `cse-client` putty session and push our image to our private project.
 
@@ -147,7 +147,7 @@ Tag the image to prepare it to be pushed to the private project:
 ~~~
 $ docker tag nginxdemos/hello harbor.pks.zpod.io/private-demo/hello:v1
 ~~~
-Attempt to push the image to the project project:
+Attempt to push the image to the project:
 ~~~
 $ docker push harbor.pks.zpod.io/private-demo/hello:v1
 The push refers to repository [harbor.pks.zpod.io/private-demo/hello]
@@ -160,7 +160,7 @@ f93c2b24cb18: Preparing
 d39d92664027: Waiting 
 denied: requested access to the resource is denied   <<--- Access Denied
 ~~~
-Note that we are not able to push the image as we get an `Access Denied` message. This is expected behavior as our private project requires authentication. Authenticate to the Harbor instance with the `dockr login` command:
+Note that we are not able to push the image as we get an `Access Denied` message. This is expected behavior as our private project requires authentication. Authenticate to the Harbor instance with the `docker login` command:
 ~~~
 $ docker login harbor.pks.zpod.io
 Username: private-demo-dev1
@@ -264,7 +264,10 @@ Use `vi` (or `nano`, not trying to start a fight here...) to edit the `~/UsingHa
       - name: private-demo-secret
 ---output omitted---
 ~~~
-Now try to deploy the application again
+Now delete the failed deployment and try to deploy the application again
+~~~
+$ kubectl delete -f private-nginx-hello.yaml 
+~~~
 ~~~
 $ kubectl create -f private-nginx-hello.yaml 
 ~~~
