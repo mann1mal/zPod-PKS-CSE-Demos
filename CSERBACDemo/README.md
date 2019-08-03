@@ -10,12 +10,12 @@ For future demos, there is a cluster (`demo-cluster`) provisioned with 3 worker 
 
 ## Prepare Tenant Org
 
-First, ensure that you are logged in to your Horizon instance and ssh to the cse-client server:
+First, ensure that you are logged in to your Horizon instance and ssh to the `cse-client` server:
 ~~~
 $ ssh cse@cse-client.vcd.zpod.io
 VMware1!
 ~~~
-Once on the cse-client, run the clean-up script to ensure the `enterprise-dev-org` is not enabled to provision Enterprise PKS clusters:
+Once logged in to the `cse-client` server, run the clean-up script to ensure the `enterprise-dev-org` is not enabled to provision Enterprise PKS clusters:
 ~~~
 $ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
 ~~~
