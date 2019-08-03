@@ -1,4 +1,4 @@
-# Namespace Network Isolation with Network Policies and NSX-T
+# Namespace Isolation with Network Policies and NSX-T
 
 As was pointed out in our [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/CSERBACDemo), the Container Service Exstension automatically provisions NSX-T Distributed Firewall rules to ensure that each clusters' workloads are isolated from other clusters' workloads. But what if you'd like to share a single cluster with multiple users/groups instead of provision a dedicated cluster for each group?
 
@@ -7,7 +7,11 @@ One option is to utilize Network Policies to ensure network traffic can not trav
 As detailed in the [previous demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NetworkPolicy) Enterprise PKS Kubernetes clusters using NSX-T as the Container Network Interface (CNI) will have DFW rules automatically created in NSX-T when we create Network Policies. We will showcase this functionality again in this demo to isolate namespace network traffic.
 
 ## Testing Default Kubernetes Pod-to-Pod Network Connectivity
-Before you start the demo, let's ensure we are accessing the `demo-cluster`:
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
+
+<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+
+Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
 ~~~
