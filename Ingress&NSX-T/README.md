@@ -8,7 +8,10 @@ If we use a service type of `Ingress` instead, in conjunction with a DNS wildcar
 
 ## Configure Ingress Service for Guestbook App
 
-Before you start the demo, let's ensure we are accessing the `demo-cluster`:
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+
+<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
 ~~~
