@@ -236,3 +236,5 @@ $ kubectl delete service -n appspace appspace-web
 ## Conclusion
 
 In this demo, we walked through the creation of Network Policies that allow Kubernetes cluster admins to isolate traffic within namespaces. With the help of the NCP, the creation of these Network Policies in turn produce DFW rules in NSX-T to restrict network traffic in our Kubernetes cluster. We also showcased the usage of the Traceflow tool to troubleshoot network connectivity between resources in our environment.
+
+Head to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/UsingHarbor) to showcase utilizing Harbor as an enterprise grade cloud native registry in an Enterprise PKS deployment.
