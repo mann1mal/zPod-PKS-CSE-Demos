@@ -1,4 +1,4 @@
-# Using Harbor as a Repository with Enterprise PKS
+# Using Harbor as an Enterprise Grade Repository with Enterprise PKS
 
 ## Using Public Projects
 
