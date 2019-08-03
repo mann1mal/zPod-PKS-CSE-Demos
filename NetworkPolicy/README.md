@@ -16,7 +16,11 @@ Among other things, the NCP also handles the creation of NSX-T Distributed Firew
 
 ## Network Policies and DFW Rules
 
-First thing's first, let's ensure we are operating in the correct cluster and the correct namespace. Also, if you did not deploy the Yelb app from the previous demos, please deploy it now as well:
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
+
+<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+
+Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. We'll also set a namespace for our default context to ensure we are deploying our workloads to the `appspace` namespace.
 
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iwp VMware1!
@@ -27,12 +31,13 @@ $ vcd cse cluster config demo-cluster > ~/.kube/config
 ~~~
 $ kubectl config set-context --current --namespace=appspace
 ~~~
+If you did not deploy the Yelb app in the last demo, do so now:
 ~~~
 $ kubectl create -f yelb-ingress.yaml
 ~~~
 Let's test connectivity to the Yelb UI at `yelb.demo.pks.zpod.io` to confirm the app deployed succesfully:
 
-**Note:** Chrome has been known to hold onto webpage cahce so may be a good idea to use incognito mode as we try to access the app before and after implementing the network polices
+**Note:** Chrome has been known to hold onto webpage cahce so please incognito mode/private browsing as you try to access the app before and after implementing the network polices.
 
 ![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
 
