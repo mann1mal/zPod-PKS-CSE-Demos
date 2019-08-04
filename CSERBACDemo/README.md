@@ -10,7 +10,7 @@ For future demos, there is a cluster (`demo-cluster`) provisioned with 3 worker 
 
 ## Prepare Tenant Org
 
-Before starting the demo, access the `cse-client` CLI from your Horizon instance via putty (pw is `VMware1!`):
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
 <img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
 
