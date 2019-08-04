@@ -295,6 +295,7 @@ $ kubectl delete secret private-demo-secret
 ~~~
 $ rm ~/.docker/config.json
 ~~~
+Also, please navigate to the Harbor web UI and delete both the `hello` image repositories from each project, and then delete both the `public-demo` and `priate-demo` projects. Please also remove the `private-demo-dev1` user from Harbor.
 
 ## Conclusion
 
