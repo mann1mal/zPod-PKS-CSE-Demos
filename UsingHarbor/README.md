@@ -9,7 +9,7 @@ In the subsequent exercises, we will:
 * deploy applications to our `demo-cluster` using Harbor as our image registry
 * explore security benefits provided by Harbor, such as automatic CVE scanning
 
-Before starting the demo, access the `cse-client` CLI from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
 
 <img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
 
