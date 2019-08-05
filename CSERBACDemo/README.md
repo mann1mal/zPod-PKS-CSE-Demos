@@ -15,13 +15,15 @@ Before starting the demo, access the `cse-client` server from your Horizon insta
 <img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
 
 Once logged in to the `cse-client` server, run the clean-up script to ensure the `enterprise-dev-org` is not enabled to provision Enterprise PKS clusters:
+
+(**Note**: please reach out to Joe Mann or ping in the `#zpod-feedback` slack channel for access credentials for the system admin user for this demo.)
+
 ~~~
 $ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
 ~~~
 
 Log in with the system admin user of the vCloud Director environment: 
 
-(**Note**: please reach out to Joe Mann or ping in the `#zpod-feedback` slack channel for access credentials for the system admin user for this demo.)
 ~~~
 $ vcd login director.vcd.zpod.io system administrator -iw
 ~~~
