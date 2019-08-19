@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: private-hello-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: private-hello
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: private-hello-ingress
+spec:
+  rules:
+  - host: private-hello.demo.pks.zpod.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: private-hello-app
+          servicePort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: private-hello
+  name: private-hello-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: private-hello
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: private-hello
+    spec:
+      containers:
+      - image: harbor.pks.zpod.io/private-demo/hello:v1
+        name: private-hello
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: private-demo-secret
+status: {}
