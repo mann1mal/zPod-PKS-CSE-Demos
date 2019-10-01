@@ -150,6 +150,12 @@ $ vcd cse cluster delete dev1-cluster
 ~~~
 CSE will delete the DFW rule create to isolate the cluster while the PKS control plane will handle deleting all additional NSX-T resources created to support the cluster.
 
+After deleting the cluster, please run the `onboarding-demo-cleanup.sh` script to clean to environment up for the next user:
+
+~~~
+$ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
+~~~
+
 ## Conclusion
 
 In this demo, we walked through the onboarding of a new organization that wishes to deploy Enterprise PKS clusters via the Container Service Extention, granted users within the tenant org access to provision clusters, and demoed the creation of a cluster via CSE.
