@@ -1,23 +1,88 @@
-## Installing Kubeapps
+# Installing Helm and Kubeapps in `demo-cluster`
 
+In this lab, we are going to run through the workflow of deploying [Helm](https://helm.sh) in our `demo-cluster`. We will then utilize Helm to deploy [Kubeapps](https://kubeapps.com). Kubeapps, an open source project developed by the folks at Bitnami, is a web-based UI for deploying and managing applications in Kubernetes clusters. 
 
-Install helm
+Kubeapps allows users to:
 
-**Security Disclaimer**
+* Browse and deploy Helm charts from chart repositories
+* Inspect, upgrade and delete Helm-based applications installed in the cluster
+* Add custom and private chart repositories (supports ChartMuseum and JFrog Artifactory)
+* Browse and provision external services from the Service Catalog and available Service Brokers
+* Connect Helm-based applications to external services with Service Catalog Bindings
+* Secure authentication and authorization based on Kubernetes Role-Based Access Control
+
+Finally, we'll use the Kubeapps dashboard to deploy a wordpress application with persistent storage in the cluster.
+
+## Deploying Helm 
+
+Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+
+<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+
+Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
-cd ~/zPod-PKS-CSE-Demos/Kubeapps
+$ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
+~~~
+~~~
+$ vcd cse cluster config demo-cluster > ~/.kube/config
+~~~
+~~~
+$ kubectl get nodes
+NAME                                   STATUS   ROLES    AGE     VERSION
+0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
+713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
+8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
+~~~
+
+Now we are ready to use the Helm client, which is already installed on the `cse-client` server, to deploy Helm in our cluster.
+
+### Helm Security Considerations
+
+Helm runs locally on the client workstation or server that is initiating Helm commands (`cse-client` in this case). Helm provides standard application package management features to allow for streamlined application deployment/management in a Kubernetes cluster. To provide this service, Helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the Kubernetes cluster.
+
+When you enter a Helm command from the client to install an application, the Helm client communicates the instructions to the tiller server which interacts with the Kubernetes API to execute commands. As Tiller has the ability to execute privliedge commands within a Kubernetes cluster, it should always be installed with thorough security precautions as detailed in [Securing your Helm Installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) page in the Helm Documentation.
+
+However, in this lab, for simplicity sake, we are going to deploy Tiller with the `cluster-admin` role so the service has access to all of the elements of the Kubernetes API to deploy our applications. This is **NOT** best practice for production but is more than acceptable in isolated/demo environments.
+
+Now that we've learned a little bit about Helm, let's change into our `Kubeapps` directory and create the Tiller service account and role binding that Helm requires to run in a Kubernetes cluster:
+
+~~~
+$ cd ~/zPod-PKS-CSE-Demos/Kubeapps
 ~~~
 
 ~~~
-kubectl create -f helm-rbac-config.yaml
+$ kubectl create -f helm-rbac-config.yaml
+serviceaccount/tiller created
+clusterrolebinding.rbac.authorization.k8s.io/tiller created
 ~~~
 
-~~~
-helm init --service-account tiller
-~~~
+After creating the service account and rolebinding for Tiller, we are ready to use the Helm client to deploy the Helm service:
 
 ~~~
-k get po -n kube-system
+$ helm init --service-account tiller
+Creating /home/cse/.helm 
+Creating /home/cse/.helm/repository 
+Creating /home/cse/.helm/repository/cache 
+Creating /home/cse/.helm/repository/local 
+Creating /home/cse/.helm/plugins 
+Creating /home/cse/.helm/starters 
+Creating /home/cse/.helm/cache/archive 
+Creating /home/cse/.helm/repository/repositories.yaml 
+Adding stable repo with URL: https://kubernetes-charts.storage.googleapis.com 
+Adding local repo with URL: http://127.0.0.1:8879/charts 
+$HELM_HOME has been configured at /home/joe/.helm.
+
+Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
+
+Please note: by default, Tiller is deployed with an insecure 'allow unauthenticated users' policy.
+To prevent this, run `helm init` with the --tiller-tls-verify flag.
+For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
+~~~
+
+Verify that the `tiller-deploy` pod is running and in ready status via `kubectl`:
+
+~~~
+$ kubectl get pods -n kube-system
 NAME                                    READY   STATUS    RESTARTS   AGE
 coredns-95489c5c9-btdq7                 1/1     Running   0          4h55m
 coredns-95489c5c9-p95nf                 1/1     Running   0          4h55m
@@ -27,13 +92,36 @@ metrics-server-867b8fdb7d-mflv6         1/1     Running   0          4h55m
 tiller-deploy-9bf6fb76d-gbcks           1/1     Running   0          40s
 ~~~
 
+Verify we are able to list Helm repos via the client:
+
+~~~
+$ helm repo list
+NAME   	URL                                             
+stable 	https://kubernetes-charts.storage.googleapis.com
+local  	http://127.0.0.1:8879/charts                    
+~~~
+
+Great! Helm has been succesfully installed in the cluster. Now we are ready to deploy the Kubeapps Helm chart.
+
+## Deploying Kubeapps via Helm chart
+
+Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on. Kubeapps uses Helm charts to deploy application stacks to Kubernetes clusters so Helm must be deployed in the cluster prior to deploying Kubeapps. We'll also use Helm to deploy Kubeapps itself in this lab.
+
+First, add the `bitnami` Helm repo with the client:
+
 ~~~
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ~~~
 
+Create a Kubernetes namespace called `kubeapps` that will be used to house the Kubeapps deployment:
+
 ~~~
 kubectl create namespace kubeapps
 ~~~
+
+In order for Kubeapps to be able to deploy applications into the cluster, we will need to create a Kubeapps service account and role binding, much like we did for the Tiller Server. Again, for simplicity sake, we are going to deploy the `kubeapps-operator` service account with the `cluster-admin` role so the service has access to all of the elements of the Kubernetes API to deploy our applications. Again, this is **NOT** best practice for a production deployment. For more information on securing your Kubeapps service, refer to the [Kubeapps documentation.](https://github.com/kubeapps/kubeapps/blob/master/docs/user/securing-kubeapps.md)
+
+Create the `serviceaccount` and `rolebinding` the Kubeapps service requires:
 
 ~~~
 kubectl create clusterrolebinding kubeapps-operator \
@@ -41,11 +129,15 @@ kubectl create clusterrolebinding kubeapps-operator \
 --serviceaccount=default:kubeapps-operator
 ~~~
 
+Use the Helm client to deploy the Kubeapps chart:
+
 ~~~
 helm install --name kubeapps --namespace kubeapps bitnami/kubeapps \
 --set mongodb.securityContext.enabled=false \
 --set mongodb.mongodbEnableIPv6=false
 ~~~
+
+Monitor the output of the below `kubectl` command to confirm when all pods in the `kubeapps` namespace are in a `Running` or `Completed`
 
 ~~~
 $ kubectl get pods,services -n kubeapps
