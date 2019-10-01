@@ -85,3 +85,51 @@ kubectl get ingress -n kubeapps
 kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{.secrets[].name}') \
 -o jsonpath='{.data.token}' -o go-template='{{.data.token | base64decode}}' && echo
 ~~~
+
+~~~
+kubectl create namespace wordpress
+~~~
+
+run through UI to create wordpress app, change persistance
+
+~~~
+kubectl get pods -n wordpress -w
+NAME                                  READY   STATUS    RESTARTS   AGE
+cut-birds-mariadb-0                   0/1     Running   0          19s
+cut-birds-wordpress-fbb7f5b76-lm5bh   0/1     Running   0          19s
+cut-birds-mariadb-0   1/1   Running   0     38s
+cut-birds-wordpress-fbb7f5b76-lm5bh   1/1   Running   0     112s
+~~~
+
+~~~
+$ kubectl get all -n wordpress
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/cut-birds-mariadb-0                   1/1     Running   0          2m33s
+pod/cut-birds-wordpress-fbb7f5b76-lm5bh   1/1     Running   0          2m33s
+
+NAME                          TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+service/cut-birds-mariadb     ClusterIP      10.100.200.87   <none>         3306/TCP                     2m33s
+service/cut-birds-wordpress   LoadBalancer   10.100.200.72   10.96.59.115   80:32370/TCP,443:31918/TCP   2m33s
+
+NAME                                  READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/cut-birds-wordpress   1/1     1            1           2m33s
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/cut-birds-wordpress-fbb7f5b76   1         1         1       2m33s
+
+NAME                                 READY   AGE
+statefulset.apps/cut-birds-mariadb   1/1     2m33s
+~~~
+
+~~~
+$ helm ls
+NAME     	REVISION	UPDATED                 	STATUS  	CHART          	APP VERSION	NAMESPACE
+cut-birds	1       	Tue Oct  1 16:58:19 2019	DEPLOYED	wordpress-7.3.8	5.2.3      	wordpress
+kubeapps 	1       	Tue Oct  1 16:22:52 2019	DEPLOYED	kubeapps-2.1.5 	v1.5.1     	kubeapps 
+~~~
+
+~~~
+$ echo Password: $(kubectl get secret --namespace wordpress cut-birds-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+Password: <your-password>
+~~~
+
