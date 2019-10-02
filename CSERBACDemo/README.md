@@ -104,7 +104,24 @@ name                         dev1-cluster
 worker_haproxy_ip_addresses
 ~~~
 
-**3.4** If you'd like to access this cluster via `kubectl` on the cse server, you'll need to add the `kubernetes_master_ips` (will only be available after the cluster provision is complete) and `kubernetes_master_host` values into the `/etc/hosts` file of the cse server so the hostname will resolve correctly.
+**3.4** Use the following command to monitor the progress of the cluster creation. Wait until the `last_action_state` equals `succeeded` and you have an IP listed for the `kubernetes_master_ips` value to proceed to step 3.5:
+~~~
+$ vcd cse cluster info dev1-cluster
+property                     value
+---------------------------  ---------------------------------
+k8s_provider                 ent-pks
+kubernetes_master_host       dev1-cluster.pks.zpod.io
+kubernetes_master_ips        <Kubernetes Master IP Address here>
+kubernetes_master_port       8443
+kubernetes_worker_instances  1
+last_action                  CREATE
+last_action_description      Instance provisioning completed
+last_action_state            succeded
+name                         dev1-cluster
+worker_haproxy_ip_addresses
+~~~
+
+**3.5** If you'd like to access this cluster via `kubectl` on the cse server, you'll need to add the `kubernetes_master_ips` (will only be available after the cluster provision is complete) and `kubernetes_master_host` values into the `/etc/hosts` file of the cse server so the hostname will resolve correctly.
 
 ~~~
 $ sudo vi /etc/hosts
@@ -121,7 +138,7 @@ NAME                                   STATUS   ROLES    AGE    VERSION
 0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   10m    v1.13.5
 ~~~
 
-**3.5** While you wait for the cluster to create (you can check status with `vcd cse cluster info dev1-cluster`), let's make sure RBAC is working as expected by logging into the org with our `dev3` user and trying to provision a cluster:
+**3.6** After the `dev1-cluster` has been provisioned, make sure RBAC is working as expected by logging into the org with our `dev3` user and trying to provision a cluster:
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev3 -iwp VMware1!
 ~~~
