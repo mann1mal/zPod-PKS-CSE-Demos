@@ -86,7 +86,7 @@ All of this automation is made possible by the NSX-T Container Plugin.
 
 ## Step 2: Test Data Persistance
 
-**2.1** If you haven't already, navigate to the homepage of the `guestbook` app (IP of the LoadBalancer service from step 5.) and enter a couple of entries in the book. Observe the pods' labels and then use the label selector to delete all of the `backend` pods:
+**2.1** If you haven't already, navigate to the homepage of the `guestbook` app (IP of the LoadBalancer service from step 1.7.) and enter a couple of entries in the book. Observe the pods' labels and then use the label selector to delete all of the `backend` pods:
 ~~~
 $ kubectl get pod -l tier=frontend
 $ kubectl get pod -l tier=backend
