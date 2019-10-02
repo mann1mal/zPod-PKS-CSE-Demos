@@ -302,6 +302,7 @@ Navigate back to the status page of the Wordpress application in the Kubeapps da
 
 ~~~
 $ echo Password: $(kubectl get secret --namespace wordpress cut-birds-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
+
 Password: <your-password>
 ~~~
 
