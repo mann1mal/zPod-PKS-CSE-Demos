@@ -33,10 +33,12 @@ Also, ensure the context is set to the `appspace` namespace:
 ~~~
 $ kubectl config set-context --current --namespace=appspace
 ~~~
-After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the `frontend` service from `LoadBalancer` type to `ClusterIP` type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's ok):
+After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the `frontend` service from `LoadBalancer` type to `ClusterIP` type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's OK):
 ~~~
 $ kubectl edit svc frontend
 ~~~
+
+**Note**: `type: ClusterIP` should be the last line in the file. Also note, `kubectl edit` utilizes `vi` as it's editor by default. After opening the yaml file for the serivce, hit `i` to enter insert mode, then make your changes. Hit `esc` to leave insert mode and enter `:wq` then `enter` to commit your changes.
 
 <img width="514" alt="Screen Shot 2019-07-10 at 10 28 59 AM" src="https://user-images.githubusercontent.com/32826912/61248498-2d765580-a721-11e9-8a09-87601e39ac8b.png">
 
