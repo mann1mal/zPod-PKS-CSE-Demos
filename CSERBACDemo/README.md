@@ -123,6 +123,8 @@ worker_haproxy_ip_addresses
 
 **3.5** If you'd like to access this cluster via `kubectl` on the cse server, you'll need to add the `kubernetes_master_ips` (will only be available after the cluster provision is complete) and `kubernetes_master_host` values into the `/etc/hosts` file of the cse server so the hostname will resolve correctly.
 
+**Note**: If there is an existing entry for `dev1-cluster` in the `/etc/hosts` file, delete or change it to reflect the IP address you obtained from step 3.4
+
 ~~~
 $ sudo vi /etc/hosts
 
@@ -172,10 +174,17 @@ $ vcd cse cluster delete dev1-cluster
 ~~~
 CSE will delete the DFW rule create to isolate the cluster while the PKS control plane will handle deleting all additional NSX-T resources created to support the cluster.
 
-**4.4** After deleting the cluster, please run the `onboarding-demo-cleanup.sh` script to clean to environment up for the next user:
+**4.4** After deleting the cluster, please run the `onboarding-demo-cleanup.sh` script and clear out the hostname entry for the `dev1-cluster` to clean the environment up for the next user:
 
 ~~~
 $ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
+~~~
+
+~~~
+$ sudo vi /etc/hosts
+
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 ~~~
 
 ## Conclusion
@@ -183,7 +192,3 @@ $ ./zPod-PKS-CSE-Demos/CSERBACDemo/onboarding-demo-cleanup.sh
 In this demo, we walked through the onboarding of a new organization that wishes to deploy Enterprise PKS clusters via the Container Service Extention, granted users within the tenant org access to provision clusters, and demoed the creation of a cluster via CSE.
 
 We also examined the work CSE does to isolate network traffic per cluster via NSX-T DFW rules any time a cluster is created via CSE. Move on to the [next demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo) to start to deploy applications in Enterprise PKS Kubernetes clusters.
-
-
-
-
