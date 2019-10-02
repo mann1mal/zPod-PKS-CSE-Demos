@@ -1,10 +1,12 @@
 # Ingress Controller and NSX-T
 
-As you may remember from our [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), if we use the kubernetes service type of `LoadBalancer` to expose an app to external connections in a PKS cluster, we would still need to manually add DNS records for each NSX-T Load Balancer IP created so that external connections could resolve on a hostname. 
+As you may remember from our [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), if we use the Kubernetes service type of `LoadBalancer` to expose an app to external connections in a PKS cluster, we would still need to manually add DNS records for each NSX-T Load Balancer IP created so that external connections could resolve on a hostname. 
 
-If we use a service type of `Ingress` instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly at the kubernetes layer via the Ingress controller (NSX-T layer 7 load balancer) that is automatically deployed in NSX-T upon cluster creation. This allows developers to fully manager the hostnames that resolve to multiple apps without having to create DNS records for each service they are looking to expose externally.
+If we use a service type of `Ingress` instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly at the Kubernetes layer via the Ingress controller (NSX-T layer 7 load balancer) that is automatically deployed in NSX-T upon cluster creation. This allows developers to fully manager the hostnames that resolve to multiple apps without having to create DNS records for each service they are looking to expose externally.
 
-**Note:** Ensure that you are using your Horizon instance (access instruction detailed [here](https://confluence.eng.vmware.com/display/CPCSA/CSE+zPod+Lab+Access+and+Demo+Scripts)) to access the demo environment.
+## Prereqs
+
+The `guestbook` app is deployed in your cluster, as detailed in the [Guestbook Demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo) lab
 
 ## Configure Ingress Service for Guestbook App
 
