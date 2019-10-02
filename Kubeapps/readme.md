@@ -196,7 +196,7 @@ kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{
 
 Open a web browser and navigate to the URL obtained from the `kubectl get ingress -n kubeapps` command. Copy the token obtained from the previous command and paste in `Token` field. Select `Login`
 
-<1.png>
+<img src="Images/1.png">
 
 You have succesfully deployed Kubeapps via a Helm chart and have logged into the dashboard utilizing the bearer token from the `kubeapps-operator` service account.
 
@@ -214,24 +214,25 @@ Navigate back to the Kubeapps dashboard. Select the recently created `wordpress`
 
 **Note**: You may need to refresh the web browser if the `wordpress` does not appear in the dropdown
 
-<2.png> 
+<img src="Images/2.png"> 
 
 After selecting the desired namespace, click `Catalog` and search for "Wordpress." Click on the Wordpress tile from the `Stable` repo:
 
-<3.png>
+<img src="Images/3.png">
 
 Review the contents of the webpage, which give additional usage information regarding the Wordpress chart, including `values` that can be set by the user to customize the deploy. When ready, click the `Deploy` button in the top right hand corner:
 
-<4.png>
+<img src="Images/4.png">
 
 The next page will display a .yaml file that describes the application deployment. Review the file and note the 2 sections that reference persistant storage, one for `mariadb` and one for wordpress itself. Change both `size` values to `4Gi`, as noted in the screenhots below:
 
-<5.png>
-<6.png>
+<img src="Images/5.png">
+
+<img src="Images/6.png">
 
 After making those 2 changes, select the "Submit" option to deploy the wordpress application.
 
-<7.png>
+<img src="Images/7.png">
 
 Return to the `cse-client` putty session and monitor the deployment. Run the following command and wait for both pods to display the `1/1` value under the "READY" column.
 
@@ -289,11 +290,11 @@ kubeapps 	1       	Tue Oct  1 16:22:52 2019	DEPLOYED	kubeapps-2.1.5 	v1.5.1     
 
 Navigate back to the Kubeapps dashboard and refresh the broswer. You should notice the deployment is in a "Ready" state. Review the page for information on accessing the Wordpress dashboard. 
 
-<8.png>
+<img src="Images/8.png">
 
 Notice the IP displayed under the "URL" column at the top of the screen. This is the public IP address that will be used to access the Wordpress site. This "LoadBalancer" service type will utilize an NSX-T L4 Load Balancer to allow external access to the site. Open another browser tab and navigate to the IP address of the `LoadBalancer` service (you should see a generic Wordpress homepage):
 
-<9.png>
+<img src="Images/9.png">
 
 Create a sample post to populate the blog with custom data we can use to test our backup in the Velero lab. Navigate to the bottom of the page and select the "Log In" option. 
 
@@ -304,19 +305,19 @@ $ echo Password: $(kubectl get secret --namespace wordpress cut-birds-wordpress 
 Password: <your-password>
 ~~~
 
-<10.png>
+<img src="Images/10.png">
 
 Once you've logged into the admin portal, select "Posts > Add New" to create a new blog post:
 
-<11.png>
+<img src="Images/11.png">
 
 Populate the post with filler content and select "Publish" in the top right hand corner:
 
-<12.png>
+<img src="Images/12.png">
 
 Navigate back to the blog homepage to verify your post is visible:
 
-<13.png>
+<img src="Images/13.png">
 
 If you intend to move on to the Velero lab, you are finished. If you do not intend to complete the Velero lab at this time, please delete all of the resources created in this lab in order to clean up for subsequent users:
 
