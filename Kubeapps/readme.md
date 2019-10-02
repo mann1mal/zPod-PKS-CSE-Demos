@@ -6,20 +6,20 @@ Kubeapps allows users to:
 
 * Browse and deploy Helm charts from chart repositories
 * Inspect, upgrade and delete Helm-based applications installed in the cluster
-* Add custom and private chart repositories (supports ChartMuseum and JFrog Artifactory)
+* Add custom and private chart repositories (supports ChartMuseum, JFrog Artifactory, and Harbor Cloud Native Regsitry)
 * Browse and provision external services from the Service Catalog and available Service Brokers
 * Connect Helm-based applications to external services with Service Catalog Bindings
 * Secure authentication and authorization based on Kubernetes Role-Based Access Control
 
 Finally, we'll use the Kubeapps dashboard to deploy a wordpress application with persistent storage in the cluster.
 
-## Deploying Helm 
+## Step 1: Deploying Helm 
 
-Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+1.1 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
 <img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
 
-Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+1.2 Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
 ~~~
@@ -39,13 +39,13 @@ Now we are ready to use the Helm client, which is already installed on the `cse-
 
 ### Helm Security Considerations
 
-Helm runs locally on the client workstation or server that is initiating Helm commands (`cse-client` in this case). Helm provides standard application package management features to allow for streamlined application deployment/management in a Kubernetes cluster. To provide this service, Helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the Kubernetes cluster.
+Helm runs locally on the client workstation or server that is initiating Helm commands (`cse-client` in this case). Helm provides standard application package management features to allow for streamlined application deployment/management in a Kubernetes cluster. To provide this service, Helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the Kubernetes cluster. Note: in Helmv3, which is currently in beta, Tiller is going away. This lab will be updated with Helmv3 transitions to GA.
 
-When you enter a Helm command from the client to install an application, the Helm client communicates the instructions to the tiller server which interacts with the Kubernetes API to execute commands. As Tiller has the ability to execute privliedge commands within a Kubernetes cluster, it should always be installed with thorough security precautions as detailed in [Securing your Helm Installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) page in the Helm Documentation.
+When you enter a Helm command from the client to install an application, the Helm client communicates the instructions to the Tiller Server which interacts with the Kubernetes API to execute commands. As Tiller has the ability to execute privliedge commands within a Kubernetes cluster, it should always be installed with thorough security precautions as detailed in [Securing your Helm Installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) page in the Helm Documentation.
 
 However, in this lab, for simplicity sake, we are going to deploy Tiller with the `cluster-admin` role so the service has access to all of the elements of the Kubernetes API to deploy our applications. This is **NOT** best practice for production but is more than acceptable in isolated/demo environments.
 
-Now that we've learned a little bit about Helm, let's change into our `Kubeapps` directory and create the Tiller `serviceaccount` and `rolebinding` that Helm requires to run in a Kubernetes cluster:
+1.3 Now that we've learned a little bit about Helm, let's change into our `Kubeapps` directory and create the Tiller `serviceaccount` and `rolebinding` that Helm requires to run in a Kubernetes cluster:
 
 ~~~
 $ cd ~/zPod-PKS-CSE-Demos/Kubeapps
@@ -58,7 +58,7 @@ serviceaccount/tiller created
 clusterrolebinding.rbac.authorization.k8s.io/tiller created
 ~~~
 
-After creating the `serviceaccount` and `rolebinding` for Tiller, we are ready to use the Helm client to deploy the Helm service in the cluster:
+1.4 After creating the `serviceaccount` and `rolebinding` for Tiller, we are ready to use the Helm client to deploy the Helm service in the cluster:
 
 ~~~
 $ helm init --service-account tiller
@@ -82,7 +82,7 @@ To prevent this, run `helm init` with the --tiller-tls-verify flag.
 For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
 ~~~
 
-Verify that the `tiller-deploy` pod is running and in ready status via `kubectl`:
+1.5 Verify that the `tiller-deploy` pod is running and in ready status via `kubectl`:
 
 ~~~
 $ kubectl get pods -n kube-system
@@ -96,7 +96,7 @@ metrics-server-867b8fdb7d-mflv6         1/1     Running   0          4h55m
 tiller-deploy-9bf6fb76d-gbcks           1/1     Running   0          40s
 ~~~
 
-Verify we are able to list Helm repos via the client:
+1.6 Verify we are able to list Helm repos via the client:
 
 ~~~
 $ helm repo list
@@ -108,17 +108,17 @@ local  	http://127.0.0.1:8879/charts
 
 Great! Helm has been succesfully installed in the cluster. Now we are ready to deploy the Kubeapps Helm chart.
 
-## Deploying Kubeapps via Helm chart
+## Step 2: Deploying Kubeapps via Helm chart
 
 Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on. Kubeapps uses Helm charts to deploy application stacks to Kubernetes clusters so Helm must be deployed in the cluster prior to deploying Kubeapps. We'll also use Helm to deploy Kubeapps itself in this lab.
 
-First, add the `bitnami` Helm repo with the client:
+2.1 Add the `bitnami` Helm repo with the Helm client on the `cse-client` server:
 
 ~~~
 $ helm repo add bitnami https://charts.bitnami.com/bitnami
 ~~~
 
-Create a Kubernetes namespace called `kubeapps` that will be used to house the Kubeapps deployment:
+2.2 Create a Kubernetes namespace called `kubeapps` that will be used to house the Kubeapps deployment:
 
 ~~~
 $ kubectl create namespace kubeapps
@@ -126,7 +126,7 @@ $ kubectl create namespace kubeapps
 
 In order for Kubeapps to be able to deploy applications into the cluster, we will need to create a Kubeapps service account and role binding, much like we did for the Tiller Server. Again, for simplicity sake, we are going to deploy the `kubeapps-operator` service account with the `cluster-admin` role so the service has access to all of the elements of the Kubernetes API to deploy our applications. Again, this is **NOT** best practice for a production deployment. For more information on securing your Kubeapps service, refer to the [Kubeapps documentation.](https://github.com/kubeapps/kubeapps/blob/master/docs/user/securing-kubeapps.md)
 
-Create the `serviceaccount` and `rolebinding` the Kubeapps service requires:
+2.3 Create the `serviceaccount` and `rolebinding` the Kubeapps service requires:
 
 ~~~
 $ kubectl create clusterrolebinding kubeapps-operator \
@@ -134,7 +134,7 @@ $ kubectl create clusterrolebinding kubeapps-operator \
 --serviceaccount=default:kubeapps-operator
 ~~~
 
-Use the Helm client to deploy the Kubeapps chart:
+2.4 Use the Helm client to deploy the Kubeapps chart:
 
 ~~~
 $ helm install --name kubeapps --namespace kubeapps bitnami/kubeapps \
@@ -142,7 +142,7 @@ $ helm install --name kubeapps --namespace kubeapps bitnami/kubeapps \
 --set mongodb.mongodbEnableIPv6=false
 ~~~
 
-Monitor the output of the below `kubectl` command to confirm when all pods in the `kubeapps` namespace are in a `Running` or `Completed`
+2.5 Monitor the output of the below `kubectl` command to confirm when all pods in the `kubeapps` namespace are in a `Running` or `Completed`
 
 ~~~
 $ kubectl get pods,services -n kubeapps
@@ -172,13 +172,13 @@ service/kubeapps-mongodb                 ClusterIP   10.100.200.138   <none>    
 
 Note that we've only deployed service type of `ClusterIP` for our Kubeapps service. In order to allow access to the Kubeapps web UI from outside of the cluster, we need to expose the service via `LoadBalancer` service type or an ingress controller. As this cluster is deployed using Enterprise PKS with NSX-T integration, we can use the built-in ingress controller provided by NSX-T to expose Kubeapps.
 
-Create the ingress resource for the Kubeapps dashboard via the following `kubectl` command:
+2.6 Create the ingress resource for the Kubeapps dashboard via the following `kubectl` command:
 
 ~~~
 $ kubectl create -f kubeapps-ingress.yaml
 ~~~
 
-Verify the resource was created and note the URL under the `HOSTS` section:
+2.7 Verify the resource was created and note the URL under the `HOSTS` section:
 
 ~~~
 kubectl get ingress -n kubeapps
@@ -187,54 +187,54 @@ NAME               HOSTS                       ADDRESS        PORTS   AGE
 kubeapps-ingress   kubeapps.demo.pks.zpod.io   10.96.59.X     80      3h29m
 ~~~
 
-Before accessing the URL above, we'll need to obtain credentials that will allow us to login to the dashboard. The Kubeapps dashboard will require a bearer token for access. You can use the following command to obtain the token for the `kubeapps-operator` service account:
+2.8 Before accessing the URL above, we'll need to obtain credentials that will allow us to login to the dashboard. The Kubeapps dashboard will require a bearer token for access. You can use the following command to obtain the token for the `kubeapps-operator` service account:
 
 ~~~
 kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{.secrets[].name}') \
 -o jsonpath='{.data.token}' -o go-template='{{.data.token | base64decode}}' && echo
 ~~~
 
-Open a web browser and navigate to the URL obtained from the `kubectl get ingress -n kubeapps` command. Copy the token obtained from the previous command and paste in `Token` field. Select `Login`
+2.9 Open a web browser and navigate to the URL obtained from the `kubectl get ingress -n kubeapps` command. Copy the token obtained from the previous command and paste in `Token` field. Select `Login`:
 
 <img src="Images/1.png">
 
 You have succesfully deployed Kubeapps via a Helm chart and have logged into the dashboard utilizing the bearer token from the `kubeapps-operator` service account.
 
-## Deploying Wordpress with Persistent Storage
+## Step 3: Deploying Wordpress with Persistent Storage
 
-Now we're ready to use the Kubeapps dashboard to deploy an application to the cluster. We are going to deploy the Wordpress application and utilize persistent storage to prepare for the Velero backup and recovery exercise.
+Now we're ready to use the Kubeapps dashboard to deploy an application to the cluster. We are going to deploy the Wordpress application and utilize persistent storage to prepare for the Velero backup and recovery exercise in a later lab.
 
-First, create a Kubernetes namespace to house our Wordpress application and all it's required resources:
+3.1 Create a Kubernetes namespace to house our Wordpress application and all it's required resources:
 
 ~~~
 $ kubectl create namespace wordpress
 ~~~
 
-Navigate back to the Kubeapps dashboard. Select the recently created `wordpress` namespace from the dropdown menu in the top right hand corner. This will ensure the Kubeapps service deploys our application to the correct namespace.
+3.2 Navigate back to the Kubeapps dashboard. Select the recently created `wordpress` namespace from the dropdown menu in the top right hand corner. This will ensure the Kubeapps service deploys our application to the correct namespace.
 
-**Note**: You may need to refresh the web browser if the `wordpress` does not appear in the dropdown
+**Note**: You may need to refresh the web browser if the `wordpress` namespace does not appear in the dropdown
 
 <img src="Images/2.png"> 
 
-After selecting the desired namespace, click `Catalog` and search for "Wordpress." Click on the Wordpress tile from the `Stable` repo:
+3.3 After selecting the desired namespace, click `Catalog` and search for "Wordpress." Click on the Wordpress tile from the `Stable` repo (tag in the bottom right corner of the tile):
 
 <img src="Images/3.png">
 
-Review the contents of the webpage, which give additional usage information regarding the Wordpress chart, including `values` that can be set by the user to customize the deploy. When ready, click the `Deploy` button in the top right hand corner:
+3.4 Review the contents of the webpage, which give additional usage information regarding the Wordpress chart, including `values` that can be set by the user to customize the deployment. When ready, click the `Deploy` button in the top right hand corner:
 
 <img src="Images/4.png">
 
-The next page will display a .yaml file that describes the application deployment. Review the file and note the 2 sections that reference persistant storage, one for `mariadb` and one for wordpress itself. Change both `size` values to `4Gi`, as noted in the screenhots below:
+3.5 The next page will display a .yaml file that describes the application deployment. Review the file and note the 2 sections that reference persistant storage, one for `mariadb` and one for wordpress itself. Change both `size` values to `4Gi`, as noted in the screenhots below:
 
 <img src="Images/5.png">
 
 <img src="Images/6.png">
 
-After making those 2 changes, select the "Submit" option to deploy the wordpress application.
+3.6 After making those 2 changes, select the "Submit" option to deploy the wordpress application.
 
 <img src="Images/7.png">
 
-Return to the `cse-client` putty session and monitor the deployment. Run the following command and wait for both pods to display the `1/1` value under the "READY" column.
+3.7 Return to the `cse-client` putty session and monitor the deployment. Run the following command and wait for both pods to display the `1/1` value under the "READY" column.
 
 ~~~
 $ kubectl get pods -n wordpress -w
@@ -246,7 +246,7 @@ cut-birds-mariadb-0   1/1   Running   0     38s
 cut-birds-wordpress-fbb7f5b76-lm5bh   1/1   Running   0     112s
 ~~~
 
-Explore all of the Kubernetes resources created by Kubeapps to support the wordpress application:
+3.8 Explore all of the Kubernetes resources created by Kubeapps to support the wordpress application:
 
 ~~~
 $ kubectl get all -n wordpress
@@ -268,7 +268,7 @@ NAME                                 READY   AGE
 statefulset.apps/cut-birds-mariadb   1/1     2m33s
 ~~~
 
-Kubeapps also instructed the Kubernetes API to provision two 4Gi `persistentvolumeclaims` (PVC) to support the application. As discussed in our Guestbook lab, the vSphere Cloud Provider automatically created VMDKs to back the PVCs. Verify they were created and are in a `Bound` status:
+3.9 Kubeapps also instructed the Kubernetes API to provision two 4Gi `persistentvolumeclaims` (PVC) to support the application. As discussed in our Guestbook lab, the vSphere Cloud Provider automatically created VMDKs to back the PVCs. Verify they were created and are in a `Bound` status:
 
 ~~~
 $ kubectl get pvc -n wordpress
@@ -279,7 +279,7 @@ data-cut-birds-mariadb-0   Bound    pvc-32859ea5-e48e-11e9-9358-005056970179   4
 
 ~~~
 
-As discussed earlier, Kubeapps actually uses Helm to deploy the applications called via the UI. Utilize the Helm client to verify both the wordpress deployment (which will receive a random two-word name, `cut-birds` in my case) and the Kubeapps deployment are visible:
+3.10 As discussed earlier, Kubeapps actually uses Helm to deploy the applications called via the UI. Utilize the Helm client to verify both the wordpress deployment (which will receive a random two-word name, `cut-birds` in my case) and the Kubeapps deployment are visible:
 
 ~~~
 $ helm ls
@@ -288,17 +288,17 @@ cut-birds	1       	Tue Oct  1 16:58:19 2019	DEPLOYED	wordpress-7.3.8	5.2.3      
 kubeapps 	1       	Tue Oct  1 16:22:52 2019	DEPLOYED	kubeapps-2.1.5 	v1.5.1     	kubeapps 
 ~~~
 
-Navigate back to the Kubeapps dashboard and refresh the broswer. You should notice the deployment is in a "Ready" state. Review the page for information on accessing the Wordpress dashboard. 
+3.11 Navigate back to the Kubeapps dashboard and refresh the broswer. You should notice the deployment is in a "Ready" state. Review the page for information on accessing the Wordpress dashboard. 
 
 <img src="Images/8.png">
 
-Notice the IP displayed under the "URL" column at the top of the screen. This is the public IP address that will be used to access the Wordpress site. This "LoadBalancer" service type will utilize an NSX-T L4 Load Balancer to allow external access to the site. Open another browser tab and navigate to the IP address of the `LoadBalancer` service (you should see a generic Wordpress homepage):
+3.12 Notice the IP displayed under the "URL" column at the top of the screen. This is the public IP address that will be used to access the Wordpress site. This "LoadBalancer" service type will utilize an NSX-T L4 Load Balancer to allow external access to the site. Open another browser tab and navigate to the IP address of the `LoadBalancer` service (you should see a generic Wordpress homepage):
 
 <img src="Images/9.png">
 
-Create a sample post to populate the blog with custom data we can use to test our backup in the Velero lab. Navigate to the bottom of the page and select the "Log In" option. 
+3.13 Create a sample post to populate the blog with custom data we can use to test our backup in the Velero lab. Navigate to the bottom Wordpress homepage and select the "Log In" option. 
 
-Navigate back to the status page of the Wordpress application in the Kubeapps dashboard. In the "Notes" section, there are instructions for obtaining access credentials to log in to the admin portal of the Wordpress application. Run the following command to retrieve the password for the `user` user to allow for login to the Wordpress admin portal:
+3.14 Navigate back to the status page of the Wordpress application in the Kubeapps dashboard. In the "Notes" section, there are instructions for obtaining access credentials to log in to the admin portal of the Wordpress application. Run the following command to retrieve the password for the `user` user to allow for login to the Wordpress admin portal:
 
 ~~~
 $ echo Password: $(kubectl get secret --namespace wordpress cut-birds-wordpress -o jsonpath="{.data.wordpress-password}" | base64 --decode)
@@ -308,19 +308,19 @@ Password: <your-password>
 
 <img src="Images/10.png">
 
-Once you've logged into the admin portal, select "Posts > Add New" to create a new blog post:
+3.15 Once you've logged into the admin portal, select "Posts > Add New" to create a new blog post:
 
 <img src="Images/11.png">
 
-Populate the post with filler content and select "Publish" in the top right hand corner:
+3.16 Populate the post with filler content and select "Publish" in the top right hand corner:
 
 <img src="Images/12.png">
 
-Navigate back to the blog homepage to verify your post is visible:
+3.17 Navigate back to the blog homepage to verify your post is visible:
 
 <img src="Images/13.png">
 
-If you intend to move on to the Velero lab, you are finished. If you do not intend to complete the Velero lab at this time, please delete all of the resources created in this lab in order to clean up for subsequent users:
+3.18 (Optional) If you intend to move on to the Velero lab, you are finished. If you do not intend to complete the Velero lab at this time, please delete all of the resources created in this lab in order to clean up for subsequent users:
 
 ~~~
 $ kubectl delete namespace wordpress
