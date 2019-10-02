@@ -130,6 +130,17 @@ yelb-ui-fc74d567f-vh2qb   1/1     Running   0          96m
 
 There is now an additional server pool within our virtual server tied to our L7 loadbalancer that will except request for the yelb UI at `yelb.demo.pks.zpod.io` and direct those connections to the `yelb-ui-fc74d567f-vh2qb` pod while the existing server pool will continue to direct requests coming in at `guestbook.demo.pks.zpod.io` to the `frontend-xxx` pods.
 
+**2.7** (Optional) If continuing on to the next lab, leave the `guestbook` and `yelb` apps running in the cluster. If you are not proceeding, please delete the applications and their resources:
+~~~
+$ kubectl delete -f ~/zPod-PKS-CSE-Demos/Guestbook/guestbook-aio-clusterip.yaml
+$ kubectl delete -f ~/zPod-PKS-CSE-Demos/Guestbook/redis-master-claim.yaml
+$ kubectl delete -f ~/zPod-PKS-CSE-Demos/Guestbook/redis-slave-claim.yaml
+$ kubectl delete ingress guestbook-frontend
+~~~
+~~~
+$ kubectl delete -f ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/yelb-ingress.yaml
+~~~
+
 ## Conclusion
 
 So there we have it, the integration between NSX-T and Enterprise PKS provides a resource for our developers to easily expose their applications to external users via an FQDN without having to work with the infrastructure team to create resources to support access every time they spin up a new application.
