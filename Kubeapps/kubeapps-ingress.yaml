@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: kubeapps.test.pks.zpod.io
+  - host: kubeapps.demo.pks.zpod.io
     http:
       paths:
       - path: /*
