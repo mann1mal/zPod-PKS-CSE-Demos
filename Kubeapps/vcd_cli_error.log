@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/joe/25testing/lib/python3.7/site-packages/container_service_extension/client/cse.py", line 501, in cluster_config
+    cluster_config = cluster.get_cluster_config(name, vdc=vdc, org=org)
+  File "/home/joe/25testing/lib/python3.7/site-packages/container_service_extension/client/cluster.py", line 171, in get_cluster_config
+    return process_response(response)
+  File "/home/joe/25testing/lib/python3.7/site-packages/container_service_extension/client/response_processor.py", line 40, in process_response
+    response_to_exception(response)
+  File "/home/joe/25testing/lib/python3.7/site-packages/container_service_extension/client/response_processor.py", line 80, in response_to_exception
+    if 'json' in response.headers['Content-Type']:
+  File "/home/joe/25testing/lib/python3.7/site-packages/requests/structures.py", line 52, in __getitem__
+    return self._store[key.lower()][1]
+KeyError: 'content-type'
+

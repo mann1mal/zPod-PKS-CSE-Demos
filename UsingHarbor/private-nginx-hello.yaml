@@ -49,6 +49,4 @@ spec:
         name: private-hello
         ports:
         - containerPort: 80
-      imagePullSecrets:
-      - name: private-demo-secret
 status: {}
