@@ -33,9 +33,9 @@ $ kubectl config set-context --current --namespace=appspace
 ~~~
 Use kubectl to deploy the storage class and persistent volume claim we will use to provide persistent storage to the guestbook app:
 ~~~
+$ kubectl create -f redis-sc.yaml
 $ kubectl create -f redis-master-claim.yaml
 $ kubectl create -f redis-slave-claim.yaml
-$ kubectl create -f redis-sc.yaml
 ~~~
 
 View the storage resources we just created:
