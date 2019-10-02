@@ -121,7 +121,7 @@ NAME                                   STATUS   ROLES    AGE    VERSION
 0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   10m    v1.13.5
 ~~~
 
-**3.5** While you wait for the cluster to create (you can check status with `vcd cse cluster info dev1-cluster`), let's make sure RBAC is working as expected by logging into the org with our dev3 user and trying to provision a cluster:
+**3.5** While you wait for the cluster to create (you can check status with `vcd cse cluster info dev1-cluster`), let's make sure RBAC is working as expected by logging into the org with our `dev3` user and trying to provision a cluster:
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev3 -iwp VMware1!
 ~~~
@@ -132,7 +132,7 @@ Try "vcd cse cluster create -h" for help.
 
 Error: Access Forbidden. Missing required rights.
 ~~~
-Perfect! So our dev3 user does not have the `"{cse}:PKS DEPLOY RIGHT"` granted to their role so they aren't able to deploy clusters within the org.
+Perfect! So our `dev3` user does not have the `"{cse}:PKS DEPLOY RIGHT"` granted to their role so they aren't able to deploy clusters within the org.
 
 ## Step 4: CSE and NSX-T Integration
 
