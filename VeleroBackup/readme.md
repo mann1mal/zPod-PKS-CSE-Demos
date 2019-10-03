@@ -348,6 +348,26 @@ cut-birds-wordpress   LoadBalancer   10.100.200.32   10.96.59.116   80:32393/TCP
 
 <img src="Images/catblog-post.png">
 
+## Step 4: Clean Up
+
+**4.1** Delete the `wordpress` namespace to remove the Wordpress application and all of its supporting resources. Confirm all pods, persistent volume claims, and services have been deleted from the namespace:
+
+~~~
+$ kubectl delete namespace wordpress
+~~~
+~~~
+$ kubectl get pods,pvc,services -n wordpress
+
+No resources found.
+~~~
+
+**4.2** Run the following commands to delete all of the components created to support the Velero application:
+
+~~~
+$ kubectl delete namespace/velero clusterrolebinding/velero
+$ kubectl delete crds -l component=velero
+~~~
+
 ## Conclusion
 
 In this lab, we were able to install Velero, and all it's required components, in the `demo-cluster` to support taking backups of Kubernetes resources. We also walked through the process for taking a backup, simulating a data loss scenario, and restoring that backup to the cluster.
