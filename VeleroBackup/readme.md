@@ -282,6 +282,10 @@ Phase:  Completed
 **3.8** Verify the current state of the Wordpress blog by confirmed the URL with the following `kubectl` command and visiting the URL in your browser:
 ~~~
 $ kubectl get svc -n wordpress
+
+NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)                      AGE
+cut-birds-mariadb     ClusterIP      10.100.200.235   <none>         3306/TCP                     23h
+cut-birds-wordpress   LoadBalancer   10.100.200.201   10.96.59.120   80:31761/TCP,443:31144/TCP   23h
 ~~~
 
 <img src="Images/catblog-pre.png">
