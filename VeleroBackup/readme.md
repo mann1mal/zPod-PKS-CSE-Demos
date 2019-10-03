@@ -1,4 +1,4 @@
-# Backing up your Kubernetes Application with Velero
+# Backing up your Kubernetes Application with Velero ⛵
 
 In this lab, you will install [Velero](https://velero.io/docs/v1.1.0/index.html) in the `demo-cluster`. You will then use Velero to take a backup of the Wordpress application, created in the previous lab. After taking a succesful backup, you will simulate a DR scenario by deleting the Wordpress application and all of it's support resources and use Velero to restore the application.
 
@@ -18,6 +18,10 @@ Velero is essentially comprised of two components:
 Velero also supports the back up and restore of Kubernetes volumes using [restic](https://github.com/restic/restic), an open source backup tool. Restic will need to utilize a S3-compatible storage server to store these volumes. To satisfy this requirement, we will also deploy a [minio](https://min.io) server in the `demo-cluster` to allow us to store our Kubernetes volume backups. Minio is a cloud storage server compatible with Amazon S3.
 
 In this lab, we will utilize Velero, in conjunction with restic and minio to take a backup of our Wordpress application and all of it's volumes.
+
+### Prereqs
+
+Ensure you have deployed the Wordpress application from the [previous lab](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps), as we will use this application to test our Velero backup strategy.
 
 ### Accessing the `demo-cluster`
 
@@ -39,10 +43,6 @@ NAME                                   STATUS   ROLES    AGE     VERSION
 713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
 8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
 ~~~
-
-### Prereqs
-
-Ensure you have deployed the Wordpress application from the [previous lab](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps), as we will use this application to test our Velero backup strategy.
 
 ## Step 1: Installing Minio in `demo-cluster`
 
@@ -136,7 +136,8 @@ $ cat credentials-velero
 
 ~~~
 $ velero install  --provider aws --bucket velero --secret-file credentials-velero \
---use-volume-snapshots=false --use-restic --backup-location-config \ region=minio,s3ForcePathStyle="true",s3Url=http://minio.velero.svc:9000,publicUrl=http://<public-ip-minio-service>:9000
+--use-volume-snapshots=false --use-restic --backup-location-config \
+region=minio,s3ForcePathStyle="true",s3Url=http://minio.velero.svc:9000,publicUrl=http://<public-ip-minio-service>:9000
 
 ---output omitted---
 
@@ -168,7 +169,7 @@ volumes:
         name: host-pods
 ~~~
 
-**2.5** Verify all of the restic pods are in `Running` status:
+**2.5** Verify all of the `restic` pods are in `Running` status:
 
 ~~~
 $ kubectl get pod -n velero
@@ -186,6 +187,10 @@ Congrats! You have succesfully deployed Velero and it's supporting services in t
 
 ## Step 3: Backup and Restore the Wordpress Application using Velero
 
+After deploying Velero, we will walk through the workflow of backing up our Wordpress application as well as simulating a DR scenario by deleting the `wordpress` namespace, which includes all of the resources we created in the previous lab to support the wordpress blog. Afterwards, we will use Velero to restore our backup and verify that persistant data, such as blog posts, is restored as well.
+
+**3.1** Verify the Wordpress pods are in the `Running` status. If you have not deployed the Wordpress application in the `demo-cluster`, please refer to the [previous lab]((https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps)) for instructions on that process before proceeding.
+
 ~~~
 $kubectl get pods -n wordpress
 
@@ -193,16 +198,95 @@ NAME                                  READY   STATUS    RESTARTS   AGE
 cut-birds-mariadb-0                   1/1     Running   0          23h
 cut-birds-wordpress-fbb7f5b76-lm5bh   1/1     Running   0          23h
 ~~~
+
+**3.2** In order for Velero to understand where to look for persistent data to back up, in addition to other Kubernetes resources in the cluster, we need to annotate each pod that is utilizing a volume so Velero backups up the pods AND the volumes.
+
+Review both of the pods in the `wordpress` namespace to view the name of each volume being used by each pod:
+
+**Note**: Your `wordpress` pod will have a different name, use the pod name obtainined from step 3.2 in the following examples
+
 ~~~
-$ kubectl -n wordpress annotate pod/<maria-db-pod-name> backup.velero.io/backup-volumes=data,config
+$ kubectl describe pod/cut-birds-mariadb-0 -n wordpress
+
+---output omitted---
+
+Volumes:
+  data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  data-cut-birds-mariadb-0
+    ReadOnly:   false
+  config:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      cut-birds-mariadb
+    Optional:  false
+  default-token-6q5xt:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-6q5xt
+    Optional:    false
+~~~
+~~~
+$ kubectl describe pods/<wordpress-pod-name> -n wordpress
+
+---output omitted---
+
+Volumes:
+  wordpress-data:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  cut-birds-wordpress
+    ReadOnly:   false
+  default-token-6q5xt:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-6q5xt
+    Optional:    false
+~~~
+
+As you can see, the `mariadb` pod is using 2 volumes: `data` and `config`, while the `wordpress` pod is utilizing a single volume: `wordpress-data`.
+
+**3.3** Run the following commands to annotate each pod with the `backup.velero.io` tag with each pods' corresponding volume(s):
+
+~~~
+$ kubectl -n wordpress annotate pod/cut-birds-mariadb-0 backup.velero.io/backup-volumes=data,config
 $ kubectl -n wordpress annotate pod/<wordpress-pod-name> backup.velero.io/backup-volumes=wordpress-data
 ~~~
+
+**3.4** Use the `velero` client to create a backup. We will name the backup `wordpress-backup` and ensure the backup only includes the resources in the `wordpress` namespace:
+
 ~~~
 $ velero backup create wordpress-backup --include-namespaces wordpress
+
+Backup request "wordpress-backup" submitted successfully.
+Run `velero backup describe wordpress-backup` or `velero backup logs wordpress-backup` for more details.
 ~~~
+
+**3.5** Use the `velero` client to ensure the `Phase: Complete` before proceeding:
 ~~~
 $ velero backup describe wordpress-backup
+
+Name:         wordpress-backup
+Namespace:    velero
+Labels:       velero.io/storage-location=default
+Annotations:  <none>
+
+Phase:  Completed
+
+--output omitted--
 ~~~
+**3.6** Navigate back to the web browser and refresh (or log back into) the Minio UI. Notice the `restic` folder, which holds houses our backups persistent data, as well as a `backups` folder:
+
+<img src="Images/minio-postbackup.png">
+
+**3.7** Select the `backups` folder and note the `wordpress-backup` folder in the subsequent directory. Explore the contents of the `wordpress-backup` folder, which contains all of the Kubernetes resources from our `wordpress` namespace:
+
+<img src="Images/minio-wordpressfolder.png">
+
+**3.8** Verify the current state of the Wordpress blog by confirmed the URL with the following `kubectl` command and visiting the URL in your browser:
+~~~
+$ kubectl get svc -n wordpress
+~~~
+
+<img src="Images/catblog-pre.png">
+
+**3.9** Navigate back to the `cse-client` server putty session. To simulate a infrastructure failure, delete the `wordpress` namespace, which will remove all of the resources that support our Wordpress application. Use `kubectl` to check the "before" and "after" states for the namespace deletion:
 ~~~
 $ kubectl get pods -n wordpress
 $ kubectl get pvc -n wordpress
@@ -214,18 +298,57 @@ $ kubectl delete namespace wordpress
 $ kubectl get pods -n wordpress
 $ kubectl get pvc -n wordpress
 ~~~
+
+**3.9** After confirming the all of the resources in the `wordpress` namespace have been deleted, refresh the browser you used to access the blog previously:
+
+<img src="Images/noblog.png">
+
+**3.10** Use the `velero` client to verify the existance/name of the backup that was previously created and restore the backup to the cluster:
+
 ~~~
 $ velero backup get
+
+NAME               STATUS      CREATED                         EXPIRES   STORAGE LOCATION   SELECTOR
+wordpress-backup   Completed   2019-10-03 15:47:07 -0400 EDT   29d       default            <none>
 ~~~
 ~~~
 $ velero restore create --from-backup wordpress-backup
 ~~~
-~~~
-$kubectl get po -n wordpress -w
-~~~
-Access the IP of the wordpress application
 
-Boom!!!
+**3.11** Monitor the pods in the `wordpress` namespace and wait for both pods to show `1/1` in the `READY` column and `Running` in the `STATUS` column:
+
+~~~
+$ kubectl get pods -n wordpress -w
+
+NAME                                  READY   STATUS     RESTARTS   AGE
+cut-birds-mariadb-0                   0/1     Init:0/1   0          12s
+cut-birds-wordpress-fbb7f5b76-qtcpp   0/1     Init:0/1   0          13s
+cut-birds-mariadb-0                   0/1     PodInitializing   0          18s
+cut-birds-mariadb-0                   0/1     Running           0          19s
+cut-birds-wordpress-fbb7f5b76-qtcpp   0/1     PodInitializing   0          19s
+cut-birds-wordpress-fbb7f5b76-qtcpp   0/1     Running           0          20s
+cut-birds-mariadb-0                   1/1     Running           0          54s
+cut-birds-wordpress-fbb7f5b76-qtcpp   1/1     Running           0          112s
+~~~
+
+**3.12** Verify the URL of the Wordpress blog:
+~~~
+$ kubectl get services -n wordpress
+
+NAME                  TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
+cut-birds-mariadb     ClusterIP      10.100.200.39   <none>         3306/TCP                     2m56s
+cut-birds-wordpress   LoadBalancer   10.100.200.32   10.96.59.116   80:32393/TCP,443:31585/TCP   2m56s
+~~~
+
+**3.13** Access the URL of the blog in the web broswer, confirm the test post is still present:
+
+<img src="Images/catblog-post.png">
+
+## Conclusion
+
+In this lab, we were able to install Velero, and all it's required components, in the `demo-cluster` to support taking backups of Kubernetes resources. We also walked through the process for taking a backup, simulating a data loss scenario, and restoring that backup to the cluster.
+
+
 
 
 
