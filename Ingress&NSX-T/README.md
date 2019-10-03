@@ -34,7 +34,7 @@ The `guestbook` app is deployed in your cluster, as detailed in the [Guestbook D
 
 ## Step 1: Configure Ingress Service for Guestbook App
 
-**1.1** After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the `frontend` service from `LoadBalancer` type to `ClusterIP` type by editing the service via kubectl and making the changes notated below to the spec section (Note: your ClusterIP may be different than the one in the screenshot and that's OK):
+**1.1** After performing the [first demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/blob/master/GuestbookDemo/README.md), you'll need to change the `frontend` service from `LoadBalancer` type to `ClusterIP` type by editing the service via `kubectl` and making the changes notated below to the `spec` section (Note: your `ClusterIP` may be different than the one in the screenshot):
 ~~~
 $ kubectl edit svc frontend
 ~~~
@@ -47,7 +47,7 @@ $ kubectl edit svc frontend
 ~~~
 $ kubectl get svc
 ~~~
-**Note:** Because we changed the "frontend" service to `ClusterIP` type, note that the NSX-T load balancer from Demo 1 has been deleted from the NSX-T manager automatically.
+**Note:** Because we changed the "frontend" service to `ClusterIP` type, the NSX Container Plugin (NCP) will automatically delete the virtual server created within the NSX-T L4 load balancer to support the `Loadbalancer` servce. You can verify this in the NSX-T Management Portal.
 
 **1.3** Create the ingress service to expose the guestbook app via FQDN. In the lab environment, we have set up a DNS wildcard that resolves `*.demo.pks.zpod.io` to the IP address of the NSX-T load balancer that is automatically created by PKS to serve as the ingress controller.
 
