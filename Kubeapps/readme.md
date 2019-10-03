@@ -17,7 +17,7 @@ Finally, we'll use the Kubeapps dashboard to deploy a wordpress application with
 
 **1.1** Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty.png">
 
 **1.2** Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
@@ -196,7 +196,7 @@ kubectl get secret $(kubectl get serviceaccount kubeapps-operator -o jsonpath='{
 
 **2.9** Open a web browser and navigate to the URL obtained from the `kubectl get ingress -n kubeapps` command. Copy the token obtained from the previous command and paste in `Token` field. Select `Login`:
 
-<img src="Images/1.png">
+<img src="Images/kubeapps-login.png">
 
 You have succesfully deployed Kubeapps via a Helm chart and have logged into the dashboard utilizing the bearer token from the `kubeapps-operator` service account.
 
@@ -214,25 +214,25 @@ $ kubectl create namespace wordpress
 
 **Note**: You may need to refresh the web browser if the `wordpress` namespace does not appear in the dropdown
 
-<img src="Images/2.png"> 
+<img src="Images/namespace-selection.png"> 
 
 **3.3** After selecting the desired namespace, click `Catalog` and search for "Wordpress." Click on the Wordpress tile from the `Stable` repo (tag in the bottom right corner of the tile):
 
-<img src="Images/3.png">
+<img src="Images/wordpress-tile.png">
 
 **3.4** Review the contents of the webpage, which give additional usage information regarding the Wordpress chart, including `values` that can be set by the user to customize the deployment. When ready, click the `Deploy` button in the top right hand corner:
 
-<img src="Images/4.png">
+<img src="Images/wp-chat-description.png">
 
 **3.5** The next page will display a .yaml file that describes the application deployment. Review the file and note the 2 sections that reference persistant storage, one for `mariadb` and one for wordpress itself. Change both `size` values to `4Gi`, as noted in the screenhots below:
 
-<img src="Images/5.png">
+<img src="Images/storage-1.png">
 
-<img src="Images/6.png">
+<img src="Images/storage-2.png">
 
 **3.6** After making those 2 changes, select the "Submit" option to deploy the wordpress application.
 
-<img src="Images/7.png">
+<img src="Images/submit.png">
 
 **3.7** Return to the `cse-client` putty session and monitor the deployment. Run the following command and wait for both pods to display the `1/1` value under the "READY" column.
 
@@ -290,11 +290,11 @@ kubeapps 	1       	Tue Oct  1 16:22:52 2019	DEPLOYED	kubeapps-2.1.5 	v1.5.1     
 
 **3.11** Navigate back to the Kubeapps dashboard and refresh the broswer. You should notice the deployment is in a "Ready" state. Review the page for information on accessing the Wordpress dashboard. 
 
-<img src="Images/8.png">
+<img src="Images/wordpress-status.png">
 
 **3.12** Notice the IP displayed under the "URL" column at the top of the screen. This is the public IP address that will be used to access the Wordpress site. This "LoadBalancer" service type will utilize an NSX-T L4 Load Balancer to allow external access to the site. Open another browser tab and navigate to the IP address of the `LoadBalancer` service (you should see a generic Wordpress homepage):
 
-<img src="Images/9.png">
+<img src="Images/wordpress-freshinstall.png">
 
 **3.13** Create a sample post to populate the blog with custom data we can use to test our backup in the Velero lab. Navigate to the bottom Wordpress homepage and select the "Log In" option. 
 
@@ -306,19 +306,19 @@ $ echo Password: $(kubectl get secret --namespace wordpress cut-birds-wordpress 
 Password: <your-password>
 ~~~
 
-<img src="Images/10.png">
+<img src="Images/wordpress-login.png">
 
 **3.15** Once you've logged into the admin portal, select "Posts > Add New" to create a new blog post:
 
-<img src="Images/11.png">
+<img src="Images/addpost.png">
 
 **3.16** Populate the post with filler content and select "Publish" in the top right hand corner:
 
-<img src="Images/12.png">
+<img src="Images/post-creation.png">
 
 **3.17** Navigate back to the blog homepage to verify your post is visible:
 
-<img src="Images/13.png">
+<img src="Images/catblog-post.png">
 
 **3.18** (Optional) If you intend to move on to the Velero lab, you are finished. If you do not intend to complete the Velero lab at this time, please delete all of the resources created in this lab in order to clean up for subsequent users:
 
