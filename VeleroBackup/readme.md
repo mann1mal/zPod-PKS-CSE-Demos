@@ -279,7 +279,7 @@ Phase:  Completed
 
 <img src="Images/minio-wordpressfolder.png">
 
-**3.8** Verify the current state of the Wordpress blog by confirmed the URL with the following `kubectl` command and visiting the URL in your browser:
+**3.8** Obtain the URL (`EXTERNAL-IP` value, `10.96.59.120` in the example below) with the following `kubectl` command. Visit the URL in your browser to confirm the current state of the blog:
 ~~~
 $ kubectl get svc -n wordpress
 
