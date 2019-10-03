@@ -19,7 +19,7 @@ Velero also supports the back up and restore of Kubernetes volumes using [restic
 
 In this lab, we will utilize Velero, in conjunction with restic and minio to take a backup of our Wordpress application and all of it's volumes.
 
-## Accessing the `demo-cluster`
+### Accessing the `demo-cluster`
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
@@ -40,7 +40,7 @@ NAME                                   STATUS   ROLES    AGE     VERSION
 8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
 ~~~
 
-## Prereqs
+### Prereqs
 
 Ensure you have deployed the Wordpress application from the [previous lab](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps), as we will use this application to test our Velero backup strategy.
 
