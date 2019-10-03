@@ -332,26 +332,6 @@ $ kubectl delete clusterrolebinding kubeapps-operator \
 --serviceaccount=default:kubeapps-operator
 ~~~
 
-## Step 4: Clean Up
-
-**4.1** Delete the `wordpress` namespace to remove the Wordpress application and all of its supporting resources. Confirm all pods, persistent volume claims, and services have been deleted from the namespace:
-
-~~~
-$ kubectl delete namespace wordpress
-~~~
-~~~
-$ kubectl get pods,pvc,services -n wordpress
-
-No resources found.
-~~~
-
-**4.2** Run the following commands to delete all of the components created to support the Velero application:
-
-~~~
-$ kubectl delete namespace/velero clusterrolebinding/velero
-$ kubectl delete crds -l component=velero
-~~~
-
 ## Conclusion
 
 In this exercise, you deployed both Helm and Kubeapps in the `demo-cluster`. You also utilized the Kubeapps dashboard to deploy a Wordpress application that utilizes persistent storage.
