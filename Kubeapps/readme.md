@@ -336,5 +336,6 @@ $ kubectl delete clusterrolebinding kubeapps-operator \
 
 In this exercise, you deployed both Helm and Kubeapps in the `demo-cluster`. You also utilized the Kubeapps dashboard to deploy a Wordpress application that utilizes persistent storage.
 
+In the [next lab](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/VeleroBackup), we will install Velero, an open source back-up and migration tool for Kubernetes clusters, as well as simulating a DR scenario with our Wordpress application in order to use Velero to restore our Wordpress blog.
 
 
