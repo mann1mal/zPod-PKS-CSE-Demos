@@ -318,7 +318,7 @@ Password: <your-password>
 
 **3.17** Navigate back to the blog homepage to verify your post is visible:
 
-<img src="Images/catblog-post.png">
+<img src="Images/catblog-firstpost.png">
 
 **3.18** (Optional) If you intend to move on to the Velero lab, you are finished. If you do not intend to complete the Velero lab at this time, please delete all of the resources created in this lab in order to clean up for subsequent users:
 
