@@ -12,4 +12,4 @@ This repo will serve as the staging area for demo scripts to deliver in the CSE/
 5. [Namespace Network Isolation with Network Policies and NSX-T](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/NamespaceIsolation)
 6. [Using Harbor with Enterprise PKS](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/UsingHarbor)
 7. [Deploying Helm and Kubeapps](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps)
-8. [Backing Up an Application Using Velero](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/VeleroBackup) (In Progress)
+8. [Backing Up an Application Using Velero](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/VeleroBackup)
