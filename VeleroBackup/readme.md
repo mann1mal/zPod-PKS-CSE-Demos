@@ -303,9 +303,7 @@ $ kubectl get pods -n wordpress
 $ kubectl get pvc -n wordpress
 ~~~
 
-**3.9** After confirming the all of the resources in the `wordpress` namespace have been deleted, refresh the browser you used to access the blog previously:
-
-<img src="Images/noblog.png">
+**3.9** After confirming all of the resources in the `wordpress` namespace have been deleted, refresh the browser you used to access the blog previously and confirm the blog is not available.
 
 **3.10** Use the `velero` client to verify the existance/name of the backup that was previously created and restore the backup to the cluster:
 
