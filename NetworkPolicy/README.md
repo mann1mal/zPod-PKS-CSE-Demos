@@ -6,11 +6,11 @@ In this demo, we are going to walk through the process of using the Kubernetes c
 
 As part of the integration between Enterprise PKS and NSX-T, the [NSX Container Plugin (NCP)](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.do) is responsible for reaching out to the NSX-T Manager API to create networking resources to correlate with the Kubernetes resources that are created by the developers via `kubectl` commands. For instance, back in our [second demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo), when we created a namespace to support application deployments, the NCP instructed the NSX-T Manager to create a new /24 network and T1 router to support pods running in this new namespace.
 
-To verify this workflow, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Switching** category if it isn't already selected. Type the UUID of the demo-cluster(`6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50`) into the search bar and you will see the NSX-T logical switches created for each namespace in the cluster, including the `appspace` namespace. You can also navigate to the **Routers** tab, search on the cluster UUID and point out the T1 routers for each namespace:
+To verify this workflow, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Switching** category if it isn't already selected. Type the UUID of the demo-cluster(`9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1`) into the search bar and you will see the NSX-T logical switches created for each namespace in the cluster, including the `appspace` namespace. You can also navigate to the **Routers** tab, search on the cluster UUID and point out the T1 routers for each namespace:
 
-![Screen Shot 2019-07-25 at 3 50 30 PM](https://user-images.githubusercontent.com/32826912/61904215-5ef6da00-aef4-11e9-8049-04159ad5e86d.png)
+<img src="Images/switching.png">
 
-![Screen Shot 2019-07-25 at 3 51 05 PM](https://user-images.githubusercontent.com/32826912/61904220-63bb8e00-aef4-11e9-9b2c-06a4f6b62e75.png)
+<img src="Images/routers.png">
 
 Among other things, the NCP also handles the creation of NSX-T Distributed Firewall Rules when developers create Network Policies in their kubernetes clusters to help extend the level of microsegmentation available to "traditional" compute resources into the kubernetes world. We will walk through this workflow in detail utilizing the Yelb app deployment in the demo below.
 
