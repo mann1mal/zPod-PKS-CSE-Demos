@@ -230,7 +230,7 @@ $ kubectl create namespace wordpress
 
 <img src="Images/storage-2.png">
 
-**3.6** After making those 2 changes, select the "Submit" option to deploy the wordpress application.
+**3.6** After making those two changes, select the "Submit" option to deploy the wordpress application.
 
 <img src="Images/submit.png">
 
