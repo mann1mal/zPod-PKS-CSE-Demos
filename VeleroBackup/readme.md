@@ -1,4 +1,4 @@
-# Backing up your Kubernetes Application with Velero ⛵
+# Backing Up a Kubernetes Application with Velero ⛵
 
 In this lab, you will install [Velero](https://velero.io/docs/v1.1.0/index.html) in the `demo-cluster`. You will then use Velero to take a backup of the Wordpress application, created in the previous lab. After taking a succesful backup, you will simulate a DR scenario by deleting the Wordpress application and all of it's support resources and use Velero to restore the application.
 
