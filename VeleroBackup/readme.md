@@ -355,7 +355,6 @@ $ kubectl delete namespace wordpress
 ~~~
 ~~~
 $ kubectl get pods,pvc,services -n wordpress
-
 No resources found.
 ~~~
 
