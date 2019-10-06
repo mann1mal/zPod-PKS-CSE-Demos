@@ -4,7 +4,7 @@ The guestbook app demo helps demonstrate the usage of persistent storage, which 
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty.png">
 
 Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
@@ -52,10 +52,9 @@ $ kubectl get pv
 
 Log in to the PKS vCSA (vcsa.pks.zpod.io), navigate to the "NFS-02" datastore and select the "kubevols" folder. The VMDKs, which are persistent volumes in the kubernetes world, were automatically created by the vSphere Cloud Provider when we created our persistent volume claims. We can correlate the VMDK with the PVs as the name is the same for both resources.
 
-![Screen Shot 2019-07-02 at 9 08 06 AM](https://user-images.githubusercontent.com/32826912/61248174-8e515e00-a720-11e9-92d0-870bc566345e.png)
+<img src="Images/vpshere-storage.png">
 
-![Screen Shot 2019-07-02 at 9 08 46 AM](https://user-images.githubusercontent.com/32826912/61248204-9d381080-a720-11e9-8c18-15f41296829e.png)
-
+<img src="Images/pvc-1.png">
 
 **1.6** Create the components of the guestbook app and watch for the pods to be created. Feel free to review the `guestbook-aio-lb.yaml` file to understand details about what resources are doing to be deployed to support the application:
 ~~~
@@ -66,21 +65,21 @@ $ kubectl get pods -o wide -w
 ~~~
 $ kubectl get services
 ~~~
-**1.8** Before (or after) you access the app via the IP of the LoadBalancer service, log into the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the "Advanced Network and Security" tab. Within the "Networking" category, select the "Load Balancers" option. Find your LB instance and locate the virtual server with the "-default-fronted" suffix, note the IP address (same as LoadBalancer service)
+**1.8** Before (or after) you access the app via the IP of the LoadBalancer service, log into the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Within the **Networking** category, select the **Load Balancers** option. Find your LB instance and locate the virtual server with the `-default-fronted` suffix, note the IP address (same as LoadBalancer service)
 
-![Screen Shot 2019-07-02 at 9 13 10 AM](https://user-images.githubusercontent.com/32826912/61248270-ba6cdf00-a720-11e9-9e1d-08884c7ab78b.png)
+<img src="Images/guestbook-L4">
 
-![Screen Shot 2019-07-02 at 9 12 42 AM](https://user-images.githubusercontent.com/32826912/61248298-c8226480-a720-11e9-9177-564222c14084.png)
+<img src="Images/lb-service.png">
 
 **1.9** Navigate to the "Server Pools" tab and select the same "-default-frontend" LB. Select "Member Pools" in the menu on the right side of the UI that expands once the LB is selected. Compare IPs to the output of the following command on the CLI:
 
-![Screen Shot 2019-07-02 at 9 14 37 AM](https://user-images.githubusercontent.com/32826912/61248333-db353480-a720-11e9-888e-74b6c9f5a6bf.png)
+<img src="Images/server-pools1.png">
 
 ~~~
 $ kubectl get pods -l tier=frontend -o wide
 ~~~
 
-![Screen Shot 2019-07-02 at 9 14 01 AM](https://user-images.githubusercontent.com/32826912/61248375-eee09b00-a720-11e9-957f-2564253fcba6.png)
+<img src="Images/frontend-pods1.png">
 
 All of this automation is made possible by the NSX-T Container Plugin.
 
@@ -105,9 +104,9 @@ $ kubectl get pods -l tier=frontend
 ~~~
 **2.4** Now we should have 5 pods for the frontend deployment, up from 3. If we look in the NSX-T manager, we should observe that the additional two pods were automatically added to the server pool of the Load Balancer (ignore IP changes from previous example, utilized different cluster for this exercise). The NCP automates this entire process so there is no manually intervention needed to distribute traffic to newly created pods.
 
-<img width="1374" alt="Screen Shot 2019-07-08 at 9 21 21 PM" src="https://user-images.githubusercontent.com/32826912/61248428-0a4ba600-a721-11e9-885c-ee00fba2b275.png">
+<img src="Images/server-pools2.png">
 
-<img width="1194" alt="Screen Shot 2019-07-08 at 9 22 11 PM" src="https://user-images.githubusercontent.com/32826912/61248463-1cc5df80-a721-11e9-855a-c7bba203405d.png">
+<img src="Images/frontend-pods2.png">
 
 **2.5** Scale the frontend pods back down to 3 (observe the Pool Members again in NSX-T if you'd like):
 ~~~
