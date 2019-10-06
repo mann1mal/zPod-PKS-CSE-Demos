@@ -10,7 +10,7 @@ As detailed in the [previous demo](https://github.com/mann1mal/zPod-PKS-CSE-Demo
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty.png">
 
 Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
@@ -152,19 +152,19 @@ newspace    newspace-isolate    <none>         55s
 ~~~
 **2.6** Now before we try our test again, let's hop over the NSX-T manager and have a look at the DFW rules that were created. log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the one of the `ip-pks-9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1...` rules and expand the it:
 
-![Screen Shot 2019-07-25 at 9 36 31 PM](https://user-images.githubusercontent.com/32826912/61919960-d4c76980-af25-11e9-95b6-ad2984d2a493.png)
+<img src="Images/dfw1.png">
 
 **2.7** The NSX Container Plugin (NCP) automatically created this rule to allow traffic from these two port groups when we created our network policy. If we click on both `Source` and `Destination` groups, we can gather more information about the members of the group:
 
-![Screen Shot 2019-07-25 at 9 38 40 PM](https://user-images.githubusercontent.com/32826912/61919963-da24b400-af25-11e9-815c-a058eeb06827.png)
+<img src="Images/source-portgroup.png">
 
-![Screen Shot 2019-07-25 at 9 39 04 PM](https://user-images.githubusercontent.com/32826912/61919966-dbee7780-af25-11e9-9909-0f2a991d65bf.png)
+<img src="Images/target-portgroup1.png">
 
 As we can see from the screenshots, the `source` and `destination` groups are both the same (the `172.16.23.0/24` network): the network assigned to our `newspace` namespace. This is the DFW rule that was created from our `newspace-isolate` Newtork Policy to allow pods within the `newspace` namespace to communicate with each other.
 
 **2.8** Look towards the bottom of the list and select one of the `pks-9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1...` rules. Hover over the rule name until you find the one ending in `...newspace-deny-all` and examine this rule. This rule drops all traffic from source of `Any` to a target group. If we select the target group, we can can confirm this rule is applied to the `172.16.23.0/24` as well:
 
-![Screen Shot 2019-07-25 at 9 45 50 PM](https://user-images.githubusercontent.com/32826912/61919970-ddb83b00-af25-11e9-8590-661ddb45f731.png)
+<img src="Images/target-portgroup2.png">
 
 This DFW rule was created by the NCP when we created our `newspace-deny-all` Network Policy.
 
@@ -212,11 +212,11 @@ The easiest way to troubleshoot connectivity between Pods or between Pods & VMs 
 
 **3.2** Under the **Source** section, select **Logical Port** from the dropdown menu. Then choose **VIF** as the attachment type as we are going to emulate traffic from the virtual interface of the pod. In the **Port** section, type `appspace-web` and select the logical port for our `appspace-web` pod:
 
-![Screen Shot 2019-07-26 at 3 32 10 PM](https://user-images.githubusercontent.com/32826912/61977491-93ce6400-afbc-11e9-90cf-62705b2b44a4.png)
+<img src="Images/traceflow1.png">
 
 **3.3** Repeat the proccess for **Destination** section but instead, reference the `appspace-web`'s virtual interface. Now select the **Trace** button:
 
-![Screen Shot 2019-07-26 at 3 41 14 PM](https://user-images.githubusercontent.com/32826912/61977492-93ce6400-afbc-11e9-9230-41f4abbca2c8.png)
+<img src="Images/traceflow2.png">
 
 **3.4** As we can see from the screenshot, the packet was dropped by our DFW rule, as expected. Now let's delete all of the network policies on the cluster and run the trace again by selecting the **Re-Trace** button in the top right hand corner:
 
@@ -231,7 +231,7 @@ networkpolicy.networking.k8s.io "newspace-deny-all" deleted
 networkpolicy.networking.k8s.io "newspace-isolate" deleted
 ~~~
 
-![Screen Shot 2019-07-26 at 3 45 03 PM](https://user-images.githubusercontent.com/32826912/61977493-93ce6400-afbc-11e9-952a-d538feb5e074.png)
+<img src="Images/traceflow3">
 
 
 When the Network Policies were deleted, the NCP sent the request to the NSX-T Manager to delete the DFW rules, so our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
