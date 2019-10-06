@@ -12,7 +12,7 @@ For future demos, there is a cluster (`demo-cluster`) provisioned with 3 worker 
 
 **1.1** Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty-ss.png">
 
 **1.2** Once logged in to the `cse-client` server, run the clean-up script to ensure the `enterprise-dev-org` is not enabled to provision Enterprise PKS clusters:
 
@@ -73,7 +73,7 @@ prod-ovdc           prod-org            ent-pks
 
 If we look at users in the `enterprise-dev-org` in vCloud Director, we can see that two users (dev1 and dev2) have the custom `k8deploy` role while another user (dev3), has the standard `vApp Author` role:
 
-![Screen Shot 2019-07-22 at 5 17 21 PM](https://user-images.githubusercontent.com/32826912/61666075-9c652880-aca4-11e9-8177-e7bdc5ec0bdb.png)
+<img src="Images/vcd-dev-users.png">
 
 We need to add the `"{cse}:PKS DEPLOY RIGHT"` right to the `k8deploy` role in order for our dev1 and 2 users to be able to deploy k8 clusters in this org.
 
@@ -159,13 +159,13 @@ Whenever a PKS Kubernetes cluster is created via CSE, the CSE server reaches out
 
 **4.1** To verify this, after the `dev1-cluster` cluster creation is completed, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab and then the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the `isolate-dev1-cluster...` DFW stanza and expand it to examine the 2 rules created:
 
-![Screen Shot 2019-07-26 at 11 29 38 AM](https://user-images.githubusercontent.com/32826912/61963590-f8c49280-af99-11e9-8298-c2cd4eefead0.png)
+<img src="dfw-rule.png">
 
 **4.2** Examine the rules to understand what each one specifies. The first rule (Allow cluster node-pod to cluster node-pod communication), ensures that all pods within the `dev1-cluster` can communicate with each other. The second rule (Block cluster node-pod to all-node-pod communication) ensures that pods running in other clusters (`ALL_NODES_PODS`) can not reach the pods running in the `dev1-cluster`. We can examine the target groups these rules are applied to by selecting the hyperlink for each group within the rule:
 
-![Screen Shot 2019-07-26 at 11 29 59 AM](https://user-images.githubusercontent.com/32826912/61963591-f8c49280-af99-11e9-8f0a-37f0565c1442.png)
+<img src="Images/source.png">
 
-![Screen Shot 2019-07-26 at 11 30 17 AM](https://user-images.githubusercontent.com/32826912/61963592-f8c49280-af99-11e9-9488-1231505662a1.png)
+<img src="Images/target.png">
 
 **4.3** Please delete the cluster after you finish this demo (you will use the `demo-cluster` for subsequest demo workflows):
 
