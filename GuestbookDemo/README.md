@@ -67,13 +67,13 @@ $ kubectl get services
 ~~~
 **1.8** Before (or after) you access the app via the IP of the LoadBalancer service, log into the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Within the **Networking** category, select the **Load Balancers** option. Find your LB instance and locate the virtual server with the `-default-fronted` suffix, note the IP address (same as LoadBalancer service)
 
-<img src="Images/guestbook-L4">
+<img src="Images/guestbook-L4.png">
 
 <img src="Images/lb-service.png">
 
 **1.9** Navigate to the "Server Pools" tab and select the same "-default-frontend" LB. Select "Member Pools" in the menu on the right side of the UI that expands once the LB is selected. Compare IPs to the output of the following command on the CLI:
 
-<img src="Images/server-pools1.png">
+<img src="Images/server-pool1.png">
 
 ~~~
 $ kubectl get pods -l tier=frontend -o wide
@@ -104,7 +104,7 @@ $ kubectl get pods -l tier=frontend
 ~~~
 **2.4** Now we should have 5 pods for the frontend deployment, up from 3. If we look in the NSX-T manager, we should observe that the additional two pods were automatically added to the server pool of the Load Balancer (ignore IP changes from previous example, utilized different cluster for this exercise). The NCP automates this entire process so there is no manually intervention needed to distribute traffic to newly created pods.
 
-<img src="Images/server-pools2.png">
+<img src="Images/server-pools.png">
 
 <img src="Images/frontend-pods2.png">
 
