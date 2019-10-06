@@ -9,18 +9,26 @@ In the subsequent exercises, we will:
 * deploy applications to our `demo-cluster` using Harbor as our image registry
 * explore security benefits provided by Harbor, such as automatic CVE scanning
 
-Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
+### Accessing the `demo-cluster`
 
-<img src="Images/putty.png">
+Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
 
-Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+<img src="Images/putty-ss.png">
+
+Ensure you are accessing the `demo-cluster` via kubectl by using the `cse` CLI extension to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
 ~~~
 ~~~
 $ vcd cse cluster config demo-cluster > ~/.kube/config
 ~~~
-Now we're ready to start our Harbor lab.
+~~~
+$ kubectl get nodes
+NAME                                   STATUS   ROLES    AGE     VERSION
+0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
+713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
+8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
+~~~
 
 ## Step 1: Creating and Using Public Projects
 A project in Harbor is essentially a repository of container images and Helm charts that we can apply RBAC rules to in order to control what teams have access to what resources. For more information on managing projects, see the [Harbor documentaiton](https://github.com/goharbor/harbor/blob/master/docs/user_guide.md#managing-projects)
