@@ -39,7 +39,7 @@ nginxdemos/hello    latest              aedf47d433f1        18 months ago       
 ~~~
 **1.3** Navigate to `harbor.pks.zpod.io` and login with `admin/VMware1!`. Once logged in, click the `New Project` button to create a project. Fill in the project name (`public-demo`) and ensure the `Public` option is selected:
 
-![Screen Shot 2019-08-02 at 3 07 05 PM](https://user-images.githubusercontent.com/32826912/62405040-be459180-b567-11e9-9109-ac79d6b94588.png)
+<img src="Images/public-proj-create.png">
 
 **1.4** After creating the project, we need to tag our docker image with the project name and push it to Harbor. Run the following command to tag the `hello` image:
 ~~~
@@ -58,7 +58,7 @@ docker push harbor.pks.zpod.io/public-demo/hello:v1
 ~~~
 **1.7** Navigate back to the web UI and click on the `public-demo` link and verify the image has been uploaded and is visible in the `Repositories` tab:
 
-![Screen Shot 2019-08-02 at 3 09 38 PM](https://user-images.githubusercontent.com/32826912/62405085-4330ab00-b568-11e9-8f06-8bb49785cf9e.png)
+<img src="Images/public-image.png">
 
 The image has been uploaded to our project! We are ready to deploy an application in our Kubernetes cluster using the uploaded image.
 
@@ -108,7 +108,7 @@ NAME            HOSTS                    ADDRESS                     PORTS   AGE
 hello-ingress   hello.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      56s
 ~~~
 
-![Screen Shot 2019-08-02 at 3 45 17 PM](https://user-images.githubusercontent.com/32826912/62405315-ef26c600-b569-11e9-89fc-a2e71649a713.png)
+<img src="Images/nginx1.png">
 
 Great!! We were able to succesfully upload our image to the Harbor project and deploy an app using that image to our Kubernetes cluster. Now let's clean up our cluster for the next demo:
 ~~~
@@ -121,23 +121,23 @@ In this exercise, we are going to create a private project, which can only be ac
 
 **2.1** First, we'll need to navigate back to the home page of Harbor web UI, click the `New Project` button, define our project name (`private-demo`), and ensure the `Public` check box is NOT selected:
 
-<img width="1440" alt="Screen Shot 2019-08-02 at 9 15 55 PM" src="https://user-images.githubusercontent.com/32826912/62405391-c3f0a680-b56a-11e9-9d74-019e5392caef.png">
+<img src="Images/private-project-create.png">
 
 After creating the project, we need to add our `private-demo-dev1` user to Harbor's local user directory and add that user to our private project to grant them access. 
 
 **2.2** Select the `Users` tab in the `Administration` section on the left-hand menu. Select the `New-User` button and fill in the requested credentials as detailed in the screenshot below:
 
-![Screen Shot 2019-08-02 at 3 57 00 PM](https://user-images.githubusercontent.com/32826912/62405464-6446cb00-b56b-11e9-9d32-c91e8200fa09.png)
+<img src="Images/dev-user-create.png">
 
 **2.3** After adding the user, select the `Projects` tab in the left-hand menu. Select the link for the `private-project` and select the `Members` tab. Select the `+ User` button and add the `private-demo-dev1` user as `Project Admin`, which will allow them to manage the private project:
 
 **Note**: You must select the username from the drop down. Begin typing `private-demo..` and select the username from the dropdown menu
 
-![Screen Shot 2019-08-02 at 3 53 19 PM](https://user-images.githubusercontent.com/32826912/62405466-6872e880-b56b-11e9-84b5-67152b4154c7.png)
+<img src="Images/add-user.png">
 
 **2.4** Now that we've added our user to our private project, let's enable some additional security feature for this project. Navigate to the `Configuration` tab and ensure both the `Automatically scan images on push` and `Prevent vulnerable images from running` options are enabled. Set the threshold for image vulnerability to `Medium`:
 
-![Screen Shot 2019-08-02 at 3 50 42 PM](https://user-images.githubusercontent.com/32826912/62405535-986ebb80-b56c-11e9-8242-f5cb750175a9.png)
+<img src="Images/private-config.png">
 
 This will ensure that any time an image is pushed to the project, it is automatically scanned for CVE vulnerabilities. Harbor utilizes [Clair](https://coreos.com/clair/docs/latest/) to scan images for vulnerabilites. We also set a process in place to prevent an image from being pulled if it has `Medium` or higher level severities reported.
 
@@ -183,7 +183,7 @@ v1: digest: sha256:f5a0b2a5fe9af497c4a7c186ef6412bb91ff19d39d6ac24a4997eaed2b0bb
 ~~~
 **2.9** This time it succeeded!! Let's have a look at the Harbor web UI and verify our image was pushed to the project. Navigate to the Harbor homepage and select the `private-demo` link. Verify you see the `private-demo/hello` image. Select the link and have a look  the `Vulnerabilites` results:
 
-![Screen Shot 2019-08-02 at 4 05 50 PM](https://user-images.githubusercontent.com/32826912/62405672-43cc4000-b56e-11e9-89a6-c61605adf2bd.png)
+<img src="Images/vulnerability-scan.png">
 
 Note there are a couple of `High` and `Medium` level vulnerabilties present in this image, which was automatically scanned when we pushed it to the project as we enabled that functionality when we created the project.
 
@@ -282,8 +282,7 @@ $ kubectl get ingress
 NAME            HOSTS                            ADDRESS                     PORTS   AGE
 hello-ingress   private-hello.demo.pks.zpod.io   10.96.59.106,100.64.32.27   80      56s
 ~~~
-
-![Screen Shot 2019-08-02 at 4 49 44 PM](https://user-images.githubusercontent.com/32826912/62405888-4aa88200-b571-11e9-9e66-47e5d2383de3.png)
+<img src="Images/nginx2.png">
 
 ## Step 3: Clean Up
 
