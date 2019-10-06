@@ -1,6 +1,6 @@
 # CSE/PKS zPod Demo Scripts
 
-<img src="Images/logicaldiagram.png">
+<img src="images/logicaldiagram.png">
 
 This repo will serve as the staging area for demo scripts to deliver in the CSE/PKS zPod Environments. Most of these demos can also be utilized in any Enterprise PKS Kubernetes cluster backed by NSX-T with a bit of alteration.
 
