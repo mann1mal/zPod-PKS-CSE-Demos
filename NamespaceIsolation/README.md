@@ -8,11 +8,11 @@ As detailed in the [previous demo](https://github.com/mann1mal/zPod-PKS-CSE-Demo
 
 ### Accessing the `demo-cluster`
 
-Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
 
-<img src="Images/putty.png">
+<img src="Images/putty-ss.png">
 
-Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+Ensure you are accessing the `demo-cluster` via kubectl by using the `cse` CLI extension to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
 ~~~
