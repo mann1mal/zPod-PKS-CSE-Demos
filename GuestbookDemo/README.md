@@ -104,7 +104,7 @@ $ kubectl get pods -l tier=frontend
 ~~~
 **2.4** Now we should have 5 pods for the frontend deployment, up from 3. If we look in the NSX-T manager, we should observe that the additional two pods were automatically added to the server pool of the Load Balancer (ignore IP changes from previous example, utilized different cluster for this exercise). The NCP automates this entire process so there is no manually intervention needed to distribute traffic to newly created pods.
 
-<img src="Images/server-pools.png">
+<img src="Images/server-pool2.png">
 
 <img src="Images/frontend-pods2.png">
 
