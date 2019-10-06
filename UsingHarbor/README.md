@@ -11,7 +11,7 @@ In the subsequent exercises, we will:
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`) if you haven't already:
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty.png">
 
 Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
