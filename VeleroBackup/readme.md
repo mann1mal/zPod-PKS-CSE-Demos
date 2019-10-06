@@ -25,7 +25,7 @@ Ensure you have deployed the Wordpress application from the [previous lab](https
 
 ### Accessing the `demo-cluster`
 
-Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
 
 <img src="Images/putty-ss.png">
 
