@@ -2,18 +2,6 @@
 
 In this demo, we are going to walk through the process of using the Kubernetes construct of [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to ensure workloads running in a Kubernetes clusters are secured from a network perspective. For those unfamiliar with the Network Policy construct in the Kubernetes world, they are essentially "firewall" rules that can be applied to certain services or pods to restrict pod to pod communication as well as communication between the external network and pods in the Kubernetes cluster.
 
-## The NSX Container Plugin
-
-As part of the integration between Enterprise PKS and NSX-T, the [NSX Container Plugin (NCP)](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.do) is responsible for reaching out to the NSX-T Manager API to create networking resources to correlate with the Kubernetes resources that are created by the developers via `kubectl` commands. For instance, back in our [second demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo), when we created a namespace to support application deployments, the NCP instructed the NSX-T Manager to create a new /24 network and T1 router to support pods running in this new namespace.
-
-To verify this workflow, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Switching** category if it isn't already selected. Type the UUID of the demo-cluster(`9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1`) into the search bar and you will see the NSX-T logical switches created for each namespace in the cluster, including the `appspace` namespace. You can also navigate to the **Routers** tab, search on the cluster UUID and point out the T1 routers for each namespace:
-
-<img src="Images/switching.png">
-
-<img src="Images/routers.png">
-
-Among other things, the NCP also handles the creation of NSX-T Distributed Firewall Rules when developers create Network Policies in their kubernetes clusters to help extend the level of microsegmentation available to "traditional" compute resources into the kubernetes world. We will walk through this workflow in detail utilizing the Yelb app deployment in the demo below.
-
 ### Accessing the `demo-cluster`
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
@@ -35,6 +23,18 @@ NAME                                   STATUS   ROLES    AGE     VERSION
 8aa79ec7-b484-4451-aea8-cb5cf2020ab0   Ready    <none>   5d10h   v1.13.5
 ~~~
 
+## The NSX Container Plugin
+
+As part of the integration between Enterprise PKS and NSX-T, the [NSX Container Plugin (NCP)](https://docs.vmware.com/en/VMware-NSX-T-Data-Center/2.4/com.vmware.nsxt.ncp_kubernetes.do) is responsible for reaching out to the NSX-T Manager API to create networking resources to correlate with the Kubernetes resources that are created by the developers via `kubectl` commands. For instance, back in our [second demo](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/GuestbookDemo), when we created a namespace to support application deployments, the NCP instructed the NSX-T Manager to create a new /24 network and T1 router to support pods running in this new namespace.
+
+To verify this workflow, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab. Select the **Switching** category if it isn't already selected. Type the UUID of the demo-cluster(`9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1`) into the search bar and you will see the NSX-T logical switches created for each namespace in the cluster, including the `appspace` namespace. You can also navigate to the **Routers** tab, search on the cluster UUID and point out the T1 routers for each namespace:
+
+<img src="Images/switching.png">
+
+<img src="Images/routers.png">
+
+Among other things, the NCP also handles the creation of NSX-T Distributed Firewall Rules when developers create Network Policies in their kubernetes clusters to help extend the level of microsegmentation available to "traditional" compute resources into the kubernetes world. We will walk through this workflow in detail utilizing the Yelb app deployment in the demo below.
+
 ## Step 1: Exploring Network Policies and Distrubuted Firewall Rules
 
 **1.1** First, set a namespace for the default context to ensure workloads are deployed to the `appspace` namespace by default:
@@ -49,7 +49,7 @@ $ kubectl create -f yelb-ingress.yaml
 
 **Note:** Chrome has been known to hold onto webpage cache so please use incognito mode/private browsing as you try to access the app before and after implementing the network polices.
 
-![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
+<img src="Images/yelb-ui.png">
 
 **1.4** In a Kubernetes cluster, if there is no Network Policy defined, Kubernetes allows all communication, by default. This means all pods can talk to each other freely, as well as communicate with external resources. This may work in some cases, especially in dev/test environments, but teams can use Network Policies to further restrict network communication between services in a Kubernetes cluster, if required.
 
@@ -62,13 +62,13 @@ $ kubectl create -f appspace-deny-all.yaml
 ~~~
 **1.5** So let's take a look at what's happened in the NSX-T manager...
 
-Navigate back to the NSX-T Manager webUI, select the **Advanced Network and Security** tab and then the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the `ip-pks-6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50` firewall rule and expand the selection
+Navigate back to the NSX-T Manager webUI, select the **Advanced Network and Security** tab and then the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the `ip-pks-9d53ebe7-46ab-4c69-a8b0-4bde4ff1e1a1` firewall rule and expand the selection
 
-![Screen Shot 2019-07-25 at 4 16 39 PM](https://user-images.githubusercontent.com/32826912/61905732-cbbfa380-aef7-11e9-97dc-0b587eb08213.png)
+<img src="Images/dfw-rule1.png">
 
 **1.6** Here we can see the NCP reached out to the NSX-T Manager to create a DFW rule to drop traffic from source `Any` to a target port group. Click on the hyperlink for the target group and note this group is comprised of a /24 network. We can also see the name of the Kuberentes network policy present in the name of the target group:
 
-![Screen Shot 2019-07-25 at 4 19 59 PM](https://user-images.githubusercontent.com/32826912/61905851-13dec600-aef8-11e9-9524-86f7ddd1308f.png)
+<img src="Images/target-portgroup1.png">
 
 **1.7** Navigate back to the `cse-client` putty session and examine the IP addresses of the pods providing the Yelb app:
 ~~~
@@ -87,7 +87,7 @@ So we've denied all communication by default, now we need to "poke holes" in the
 
 For informational purposes, refer to the architecture of the Yelb app below to understand which pods need to communicate with each other:
 
-![Screen Shot 2019-07-25 at 4 44 29 PM](https://user-images.githubusercontent.com/32826912/61907462-83a28000-aefb-11e9-9ca8-667902b631a1.png)
+<img src="Images/yelb-arch.png">
 
 **1.9** The `yelb-allow-netpol.yaml` file contains 5 Network Policies to allow pod to pod communication between all of the components as well as a policy that allows external access to the Yelb UI for external users. Feel free to review the `.yaml` file to understand more about each policy. Deploy the policies:
 ~~~
@@ -95,19 +95,19 @@ $ kubectl create -f yelb-allow-netpol.yaml
 ~~~
 **1.10** Again, let's see what's happened in NSX-T. Navigate back to the **Distributed Firewall** section and notice we have new entries in the DFW table. Expand one of the new DFW rules and examine the contents:
 
-![Screen Shot 2019-07-25 at 4 36 16 PM](https://user-images.githubusercontent.com/32826912/61907166-e7787900-aefa-11e9-92b0-02c4452fa445.png)
+<img src="Images/dfw-rule2.png">
 
 **1.11** In the example above, we are allowing ingress and egress traffic between two target groups. Select the target group from each section and compare with `kubectl` output:
 
-![Screen Shot 2019-07-25 at 4 36 43 PM](https://user-images.githubusercontent.com/32826912/61907171-e8a9a600-aefa-11e9-8732-efbb60c74635.png)
+<img src="Images/source-portgroup1.png">
 
-![Screen Shot 2019-07-25 at 4 39 13 PM](https://user-images.githubusercontent.com/32826912/61907175-e9423c80-aefa-11e9-9ddd-1996a25b46b3.png)
+<img src="Images/target-portgroup2.png">
 
 This rule is allowing traffic between the `yelb-appserver` pod (`172.16.19.5`) and the `redis-server` pod (`172.16.19.3`). Feel free to review the rest of the DFW rules created from the Network Policies.
 
 **1.12** Now let's test the availability of the Yelb app from the browser:
 
-![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
+<img src="Images/yelb-ui.png">
 
 And we're back in business!!
 
