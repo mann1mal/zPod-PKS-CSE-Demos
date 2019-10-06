@@ -236,12 +236,25 @@ networkpolicy.networking.k8s.io "newspace-isolate" deleted
 
 When the Network Policies were deleted, the NCP sent the request to the NSX-T Manager to delete the DFW rules, so our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
 
-**3.5** Now that we're done with our testing, let's head back over to the CLI of the `cse-client` server and delete our nginx pods services:
+## Step 4: Clean Up
+
+**4.1** Now that we're done with our testing, navigate back over to the CLI of the `cse-client` server and delete the nginx pods and services:
 ~~~
 $ kubectl delete pods -n newspace newspace-web
 $ kubectl delete service -n newspace newspace-web
 $ kubectl delete pods -n appspace appspace-web
 $ kubectl delete service -n appspace appspace-web
+~~~
+**4.2** Delete the newtork policies we applied in the lab as well:
+~~~
+$ cd ~/zPod-PKS-CSE-Demos/NamespaceIsolation
+~~~
+~~~
+$ kubectl delete -f .
+networkpolicy.networking.k8s.io "appspace-deny-all" deleted
+networkpolicy.networking.k8s.io "appspace-isolate" deleted
+networkpolicy.networking.k8s.io "newspace-deny-all" deleted
+networkpolicy.networking.k8s.io "newspace-isolate" deleted
 ~~~
 
 ## Conclusion
