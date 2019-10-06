@@ -159,7 +159,7 @@ Whenever a PKS Kubernetes cluster is created via CSE, the CSE server reaches out
 
 **4.1** To verify this, after the `dev1-cluster` cluster creation is completed, log in to the [NSX-T manager](https://nsx.pks.zpod.io) and navigate to the **Advanced Network and Security** tab and then the **Security** > **Distrubuted Firewall Rule** tab on the left hand menu. Locate the `isolate-dev1-cluster...` DFW stanza and expand it to examine the 2 rules created:
 
-<img src="dfw-rule.png">
+<img src="Images/dfw-rule.png">
 
 **4.2** Examine the rules to understand what each one specifies. The first rule (Allow cluster node-pod to cluster node-pod communication), ensures that all pods within the `dev1-cluster` can communicate with each other. The second rule (Block cluster node-pod to all-node-pod communication) ensures that pods running in other clusters (`ALL_NODES_PODS`) can not reach the pods running in the `dev1-cluster`. We can examine the target groups these rules are applied to by selecting the hyperlink for each group within the rule:
 
