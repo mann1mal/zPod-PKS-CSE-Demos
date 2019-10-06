@@ -220,19 +220,7 @@ The easiest way to troubleshoot connectivity between Pods or between Pods & VMs 
 
 **3.4** As we can see from the screenshot, the packet was dropped by our DFW rule, as expected. Now let's delete all of the network policies on the cluster and run the trace again by selecting the **Re-Trace** button in the top right hand corner:
 
-~~~
-$ cd ~/zPod-PKS-CSE-Demos/NamespaceIsolation
-~~~
-~~~
-$ kubectl delete -f .
-networkpolicy.networking.k8s.io "appspace-deny-all" deleted
-networkpolicy.networking.k8s.io "appspace-isolate" deleted
-networkpolicy.networking.k8s.io "newspace-deny-all" deleted
-networkpolicy.networking.k8s.io "newspace-isolate" deleted
-~~~
-
 <img src="Images/traceflow3.png">
-
 
 When the Network Policies were deleted, the NCP sent the request to the NSX-T Manager to delete the DFW rules, so our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
 
