@@ -4,11 +4,13 @@ As you may remember from our [first demo](https://github.com/mann1mal/zPod-PKS-C
 
 If we use a service type of `Ingress` instead, in conjunction with a DNS wildcard record, we can manage hostname resolution directly at the Kubernetes layer via the Ingress controller (NSX-T layer 7 load balancer) that is automatically deployed in NSX-T upon cluster creation. This allows developers to fully manager the hostnames that resolve to multiple apps without having to create DNS records for each service they are looking to expose externally.
 
-Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+### Accessing the `demo-cluster`
 
-<img src="Images/putty.png">
+Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
 
-Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+<img src="Images/putty-ss.png">
+
+Ensure you are accessing the `demo-cluster` via kubectl by using the `cse` CLI extension to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
 ~~~
@@ -129,7 +131,9 @@ yelb-ui-fc74d567f-vh2qb   1/1     Running   0          96m
 
 There is now an additional server pool within our virtual server tied to our L7 loadbalancer that will except request for the yelb UI at `yelb.demo.pks.zpod.io` and direct those connections to the `yelb-ui-fc74d567f-vh2qb` pod while the existing server pool will continue to direct requests coming in at `guestbook.demo.pks.zpod.io` to the `frontend-xxx` pods.
 
-**2.7** (Optional) If continuing on to the next lab, leave the `guestbook` and `yelb` apps running in the cluster. If you are not proceeding, please delete the applications and their resources:
+## Step 3 (Optional): Cleanup
+
+ **3.1** If continuing on to the next lab, leave the `guestbook` and `yelb` apps running in the cluster. If you are not proceeding, please delete the applications and their resources:
 ~~~
 $ kubectl delete -f ~/zPod-PKS-CSE-Demos/Guestbook/guestbook-aio-clusterip.yaml
 $ kubectl delete -f ~/zPod-PKS-CSE-Demos/Guestbook/redis-master-claim.yaml
@@ -138,6 +142,15 @@ $ kubectl delete ingress guestbook-frontend
 ~~~
 ~~~
 $ kubectl delete -f ~/zPod-PKS-CSE-Demos/Ingress\&NSX-T/yelb-ingress.yaml
+~~~
+
+**3.2** Log back in to the vCloud Director environment via the `vcd-cli` and pull a fresh `demo-cluster` config file to reset cluster contexts:
+
+~~~
+$ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
+~~~
+~~~
+$ vcd cse cluster config demo-cluster > ~/.kube/config
 ~~~
 
 ## Conclusion
