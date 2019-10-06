@@ -231,7 +231,7 @@ networkpolicy.networking.k8s.io "newspace-deny-all" deleted
 networkpolicy.networking.k8s.io "newspace-isolate" deleted
 ~~~
 
-<img src="Images/traceflow3">
+<img src="Images/traceflow3.png">
 
 
 When the Network Policies were deleted, the NCP sent the request to the NSX-T Manager to delete the DFW rules, so our pods can communicate with each other again, as verified in the new trace above. Traceflow can be an incredibly helpful tool in helping developers and infrastructure teams work together to troubleshoot network connectivity issues within Kubernetes clusters.
