@@ -13,13 +13,13 @@ Kubeapps allows users to:
 
 Finally, we'll use the Kubeapps dashboard to deploy a wordpress application with persistent storage in the cluster.
 
-## Step 1: Deploying Helm 
+### Accessing the `demo-cluster`
 
-**1.1** Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
+Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
 
-<img src="Images/putty.png">
+<img src="Images/putty-ss.png">
 
-**1.2** Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
 $ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
 ~~~
@@ -28,7 +28,6 @@ $ vcd cse cluster config demo-cluster > ~/.kube/config
 ~~~
 ~~~
 $ kubectl get nodes
-
 NAME                                   STATUS   ROLES    AGE     VERSION
 0faf789a-18db-4b3f-a91a-a9e0b213f310   Ready    <none>   5d9h    v1.13.5
 713d03dc-a5de-4c0f-bbfe-ed4a31044465   Ready    <none>   5d10h   v1.13.5
@@ -39,13 +38,15 @@ Now we are ready to use the Helm client, which is already installed on the `cse-
 
 ### Helm Security Considerations
 
-Helm runs locally on the client workstation or server that is initiating Helm commands (`cse-client` in this case). Helm provides standard application package management features to allow for streamlined application deployment/management in a Kubernetes cluster. To provide this service, Helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the Kubernetes cluster. Note: in Helmv3, which is currently in beta, Tiller is going away. This lab will be updated with Helmv3 transitions to GA.
+Before we get started on the lab, let's talk about Helm and security considerations. Helm runs locally on the client workstation or server that is initiating Helm commands (`cse-client` in this case). Helm provides standard application package management features to allow for streamlined application deployment/management in a Kubernetes cluster. To provide this service, Helm includes an application called Tiller Server (aka Tiller) that is usually installed as a pod in the Kubernetes cluster. Note: in Helmv3, which is currently in beta, Tiller is going away. This lab will be updated with Helmv3 transitions to GA.
 
 When you enter a Helm command from the client to install an application, the Helm client communicates the instructions to the Tiller Server which interacts with the Kubernetes API to execute commands. As Tiller has the ability to execute privliedge commands within a Kubernetes cluster, it should always be installed with thorough security precautions as detailed in [Securing your Helm Installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation) page in the Helm Documentation.
 
 However, in this lab, for simplicity sake, we are going to deploy Tiller with the `cluster-admin` role so the service has access to all of the elements of the Kubernetes API to deploy our applications. This is **NOT** best practice for production but is more than acceptable in isolated/demo environments.
 
-**1.3** Now that we've learned a little bit about Helm, let's change into our `Kubeapps` directory and create the Tiller `serviceaccount` and `rolebinding` that Helm requires to run in a Kubernetes cluster:
+## Step 1: Deploy Helm
+
+**1.1** Now that we've learned a little bit about Helm, let's change into our `Kubeapps` directory and create the Tiller `serviceaccount` and `rolebinding` that Helm requires to run in a Kubernetes cluster:
 
 ~~~
 $ cd ~/zPod-PKS-CSE-Demos/Kubeapps
@@ -58,7 +59,7 @@ serviceaccount/tiller created
 clusterrolebinding.rbac.authorization.k8s.io/tiller created
 ~~~
 
-**1.4** After creating the `serviceaccount` and `rolebinding` for Tiller, we are ready to use the Helm client to deploy the Helm service in the cluster:
+**1.2** After creating the `serviceaccount` and `rolebinding` for Tiller, we are ready to use the Helm client to deploy the Helm service in the cluster:
 
 ~~~
 $ helm init --service-account tiller
@@ -82,7 +83,7 @@ To prevent this, run `helm init` with the --tiller-tls-verify flag.
 For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
 ~~~
 
-**1.5** Verify that the `tiller-deploy` pod is running and in ready status via `kubectl`:
+**1.3** Verify that the `tiller-deploy` pod is running and in ready status via `kubectl`:
 
 ~~~
 $ kubectl get pods -n kube-system
@@ -96,7 +97,7 @@ metrics-server-867b8fdb7d-mflv6         1/1     Running   0          4h55m
 tiller-deploy-9bf6fb76d-gbcks           1/1     Running   0          40s
 ~~~
 
-**1.6** Verify we are able to list Helm repos via the client:
+**1.4** Verify we are able to list Helm repos via the client:
 
 ~~~
 $ helm repo list
