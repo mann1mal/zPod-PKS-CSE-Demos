@@ -6,7 +6,7 @@ If we use a service type of `Ingress` instead, in conjunction with a DNS wildcar
 
 Before starting the demo, access the `cse-client` server from your Horizon instance via putty (pw is `VMware1!`):
 
-<img width="542" alt="Screen Shot 2019-08-02 at 8 30 20 PM" src="https://user-images.githubusercontent.com/32826912/62404702-6ce7d300-b564-11e9-8cce-145289c1e5e9.png">
+<img src="Images/putty.png">
 
 Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
 ~~~
@@ -41,7 +41,7 @@ $ kubectl edit svc frontend
 
 **Note**: `type: ClusterIP` should be the last line in the file. Also note, `kubectl edit` utilizes `vi` as it's editor by default. After opening the yaml file for the serivce, hit `i` to enter insert mode, then make your changes. Hit `esc` to leave insert mode and enter `:wq` then `enter` to commit your changes.
 
-<img width="514" alt="Screen Shot 2019-07-10 at 10 28 59 AM" src="https://user-images.githubusercontent.com/32826912/61248498-2d765580-a721-11e9-8a09-87601e39ac8b.png">
+<img src="Images/public-proj-create.png">
 
 **1.2** Verify the "frontend" service is now type "ClusterIP"
 ~~~
@@ -67,14 +67,13 @@ guestbook-ingress   guestbook.demo.pks.zpod.io   10.96.59.100,100.64.32.15   80 
 ~~~
 **1.5** Navigate to the URL displayed in the output of the above command to verify connectivity:
 
-![Screen Shot 2019-07-23 at 2 24 39 PM](https://user-images.githubusercontent.com/32826912/61737232-c32f6780-ad55-11e9-8b89-a34e0f87a150.png)
+<img src="Images/public-proj-create.png">
 
 **1.6** Navigate to the NSX-T Manager to view the L7 load balancer serving as our ingress controller for this cluster. Navigate to https://nsx.pks.zpod.io/ and login with the `audit` user's credentials (`audit/VMware1!VMware1!`).
 
 Navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. Here, we have (at least) 2 NSX-T load balancers per k8 cluster. The UUID of the demo-cluster is `6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50`. NSX-T assigns the UUID of the cluster to each load balancer it provisions for said. Locate the `pks-6e92c1a9-c8f2-4774-ba8b-7786e7fc8d50-default...` server pool, and click on the integer in the **Members/NSGroups** section:
 
-![Screen Shot 2019-07-23 at 1 22 15 PM](https://user-images.githubusercontent.com/32826912/61733302-7d6ea100-ad4d-11e9-86b3-45bdbb01a8b7.png)
-
+<img src="Images/public-proj-create.png">
 
 **1.7** Verify these are the pod names of the pods that are serving out our frontend web UI for the guestbook app via the CLI of the `cse-client` server:
 ~~~
@@ -116,11 +115,11 @@ Note, `10.96.59.100` is the same public IP for both hostnames. This is the IP of
 
 **2.5** Navigate to the hostname of our new app to ensure it is available:
 
-![Screen Shot 2019-07-23 at 2 54 57 PM](https://user-images.githubusercontent.com/32826912/61739173-eb20ca00-ad59-11e9-9a76-6af44e8476bf.png)
+<img src="Images/public-proj-create.png">
 
 **2.6** Voila! Now let's navigate back to the NSX-T manager to see what's happening on the NSX-T side. Again, navigate to the **Advanced Networking and Security** tab. Navigate to **Load Balancing** in the left hand menu and choose the **Server Pools** tab on the right side of the UI. We should now see a new server pool entry ending in `...default-yelb-ui-80` with our `yelb-ui` pod name listed in the **Members/NSGroups** column:
 
-![Screen Shot 2019-07-23 at 2 50 20 PM](https://user-images.githubusercontent.com/32826912/61738952-7057af00-ad59-11e9-9401-e9bf6a0600e5.png)
+<img src="Images/public-proj-create.png">
 
 ~~~
 $ kubectl get pods -l app=yelb-ui
