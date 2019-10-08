@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minio-ingress
+spec:
+  rules:
+  - host: minio.test.pks.zpod.io
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: frontend 
+          servicePort: 9000

@@ -17,7 +17,7 @@ spec:
       volumes:
       - name: storage
         persistentVolumeClaim:
-          claimName: velero-claim
+          claimName: minio-claim
       - name: config
         emptyDir: {}
       containers:
