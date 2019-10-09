@@ -12,3 +12,4 @@ This repo will serve as the staging area for demo scripts to deliver in the CSE/
 6. [Using Harbor with Enterprise PKS](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/UsingHarbor)
 7. [Deploying Helm and Kubeapps](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/Kubeapps)
 8. [Backing Up an Application Using Velero](https://github.com/mann1mal/zPod-PKS-CSE-Demos/tree/master/VeleroBackup)
+9. Providing Application Ingress to CSE Standard Clusters with MetalLB and Contour (In Progress)
