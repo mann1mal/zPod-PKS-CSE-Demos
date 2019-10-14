@@ -1,6 +1,6 @@
 # Using MetalLB and Contour in CSE Standard Clusters
 
-~~~
+
 ### Accessing `ubuntu-cluster-1`
 
 Before starting the demo, access the `cse-client` server with the `cse` user (`cse@cse-client.vcd.zpod.io`) from your Horizon instance via putty (pw is `VMware1!`):
