@@ -47,7 +47,7 @@ nginxdemos/hello    latest              aedf47d433f1        18 months ago       
 ~~~
 **1.3** Navigate to `harbor.pks.zpod.io` and login with `admin/VMware1!`. Once logged in, click the `New Project` button to create a project. Fill in the project name (`public-demo`) and ensure the `Public` option is selected:
 
-<img src="Images/public-proj-create.png">
+<img src="Images/public-project-create.png">
 
 **1.4** After creating the project, we need to tag our docker image with the project name and push it to Harbor. Run the following command to tag the `hello` image:
 ~~~
