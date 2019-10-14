@@ -1,0 +1,953 @@
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:45:40 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '5ed6fda0-986a-4b32-bfe2-212712c73e87', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '4', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:45:43 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'd9634673-fd37-489e-80d6-0c41467c5dd4', 'X-VMWARE-VCLOUD-ACCESS-TOKEN': '[REDACTED]', 'X-VMWARE-VCLOUD-TOKEN-TYPE': 'Bearer', 'x-vcloud-authorization': '[REDACTED]', 'Content-Type': 'application/vnd.vmware.vcloud.session+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '307', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3015'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Session xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" locationId="20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a" org="cse-demo-org" roles="vApp User" user="jomann" userId="urn:vcloud:user:010ce898-65aa-45ae-837c-eb2c59e7bcf8" href="https://director.vcd.zpod.io/api/session" type="application/vnd.vmware.vcloud.session+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+json"/>
+    <Link rel="remove" href="https://director.vcd.zpod.io/api/session"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+json"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+xml"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+json"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+xml"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+json"/>
+    <Link rel="openapi" href="https://director.vcd.zpod.io/cloudapi" type="application/json"/>
+    <AuthorizedLocations>
+        <Location>
+            <LocationId>20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a</LocationId>
+            <SiteName>director.vcd.zpod.io</SiteName>
+            <OrgName>cse-demo-org</OrgName>
+            <RestApiEndpoint>https://director.vcd.zpod.io</RestApiEndpoint>
+            <UIEndpoint>https://director.vcd.zpod.io</UIEndpoint>
+            <AuthContext>cse-demo-org</AuthContext>
+            <ApiVersion>33.0</ApiVersion>
+        </Location>
+    </AuthorizedLocations>
+</Session>
+
+Request uri (GET): https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:45:43 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'bccc9e66-de5c-437e-9e3f-7302aa59f033', 'Content-Type': 'application/vnd.vmware.vcloud.org+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '25', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3485'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="cse-demo-org" id="urn:vcloud:org:20a1f5bd-8fda-401c-b02e-2c42693ba494" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+xml"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+json"/>
+    <Description>Org for VCPP Demos</Description>
+    <FullName>Org for VCPP Demos</FullName>
+</Org>
+
+Request uri (GET): https://director.vcd.zpod.io/api/query?type=orgVdc
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:45:43 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'bb55fab8-97e4-478c-88f8-0fa4b3433cc6', 'Content-Type': 'application/vnd.vmware.vcloud.query.records+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '45', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3784'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryResultRecords xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="orgVdc" page="1" pageSize="25" total="2" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=records" type="application/vnd.vmware.vcloud.query.records+xml">
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+json"/>
+    <OrgVdcRecord cpuAllocationMhz="0" cpuLimitMhz="0" cpuReservedMhz="0" cpuUsedMhz="12000" description="OvDC to support CSE Standard Clusters" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="0" memoryLimitMB="0" memoryReservedMB="0" memoryUsedMB="12288" name="standard-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="2" numberOfDeployedVApps="2" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="6" numberOfStorageProfiles="2" numberOfUnmanagedVApps="2" numberOfVAppTemplates="0" numberOfVApps="2" numberOfVMs="6" orgName="cse-demo-org" status="READY" storageLimitMB="301762" storageUsedMB="92160" href="https://director.vcd.zpod.io/api/vdc/963e5e3a-140f-488d-9d80-d77d11adcfdd" cpuOverheadMhz="0" pvdcHardwareVersion="14" taskStatusName="vdcUpdateStorageProfiles" task="https://director.vcd.zpod.io/api/task/040ed7eb-7ebb-4c4c-bc33-9560be0ae122" allocationModel="1" networkPool="https://director.vcd.zpod.io/api/admin/extension/networkPool/63890711-ab00-4f8c-b092-b91e60c0c448" storageOverheadMB="0" memoryOverheadMB="283" taskStatus="success" taskDetails=" "/>
+    <OrgVdcRecord cpuAllocationMhz="15000" cpuLimitMhz="15000" cpuReservedMhz="7500" cpuUsedMhz="0" description="OvDC for CSE Enterprise workloads" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="61440" memoryLimitMB="61440" memoryReservedMB="30720" memoryUsedMB="0" name="ent-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="0" numberOfDeployedVApps="0" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="0" numberOfStorageProfiles="1" numberOfUnmanagedVApps="0" numberOfVAppTemplates="0" numberOfVApps="0" numberOfVMs="0" orgName="cse-demo-org" status="READY" storageLimitMB="0" storageUsedMB="0" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" cpuOverheadMhz="0" pvdcHardwareVersion="7" taskStatusName="metadataUpdate" task="https://director.vcd.zpod.io/api/task/df455521-a9bd-453d-84a8-79ade43f5960" allocationModel="2" storageOverheadMB="0" memoryOverheadMB="0" taskStatus="success" taskDetails=" "/>
+</QueryResultRecords>
+
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:45:48 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '7d52bb90-f60f-463b-b08f-53230368ac01', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2'}
+Response body: []
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:34 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '0c8e0ab9-cfa5-498b-8561-19ef32e09bd4', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2'}
+Response body: []
+Request uri (DELETE): https://director.vcd.zpod.io/api/session
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]', 'Content-Length': '0'}
+Response status code: 204
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:42 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '36196adb-b9e8-4fa5-b732-a2453c2b271c', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '30', 'Cache-Control': 'no-store, must-revalidate'}
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:46 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '57c095f9-6708-46cf-8a34-efddc1fc4b2b', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '7', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 401
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:53 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'db1083d1-91ca-4ebc-8a0c-68e8b6dca0e4', 'Content-Length': '0'}
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:55 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'fbac715f-bbca-4fd1-8a9e-3154aa0961eb', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '3', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:58 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '40517530-fcaf-4e47-a564-1a7778b4e7f4', 'X-VMWARE-VCLOUD-ACCESS-TOKEN': '[REDACTED]', 'X-VMWARE-VCLOUD-TOKEN-TYPE': 'Bearer', 'x-vcloud-authorization': '[REDACTED]', 'Content-Type': 'application/vnd.vmware.vcloud.session+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '164', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3351'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Session xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" locationId="20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a" org="cse-demo-org" roles="standard-cluster-user" user="jomann" userId="urn:vcloud:user:010ce898-65aa-45ae-837c-eb2c59e7bcf8" href="https://director.vcd.zpod.io/api/session" type="application/vnd.vmware.vcloud.session+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+json"/>
+    <Link rel="remove" href="https://director.vcd.zpod.io/api/session"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+json"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+xml"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+json"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+xml"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+json"/>
+    <Link rel="nsx" href="https://director.vcd.zpod.io/network" type="application/xml"/>
+    <Link rel="openapi" href="https://director.vcd.zpod.io/cloudapi" type="application/json"/>
+    <AuthorizedLocations>
+        <Location>
+            <LocationId>20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a</LocationId>
+            <SiteName>director.vcd.zpod.io</SiteName>
+            <OrgName>cse-demo-org</OrgName>
+            <RestApiEndpoint>https://director.vcd.zpod.io</RestApiEndpoint>
+            <UIEndpoint>https://director.vcd.zpod.io</UIEndpoint>
+            <AuthContext>cse-demo-org</AuthContext>
+            <ApiVersion>33.0</ApiVersion>
+        </Location>
+    </AuthorizedLocations>
+</Session>
+
+Request uri (GET): https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:58 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '5f33f94d-c5fb-4b3d-98c4-6c53312181c4', 'Content-Type': 'application/vnd.vmware.vcloud.org+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '41', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '4149'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="cse-demo-org" id="urn:vcloud:org:20a1f5bd-8fda-401c-b02e-2c42693ba494" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+xml"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+json"/>
+    <Description>Org for VCPP Demos</Description>
+    <FullName>Org for VCPP Demos</FullName>
+</Org>
+
+Request uri (GET): https://director.vcd.zpod.io/api/query?type=orgVdc
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:48:58 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '5dd3ac5d-ef62-4651-a4df-73e0b2ed4ffb', 'Content-Type': 'application/vnd.vmware.vcloud.query.records+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '57', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3784'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryResultRecords xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="orgVdc" page="1" pageSize="25" total="2" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=records" type="application/vnd.vmware.vcloud.query.records+xml">
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+json"/>
+    <OrgVdcRecord cpuAllocationMhz="0" cpuLimitMhz="0" cpuReservedMhz="0" cpuUsedMhz="12000" description="OvDC to support CSE Standard Clusters" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="0" memoryLimitMB="0" memoryReservedMB="0" memoryUsedMB="12288" name="standard-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="2" numberOfDeployedVApps="2" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="6" numberOfStorageProfiles="2" numberOfUnmanagedVApps="2" numberOfVAppTemplates="0" numberOfVApps="2" numberOfVMs="6" orgName="cse-demo-org" status="READY" storageLimitMB="301762" storageUsedMB="92160" href="https://director.vcd.zpod.io/api/vdc/963e5e3a-140f-488d-9d80-d77d11adcfdd" cpuOverheadMhz="0" pvdcHardwareVersion="14" taskStatusName="vdcUpdateStorageProfiles" task="https://director.vcd.zpod.io/api/task/040ed7eb-7ebb-4c4c-bc33-9560be0ae122" allocationModel="1" networkPool="https://director.vcd.zpod.io/api/admin/extension/networkPool/63890711-ab00-4f8c-b092-b91e60c0c448" storageOverheadMB="0" memoryOverheadMB="283" taskStatus="success" taskDetails=" "/>
+    <OrgVdcRecord cpuAllocationMhz="15000" cpuLimitMhz="15000" cpuReservedMhz="7500" cpuUsedMhz="0" description="OvDC for CSE Enterprise workloads" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="61440" memoryLimitMB="61440" memoryReservedMB="30720" memoryUsedMB="0" name="ent-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="0" numberOfDeployedVApps="0" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="0" numberOfStorageProfiles="1" numberOfUnmanagedVApps="0" numberOfVAppTemplates="0" numberOfVApps="0" numberOfVMs="0" orgName="cse-demo-org" status="READY" storageLimitMB="0" storageUsedMB="0" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" cpuOverheadMhz="0" pvdcHardwareVersion="7" taskStatusName="metadataUpdate" task="https://director.vcd.zpod.io/api/task/df455521-a9bd-453d-84a8-79ade43f5960" allocationModel="2" storageOverheadMB="0" memoryOverheadMB="0" taskStatus="success" taskDetails=" "/>
+</QueryResultRecords>
+
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:49:03 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'decbea57-039f-4edd-a418-86ff3dd9297d', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '320'}
+Response body: [{"name": "photon-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.12", "k8s_provider": "native"}, {"name": "ubuntu-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.15", "k8s_provider": "native"}]
+Request uri (GET): https://director.vcd.zpod.io/api/org/
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:51:11 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'cbb40f7c-6f66-4f97-9053-41b554467835', 'Content-Type': 'application/vnd.vmware.vcloud.orglist+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '23', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '879'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OrgList xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+xml">
+    <Org href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+xml"/>
+</OrgList>
+
+Request uri (GET): https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:51:11 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '1ba6657d-fe07-4073-806e-43a98728d9f7', 'Content-Type': 'application/vnd.vmware.vcloud.org+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '25', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '4149'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="cse-demo-org" id="urn:vcloud:org:20a1f5bd-8fda-401c-b02e-2c42693ba494" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+xml"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+json"/>
+    <Description>Org for VCPP Demos</Description>
+    <FullName>Org for VCPP Demos</FullName>
+</Org>
+
+Request uri (GET): https://director.vcd.zpod.io/api/query?type=orgVdc
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:51:11 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '47b1232b-d57a-4eba-8ef7-71a4e7d42e78', 'Content-Type': 'application/vnd.vmware.vcloud.query.records+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '44', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3784'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryResultRecords xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="orgVdc" page="1" pageSize="25" total="2" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=records" type="application/vnd.vmware.vcloud.query.records+xml">
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+json"/>
+    <OrgVdcRecord cpuAllocationMhz="0" cpuLimitMhz="0" cpuReservedMhz="0" cpuUsedMhz="12000" description="OvDC to support CSE Standard Clusters" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="0" memoryLimitMB="0" memoryReservedMB="0" memoryUsedMB="12288" name="standard-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="2" numberOfDeployedVApps="2" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="6" numberOfStorageProfiles="2" numberOfUnmanagedVApps="2" numberOfVAppTemplates="0" numberOfVApps="2" numberOfVMs="6" orgName="cse-demo-org" status="READY" storageLimitMB="301762" storageUsedMB="92160" href="https://director.vcd.zpod.io/api/vdc/963e5e3a-140f-488d-9d80-d77d11adcfdd" cpuOverheadMhz="0" pvdcHardwareVersion="14" taskStatusName="vdcUpdateStorageProfiles" task="https://director.vcd.zpod.io/api/task/040ed7eb-7ebb-4c4c-bc33-9560be0ae122" allocationModel="1" networkPool="https://director.vcd.zpod.io/api/admin/extension/networkPool/63890711-ab00-4f8c-b092-b91e60c0c448" storageOverheadMB="0" memoryOverheadMB="283" taskStatus="success" taskDetails=" "/>
+    <OrgVdcRecord cpuAllocationMhz="15000" cpuLimitMhz="15000" cpuReservedMhz="7500" cpuUsedMhz="0" description="OvDC for CSE Enterprise workloads" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="61440" memoryLimitMB="61440" memoryReservedMB="30720" memoryUsedMB="0" name="ent-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="0" numberOfDeployedVApps="0" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="0" numberOfStorageProfiles="1" numberOfUnmanagedVApps="0" numberOfVAppTemplates="0" numberOfVApps="0" numberOfVMs="0" orgName="cse-demo-org" status="READY" storageLimitMB="0" storageUsedMB="0" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" cpuOverheadMhz="0" pvdcHardwareVersion="7" taskStatusName="metadataUpdate" task="https://director.vcd.zpod.io/api/task/df455521-a9bd-453d-84a8-79ade43f5960" allocationModel="2" storageOverheadMB="0" memoryOverheadMB="0" taskStatus="success" taskDetails=" "/>
+</QueryResultRecords>
+
+Request uri (GET): https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:51:11 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '4828d117-96a9-4a3f-8345-f796e42d9e5b', 'Content-Type': 'application/vnd.vmware.vcloud.vdc+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '68', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '6589'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Vdc xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" isLegacyType="false" status="1" name="ent-demo-ovdc" id="urn:vcloud:vdc:c4928d6f-ffd7-4f29-839b-3915fcc50fc2" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" type="application/vnd.vmware.vcloud.vdc+xml">
+    <Link rel="up" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml"/>
+    <Link rel="up" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/metadata" type="application/vnd.vmware.vcloud.metadata+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/metadata" type="application/vnd.vmware.vcloud.metadata+json"/>
+    <Link rel="fullEdgeGateway" href="https://director.vcd.zpod.io/network/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/edges" type="application/xml"/>
+    <Link rel="edgeGateways" href="https://director.vcd.zpod.io/api/admin/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/edgeGateways" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="edgeGateways" href="https://director.vcd.zpod.io/api/admin/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/edgeGateways" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="orgVdcNetworks" href="https://director.vcd.zpod.io/api/admin/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/networks" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="orgVdcNetworks" href="https://director.vcd.zpod.io/api/admin/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/networks" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/controlAccess/" type="application/vnd.vmware.vcloud.controlAccess+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/controlAccess/" type="application/vnd.vmware.vcloud.controlAccess+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/computePolicies" type="application/vnd.vmware.vcloud.vdcComputePolicyReferences+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/computePolicies" type="application/vnd.vmware.vcloud.vdcComputePolicyReferences+json"/>
+    <Link rel="vdcCapabilities" href="https://director.vcd.zpod.io/cloudapi/1.0.0/vdcs/urn:vcloud:vdc:c4928d6f-ffd7-4f29-839b-3915fcc50fc2/capabilities" type="application/json"/>
+    <Link rel="down:firewallGroups" href="https://director.vcd.zpod.io/cloudapi/1.0.0/firewallGroups" type="application/json"/>
+    <Link rel="down:appPortProfiles" href="https://director.vcd.zpod.io/cloudapi/1.0.0/applicationPortProfiles" type="application/json"/>
+    <Link rel="add" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/vmAffinityRules/" type="application/vnd.vmware.vcloud.vmaffinityrule+xml"/>
+    <Link rel="add" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/vmAffinityRules/" type="application/vnd.vmware.vcloud.vmaffinityrule+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/vmAffinityRules/" type="application/vnd.vmware.vcloud.vmaffinityrules+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/vmAffinityRules/" type="application/vnd.vmware.vcloud.vmaffinityrules+json"/>
+    <Description>OvDC for CSE Enterprise workloads</Description>
+    <AllocationModel>AllocationPool</AllocationModel>
+    <ComputeCapacity>
+        <Cpu>
+            <Units>MHz</Units>
+            <Allocated>15000</Allocated>
+            <Limit>15000</Limit>
+            <Reserved>7500</Reserved>
+            <Used>0</Used>
+        </Cpu>
+        <Memory>
+            <Units>MB</Units>
+            <Allocated>61440</Allocated>
+            <Limit>61440</Limit>
+            <Reserved>30720</Reserved>
+            <Used>0</Used>
+        </Memory>
+    </ComputeCapacity>
+    <ResourceEntities>
+        <ResourceEntity href="https://director.vcd.zpod.io/api/vAppTemplate/vappTemplate-d2cea234-b93a-45f4-a7f3-ee4f515a332a" id="urn:vcloud:vapptemplate:d2cea234-b93a-45f4-a7f3-ee4f515a332a" name="ubuntu-16.04-server-cloudimg-amd64.ova" type="application/vnd.vmware.vcloud.vAppTemplate+xml"/>
+    </ResourceEntities>
+    <AvailableNetworks/>
+    <Capabilities>
+        <SupportedHardwareVersions>
+            <SupportedHardwareVersion href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/hwv/vmx-04" name="vmx-04" type="application/vnd.vmware.vcloud.virtualHardwareVersion+xml">vmx-04</SupportedHardwareVersion>
+            <SupportedHardwareVersion default="true" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2/hwv/vmx-07" name="vmx-07" type="application/vnd.vmware.vcloud.virtualHardwareVersion+xml">vmx-07</SupportedHardwareVersion>
+        </SupportedHardwareVersions>
+    </Capabilities>
+    <NicQuota>0</NicQuota>
+    <NetworkQuota>1000</NetworkQuota>
+    <UsedNetworkCount>0</UsedNetworkCount>
+    <VmQuota>100</VmQuota>
+    <IsEnabled>true</IsEnabled>
+    <VdcStorageProfiles>
+        <VdcStorageProfile href="https://director.vcd.zpod.io/api/vdcStorageProfile/04108eae-d3e5-4a56-b2fd-d7546a5d5b66" id="urn:vcloud:vdcstorageProfile:04108eae-d3e5-4a56-b2fd-d7546a5d5b66" name="*" type="application/vnd.vmware.vcloud.vdcStorageProfile+xml"/>
+    </VdcStorageProfiles>
+    <DefaultComputePolicy href="https://director.vcd.zpod.io/cloudapi/1.0.0/vdcComputePolicies/urn:vcloud:vdcComputePolicy:ed04938b-dc90-41f4-8de6-a04c88df714f" id="urn:vcloud:vdcComputePolicy:ed04938b-dc90-41f4-8de6-a04c88df714f" name="System Default" type="application/json"/>
+    <VCpuInMhz2>1000</VCpuInMhz2>
+</Vdc>
+
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:51:15 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '2490eebd-e3cb-451b-ac3a-9a45dff8065e', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '320'}
+Response body: [{"name": "photon-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.12", "k8s_provider": "native"}, {"name": "ubuntu-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.15", "k8s_provider": "native"}]
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:12 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '0473215b-f245-4142-87b4-725e997da7ba', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '4', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 401
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:15 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '93434b1a-566e-4816-8368-c9fbc4d4bf40', 'Content-Length': '0'}
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:18 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'e16d4f62-74a3-4ae3-aef1-f6bae314c8a6', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '3', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 401
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:20 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '73d9bcf7-4a2b-4fd1-b901-762fbbdd3603', 'Content-Length': '0'}
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:47 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '0204606a-babf-4bd0-bad0-4ae923c3307d', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '7', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:49 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '4b5194bf-92cc-4240-ad12-b8df2f1c2d8c', 'X-VMWARE-VCLOUD-ACCESS-TOKEN': '[REDACTED]', 'X-VMWARE-VCLOUD-TOKEN-TYPE': 'Bearer', 'x-vcloud-authorization': '[REDACTED]', 'Content-Type': 'application/vnd.vmware.vcloud.session+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '94', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3352'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Session xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" locationId="20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a" org="cse-demo-org" roles="pks-cluster-user" user="cse-ent-user" userId="urn:vcloud:user:6603d2fa-6255-41ff-82f8-5bad49968e9e" href="https://director.vcd.zpod.io/api/session" type="application/vnd.vmware.vcloud.session+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+json"/>
+    <Link rel="remove" href="https://director.vcd.zpod.io/api/session"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+json"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+xml"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+json"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+xml"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+json"/>
+    <Link rel="nsx" href="https://director.vcd.zpod.io/network" type="application/xml"/>
+    <Link rel="openapi" href="https://director.vcd.zpod.io/cloudapi" type="application/json"/>
+    <AuthorizedLocations>
+        <Location>
+            <LocationId>20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a</LocationId>
+            <SiteName>director.vcd.zpod.io</SiteName>
+            <OrgName>cse-demo-org</OrgName>
+            <RestApiEndpoint>https://director.vcd.zpod.io</RestApiEndpoint>
+            <UIEndpoint>https://director.vcd.zpod.io</UIEndpoint>
+            <AuthContext>cse-demo-org</AuthContext>
+            <ApiVersion>33.0</ApiVersion>
+        </Location>
+    </AuthorizedLocations>
+</Session>
+
+Request uri (GET): https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:49 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '2044678d-18d8-4e08-aed1-85b90f62e5f3', 'Content-Type': 'application/vnd.vmware.vcloud.org+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '28', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '4149'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="cse-demo-org" id="urn:vcloud:org:20a1f5bd-8fda-401c-b02e-2c42693ba494" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+xml"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+json"/>
+    <Description>Org for VCPP Demos</Description>
+    <FullName>Org for VCPP Demos</FullName>
+</Org>
+
+Request uri (GET): https://director.vcd.zpod.io/api/query?type=orgVdc
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:49 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '63586f66-ac5f-46a3-88a0-61b3dc7a2b3c', 'Content-Type': 'application/vnd.vmware.vcloud.query.records+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '49', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3784'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryResultRecords xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="orgVdc" page="1" pageSize="25" total="2" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=records" type="application/vnd.vmware.vcloud.query.records+xml">
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+json"/>
+    <OrgVdcRecord cpuAllocationMhz="0" cpuLimitMhz="0" cpuReservedMhz="0" cpuUsedMhz="12000" description="OvDC to support CSE Standard Clusters" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="0" memoryLimitMB="0" memoryReservedMB="0" memoryUsedMB="12288" name="standard-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="2" numberOfDeployedVApps="2" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="6" numberOfStorageProfiles="2" numberOfUnmanagedVApps="2" numberOfVAppTemplates="0" numberOfVApps="2" numberOfVMs="6" orgName="cse-demo-org" status="READY" storageLimitMB="301762" storageUsedMB="92160" href="https://director.vcd.zpod.io/api/vdc/963e5e3a-140f-488d-9d80-d77d11adcfdd" cpuOverheadMhz="0" pvdcHardwareVersion="14" taskStatusName="vdcUpdateStorageProfiles" task="https://director.vcd.zpod.io/api/task/040ed7eb-7ebb-4c4c-bc33-9560be0ae122" allocationModel="1" networkPool="https://director.vcd.zpod.io/api/admin/extension/networkPool/63890711-ab00-4f8c-b092-b91e60c0c448" storageOverheadMB="0" memoryOverheadMB="283" taskStatus="success" taskDetails=" "/>
+    <OrgVdcRecord cpuAllocationMhz="15000" cpuLimitMhz="15000" cpuReservedMhz="7500" cpuUsedMhz="0" description="OvDC for CSE Enterprise workloads" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="61440" memoryLimitMB="61440" memoryReservedMB="30720" memoryUsedMB="0" name="ent-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="0" numberOfDeployedVApps="0" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="0" numberOfStorageProfiles="1" numberOfUnmanagedVApps="0" numberOfVAppTemplates="0" numberOfVApps="0" numberOfVMs="0" orgName="cse-demo-org" status="READY" storageLimitMB="0" storageUsedMB="0" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" cpuOverheadMhz="0" pvdcHardwareVersion="7" taskStatusName="metadataUpdate" task="https://director.vcd.zpod.io/api/task/df455521-a9bd-453d-84a8-79ade43f5960" allocationModel="2" storageOverheadMB="0" memoryOverheadMB="0" taskStatus="success" taskDetails=" "/>
+</QueryResultRecords>
+
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:52:53 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '5a47a75f-121e-4e63-8e97-9d277c590257', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '476'}
+Response body: [{"name": "photon-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.12", "k8s_provider": "native"}, {"name": "ubuntu-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.15", "k8s_provider": "native"}, {"name": "demo-cluster", "vdc": "ent-demo-ovdc", "status": "create succeeded", "org_name": "cse-demo-org", "k8s_version": null, "k8s_provider": "ent-pks"}]
+Negotiating API version
+Request uri (GET): https://director.vcd.zpod.io/api/versions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': ';version=33.0', 'Connection': 'keep-alive'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:53:38 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '11de0779-dc8d-4043-962c-169084ed96b9', 'Content-Type': 'text/xml', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '5', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '2945'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SupportedVersions xmlns="http://www.vmware.com/vcloud/versions" xmlns:ns2="http://www.vmware.com/vcloud/v1.5" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1">
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>27.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="true">
+        <Version>28.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>29.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>30.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>31.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>32.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <VersionInfo deprecated="false">
+        <Version>33.0</Version>
+        <LoginUrl>https://director.vcd.zpod.io/api/sessions</LoginUrl>
+    </VersionInfo>
+    <SchemaRoot>https://director.vcd.zpod.io/api/v1.5/schema/</SchemaRoot>
+</SupportedVersions>
+
+API versions supported: ['27.0', '27.0', '28.0', '28.0', '29.0', '29.0', '30.0', '30.0', '31.0', '31.0', '32.0', '32.0', '33.0', '33.0']
+API version negotiated to: 33.0
+API version in use: 33.0
+Request uri (POST): https://director.vcd.zpod.io/api/sessions
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'Content-Length': '0', 'Authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:53:41 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '4052f4bf-178f-48d0-95ef-d9397f0eba84', 'X-VMWARE-VCLOUD-ACCESS-TOKEN': '[REDACTED]', 'X-VMWARE-VCLOUD-TOKEN-TYPE': 'Bearer', 'x-vcloud-authorization': '[REDACTED]', 'Content-Type': 'application/vnd.vmware.vcloud.session+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '171', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3346'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Session xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" locationId="20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a" org="cse-demo-org" roles="pks-cluster-user" user="jomann" userId="urn:vcloud:user:010ce898-65aa-45ae-837c-eb2c59e7bcf8" href="https://director.vcd.zpod.io/api/session" type="application/vnd.vmware.vcloud.session+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/" type="application/vnd.vmware.vcloud.orgList+json"/>
+    <Link rel="remove" href="https://director.vcd.zpod.io/api/session"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/admin/" type="application/vnd.vmware.admin.vcloud+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" name="cse-demo-org" type="application/vnd.vmware.vcloud.org+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query" type="application/vnd.vmware.vcloud.query.queryList+json"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+xml"/>
+    <Link rel="entityResolver" href="https://director.vcd.zpod.io/api/entity/" type="application/vnd.vmware.vcloud.entity+json"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+xml"/>
+    <Link rel="down:extensibility" href="https://director.vcd.zpod.io/api/extensibility" type="application/vnd.vmware.vcloud.apiextensibility+json"/>
+    <Link rel="nsx" href="https://director.vcd.zpod.io/network" type="application/xml"/>
+    <Link rel="openapi" href="https://director.vcd.zpod.io/cloudapi" type="application/json"/>
+    <AuthorizedLocations>
+        <Location>
+            <LocationId>20a1f5bd-8fda-401c-b02e-2c42693ba494@2cd29e02-3128-47b0-9d54-cd89ebacd89a</LocationId>
+            <SiteName>director.vcd.zpod.io</SiteName>
+            <OrgName>cse-demo-org</OrgName>
+            <RestApiEndpoint>https://director.vcd.zpod.io</RestApiEndpoint>
+            <UIEndpoint>https://director.vcd.zpod.io</UIEndpoint>
+            <AuthContext>cse-demo-org</AuthContext>
+            <ApiVersion>33.0</ApiVersion>
+        </Location>
+    </AuthorizedLocations>
+</Session>
+
+Request uri (GET): https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:53:41 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '97441285-837d-4b9a-8be8-883340868766', 'Content-Type': 'application/vnd.vmware.vcloud.org+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '32', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '4149'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Org xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="cse-demo-org" id="urn:vcloud:org:20a1f5bd-8fda-401c-b02e-2c42693ba494" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.org+xml">
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=orgVdc" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/tasksList/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.vcloud.tasksList+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/query?type=catalog" type="application/vnd.vmware.vcloud.query.records+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/supportedSystemsInfo/" type="application/vnd.vmware.vcloud.supportedSystemsInfo+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/metadata" type="application/vnd.vmware.vcloud.metadata+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/hybrid" type="application/vnd.vmware.vcloud.hybridOrg+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/admin/org/20a1f5bd-8fda-401c-b02e-2c42693ba494" type="application/vnd.vmware.admin.organization+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/c78f6e1a-585f-469a-818b-f01278f71363" name="outside" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+xml"/>
+    <Link rel="down" href="https://director.vcd.zpod.io/api/network/3e31c7be-1490-45e8-9567-b759382fbc9d" name="ovdc-network-standard-k8" type="application/vnd.vmware.vcloud.orgNetwork+json"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+xml"/>
+    <Link rel="rollup" href="https://director.vcd.zpod.io/api/org/20a1f5bd-8fda-401c-b02e-2c42693ba494/vdcRollup" type="application/vnd.vmware.vcloud.orgVdcRollup+json"/>
+    <Description>Org for VCPP Demos</Description>
+    <FullName>Org for VCPP Demos</FullName>
+</Org>
+
+Request uri (GET): https://director.vcd.zpod.io/api/query?type=orgVdc
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/*+xml;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:53:41 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': 'a472bb2d-81ea-491d-a372-dfd0e765cef4', 'Content-Type': 'application/vnd.vmware.vcloud.query.records+xml;version=33.0', 'X-VMWARE-VCLOUD-REQUEST-EXECUTION-TIME': '38', 'Cache-Control': 'no-store, must-revalidate', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '3784'}
+Response body: <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<QueryResultRecords xmlns="http://www.vmware.com/vcloud/v1.5" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:common="http://schemas.dmtf.org/wbem/wscim/1/common" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovfenv="http://schemas.dmtf.org/ovf/environment/1" xmlns:vmext="http://www.vmware.com/vcloud/extension/v1.5" xmlns:ns9="http://www.vmware.com/vcloud/versions" name="orgVdc" page="1" pageSize="25" total="2" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=records" type="application/vnd.vmware.vcloud.query.records+xml">
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=references" type="application/vnd.vmware.vcloud.query.references+json"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+xml"/>
+    <Link rel="alternate" href="https://director.vcd.zpod.io/api/query?type=orgVdc&amp;page=1&amp;pageSize=25&amp;format=idrecords" type="application/vnd.vmware.vcloud.query.idrecords+json"/>
+    <OrgVdcRecord cpuAllocationMhz="0" cpuLimitMhz="0" cpuReservedMhz="0" cpuUsedMhz="12000" description="OvDC to support CSE Standard Clusters" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="0" memoryLimitMB="0" memoryReservedMB="0" memoryUsedMB="12288" name="standard-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="2" numberOfDeployedVApps="2" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="6" numberOfStorageProfiles="2" numberOfUnmanagedVApps="2" numberOfVAppTemplates="0" numberOfVApps="2" numberOfVMs="6" orgName="cse-demo-org" status="READY" storageLimitMB="301762" storageUsedMB="92160" href="https://director.vcd.zpod.io/api/vdc/963e5e3a-140f-488d-9d80-d77d11adcfdd" cpuOverheadMhz="0" pvdcHardwareVersion="14" taskStatusName="vdcUpdateStorageProfiles" task="https://director.vcd.zpod.io/api/task/040ed7eb-7ebb-4c4c-bc33-9560be0ae122" allocationModel="1" networkPool="https://director.vcd.zpod.io/api/admin/extension/networkPool/63890711-ab00-4f8c-b092-b91e60c0c448" storageOverheadMB="0" memoryOverheadMB="283" taskStatus="success" taskDetails=" "/>
+    <OrgVdcRecord cpuAllocationMhz="15000" cpuLimitMhz="15000" cpuReservedMhz="7500" cpuUsedMhz="0" description="OvDC for CSE Enterprise workloads" isBusy="false" isEnabled="true" isFastProvisioned="true" isThinProvisioned="true" memoryAllocationMB="61440" memoryLimitMB="61440" memoryReservedMB="30720" memoryUsedMB="0" name="ent-demo-ovdc" numberOfDatastores="0" numberOfDeployedUnmanagedVApps="0" numberOfDeployedVApps="0" numberOfDisks="0" numberOfMedia="0" numberOfRunningVMs="0" numberOfStorageProfiles="1" numberOfUnmanagedVApps="0" numberOfVAppTemplates="0" numberOfVApps="0" numberOfVMs="0" orgName="cse-demo-org" status="READY" storageLimitMB="0" storageUsedMB="0" href="https://director.vcd.zpod.io/api/vdc/c4928d6f-ffd7-4f29-839b-3915fcc50fc2" cpuOverheadMhz="0" pvdcHardwareVersion="7" taskStatusName="metadataUpdate" task="https://director.vcd.zpod.io/api/task/df455521-a9bd-453d-84a8-79ade43f5960" allocationModel="2" storageOverheadMB="0" memoryOverheadMB="0" taskStatus="success" taskDetails=" "/>
+</QueryResultRecords>
+
+Request uri (GET): https://director.vcd.zpod.io/api/cse/clusters?org_name=cse-demo-org
+Request headers: {'User-Agent': 'python-requests/2.22.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': 'application/json;version=33.0', 'Connection': 'keep-alive', 'x-vcloud-authorization': '[REDACTED]'}
+Response status code: 200
+Response headers: {'Date': 'Mon, 14 Oct 2019 19:53:43 GMT', 'X-VMWARE-VCLOUD-REQUEST-ID': '676a6dbc-ea00-4650-99e4-b2c4c0bf23d1', 'Content-Type': 'application/json', 'Vary': 'Accept-Encoding, User-Agent', 'Content-Length': '320'}
+Response body: [{"name": "photon-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.12", "k8s_provider": "native"}, {"name": "ubuntu-cluster-1", "vdc": "standard-demo-ovdc", "status": "POWERED_ON", "org_name": "cse-demo-org", "k8s_version": "1.15", "k8s_provider": "native"}]

@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/vcd_cli/login.py", line 161, in login
+    client.set_credentials(BasicLoginCredentials(user, org, password))
+  File "/usr/local/lib/python3.7/site-packages/pyvcloud/vcd/client.py", line 967, in set_credentials
+    raise VcdException('Login failed.')
+pyvcloud.vcd.exceptions.VcdException: Login failed.
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/vcd_cli/login.py", line 161, in login
+    client.set_credentials(BasicLoginCredentials(user, org, password))
+  File "/usr/local/lib/python3.7/site-packages/pyvcloud/vcd/client.py", line 967, in set_credentials
+    raise VcdException('Login failed.')
+pyvcloud.vcd.exceptions.VcdException: Login failed.
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/vcd_cli/login.py", line 161, in login
+    client.set_credentials(BasicLoginCredentials(user, org, password))
+  File "/usr/local/lib/python3.7/site-packages/pyvcloud/vcd/client.py", line 967, in set_credentials
+    raise VcdException('Login failed.')
+pyvcloud.vcd.exceptions.VcdException: Login failed.
+

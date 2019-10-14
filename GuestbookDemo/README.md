@@ -6,9 +6,10 @@ Before starting the demo, access the `cse-client` server from your Horizon insta
 
 <img src="Images/putty-ss.png">
 
-Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+Also, let's ensure we are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location. Use the `cse-ent-user` with password `VMware1!` to log in to the `vcd-cli`:
+
 ~~~
-$ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iw
 ~~~
 ~~~
 $ vcd cse cluster config demo-cluster > ~/.kube/config

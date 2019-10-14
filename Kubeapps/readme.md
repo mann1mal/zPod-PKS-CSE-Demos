@@ -19,9 +19,9 @@ Before starting the demo, access the `cse-client` server with the `cse` user (`c
 
 <img src="Images/putty-ss.png">
 
-Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use your vmc.lab AD credentials to log in to the `vcd-cli`:
+Ensure you are accessing the `demo-cluster` via kubectl by using `cse` to pull down the cluster config file and store it in the default location, if you haven't done so in a previous lab. Use the `cse-ent-user` with password `VMware1!` AD to log in to the `vcd-cli`:
 ~~~
-$ vcd login director.vcd.zpod.io cse-demo-org <username> -iw
+$ vcd login director.vcd.zpod.io cse-demo-org cse-ent-user -iw
 ~~~
 ~~~
 $ vcd cse cluster config demo-cluster > ~/.kube/config
