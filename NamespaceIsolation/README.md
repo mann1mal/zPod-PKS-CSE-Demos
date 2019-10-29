@@ -58,7 +58,7 @@ newspace-web   1/1     Running   0          2m22s   172.16.23.2
 ~~~
 Note the `appspace-web` pod has an IP of `172.16.19.2` while the `newspace-web` pod has an IP of `172.16.23.2`. 
 
-**1.5** Deploy an apline linux pod in the `appspace` namespace and try to query the nginx webpage in the `newspace` namespace from the shell of the apline pod:
+**1.5** Deploy an alpine linux pod in the `appspace` namespace and try to query the nginx webpage in the `newspace` namespace from the shell of the apline pod:
 ~~~
 $ kubectl run test --namespace=appspace --rm -i -t --image=alpine -- sh
 
