@@ -173,10 +173,10 @@ This DFW rule was created by the NCP when we created our `newspace-deny-all` Net
 ~~~
 $ kubectl run test --namespace=appspace --rm -i -t --image=alpine -- sh
 
-/ # wget -qO- --timeout=2 http://172.16.23.2
+/ # wget -O- --timeout=2 http://172.16.23.2
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://172.16.19.2
+/ # wget -O- --timeout=2 http://172.16.19.2
 <!DOCTYPE html>
 <html>
 <head>
