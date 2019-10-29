@@ -62,7 +62,7 @@ Note the `appspace-web` pod has an IP of `172.16.19.2` while the `newspace-web` 
 ~~~
 $ kubectl run test --namespace=appspace --rm -i -t --image=alpine -- sh
 
-/ # wget -qO- --timeout=2 http://172.16.23.2
+/ # wget -O- --timeout=2 http://172.16.23.2
 
 <!DOCTYPE html>
 <html>
