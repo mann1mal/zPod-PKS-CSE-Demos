@@ -47,12 +47,12 @@ $ kubectl run newspace-web --restart=Never --namespace newspace --image=nginx --
 
 Let's get the name and IP address of each pod:
 ~~~
-$ kubectl get pods -n appspace-web -o wide
+$ kubectl get pods -n appspace -o wide
 NAME                            READY   STATUS    RESTARTS   AGE     IP      
 appspace-web   1/1     Running   0          2m58s   172.16.19.2
 ~~~
 ~~~
-$ kubectl get pods newspace-web -n newspace -o wide
+$ kubectl get pods -n newspace -o wide
 NAME                            READY   STATUS    RESTARTS   AGE     IP            
 newspace-web   1/1     Running   0          2m22s   172.16.23.2   
 ~~~
