@@ -175,7 +175,9 @@ $ kubectl run test --namespace=appspace --rm -i -t --image=alpine -- sh
 
 / # wget -O- --timeout=2 http://172.16.23.2
 wget: download timed out
-
+~~~
+So traffic between the two namespaces is blocked, as expected. Let's try to access the webpage being served out from the pod in the same namespace:
+~~~
 / # wget -O- --timeout=2 http://172.16.19.2
 <!DOCTYPE html>
 <html>
