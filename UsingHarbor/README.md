@@ -61,21 +61,33 @@ REPOSITORY                             TAG                 IMAGE ID            C
 nginxdemos/hello                       latest              aedf47d433f1        18 months ago       16.8MB
 harbor.pks.zpod.io/public-demo/hello   v1                  aedf47d433f1        18 months ago       16.8MB
 ~~~
-**1.6** Push the image to our `public-demo` project
+**1.6** Before we can upload the image to the Harbor repository, we need to login to the repo using the docker daemon. Log in to the Harbor repo with the command below (username: `admin`, password: `VMware1!`)
+~~~
+$ docker login harbor.pks.zpod.io -u admin
+Password: 
+
+WARNING! Your password will be stored unencrypted in /home/cse/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+~~~
+
+**1.7** Push the image to our `public-demo` project
 ~~~
 docker push harbor.pks.zpod.io/public-demo/hello:v1
 ~~~
-**1.7** Navigate back to the web UI and click on the `public-demo` link and verify the image has been uploaded and is visible in the `Repositories` tab:
+**1.8** Navigate back to the web UI and click on the `public-demo` link and verify the image has been uploaded and is visible in the `Repositories` tab:
 
 <img src="Images/public-image.png">
 
 The image has been uploaded to our project! We are ready to deploy an application in our Kubernetes cluster using the uploaded image.
 
-**1.8** Navigate to the `~/zPod-PKS-CSE-Demos/UsingHarbor` directory:
+**1.9** Navigate to the `~/zPod-PKS-CSE-Demos/UsingHarbor` directory:
 ~~~
 $ cd ~/zPod-PKS-CSE-Demos/UsingHarbor
 ~~~
-**1.9** Examine the `nginx-hello.yaml` file, which contains configuration files for our deployment, including an ingress resource to allow us to access the application from outside the cluster. Note the image name reference in the pod spec:
+**1.10** Examine the `nginx-hello.yaml` file, which contains configuration files for our deployment, including an ingress resource to allow us to access the application from outside the cluster. Note the image name reference in the pod spec:
 ~~~
 ---output omitted---
     spec:
@@ -84,17 +96,17 @@ $ cd ~/zPod-PKS-CSE-Demos/UsingHarbor
         name: hello
 ---output omitted---
 ~~~
-**1.10** Run the following command to create a deployment of the app in our Kubernetes cluster:
+**1.11** Run the following command to create a deployment of the app in our Kubernetes cluster:
 ~~~
 $ kubectl create -f nginx-hello.yaml
 ~~~
-**1.11** Monitor the deployment and wait for the pod to become ready:
+**1.12** Monitor the deployment and wait for the pod to become ready:
 ~~~
 $ k get pods -w
 NAME                         READY   STATUS    RESTARTS   AGE
 hello-app-6d78887559-27mjp   1/1     Running   0          9s
 ~~~
-**1.12** Examine the deployment to ensure we are using the image we uploaded to our Harbor project:
+**1.13** Examine the deployment to ensure we are using the image we uploaded to our Harbor project:
 ~~~
 $ kubectl describe deploy hello-app
 ---output ommitted---
@@ -110,7 +122,7 @@ Pod Template:
   Volumes:        <none>
 ---output omitted---
 ~~~
-**1.13** Let's query our ingress resource to access the hostname for our application and access the application via a brower:
+**1.14** Let's query our ingress resource to access the hostname for our application and access the application via a brower:
 ~~~
 $ kubectl get ingress
 NAME            HOSTS                    ADDRESS                     PORTS   AGE
@@ -156,7 +168,18 @@ Tag the image to prepare it to be pushed to the private project:
 ~~~
 $ docker tag nginxdemos/hello harbor.pks.zpod.io/private-demo/hello:v1
 ~~~
-**2.6** Attempt to push the image to the project:
+**2.6** First, let's log in as a user that does NOT have explicit access to the private repo we just created. We can use the `normal-user` user with password `VMware1!`:
+~~~
+docker login harbor.pks.zpod.io -u normal-user
+Password: 
+
+WARNING! Your password will be stored unencrypted in /home/joe/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+~~~
+**2.7** Attempt to push the image to the project:
 ~~~
 $ docker push harbor.pks.zpod.io/private-demo/hello:v1
 The push refers to repository [harbor.pks.zpod.io/private-demo/hello]
@@ -169,15 +192,14 @@ f93c2b24cb18: Preparing
 d39d92664027: Waiting 
 denied: requested access to the resource is denied   <<--- Access Denied
 ~~~
-**2.7** Note that we are not able to push the image as we get an `Access Denied` message. This is expected behavior as our private project requires authentication. Authenticate to the Harbor instance with the `docker login` command:
+**2.8** Note that we are not able to push the image as we get an `Access Denied` message. This is expected behavior as our `normal-user` user has not been given access to the private project. Now, let's authenticate to the Harbor instance with the `private-demo-dev1` user we created earlier:
 ~~~
-$ docker login harbor.pks.zpod.io
-Username: private-demo-dev1
+$ docker login harbor.pks.zpod.io -u private-demo-dev1
 Password: 
 
 Login Succeeded
 ~~~
-**2.8** Now let's try to push the image again:
+**2.9** Now let's try to push the image again:
 ~~~
 $ docker push harbor.pks.zpod.io/private-demo/hello:v1
 The push refers to repository [harbor.pks.zpod.io/private-demo/hello]
@@ -190,19 +212,19 @@ f93c2b24cb18: Layer already exists
 d39d92664027: Layer already exists 
 v1: digest: sha256:f5a0b2a5fe9af497c4a7c186ef6412bb91ff19d39d6ac24a4997eaed2b0bb334 size: 1775
 ~~~
-**2.9** This time it succeeded!! Let's have a look at the Harbor web UI and verify our image was pushed to the project. Navigate to the Harbor homepage and select the `private-demo` link. Verify you see the `private-demo/hello` image. Select the link and have a look  the `Vulnerabilites` results:
+**2.10** This time it succeeded!! Let's have a look at the Harbor web UI and verify our image was pushed to the project. Navigate to the Harbor homepage and select the `private-demo` link. Verify you see the `private-demo/hello` image. Select the link and have a look  the `Vulnerabilites` results:
 
 <img src="Images/vulnerability-scan.png">
 
 Note there are a couple of `High` and `Medium` level vulnerabilties present in this image, which was automatically scanned when we pushed it to the project as we enabled that functionality when we created the project.
 
-**2.10** Now that we have our image available in our private project, let's deploy an application using said image.
+**2.11** Now that we have our image available in our private project, let's deploy an application using said image.
 
 Head back over to the `cse-client` putty session and navigate to the `~/zPod-PKS-CSE-Demos/UsingHarbor` directory:
 ~~~
 $ cd ~/zPod-PKS-CSE-Demos/UsingHarbor
 ~~~
-**2.11** Examine the `private-nginx-hello.yaml` file, which contains configuration files for our deployment, including an ingress resource to allow us to access the application from outside the cluster. Note the image name reference in the pod spec, which should point to the image in our private project:
+**2.12** Examine the `private-nginx-hello.yaml` file, which contains configuration files for our deployment, including an ingress resource to allow us to access the application from outside the cluster. Note the image name reference in the pod spec, which should point to the image in our private project:
 ~~~
 ---output omitted---
     spec:
@@ -211,17 +233,17 @@ $ cd ~/zPod-PKS-CSE-Demos/UsingHarbor
         name: hello
 ---output omitted---
 ~~~
-**2.12** Create the deployment:
+**2.13** Create the deployment:
 ~~~
 $ kubectl create -f private-nginx-hello.yaml
 ~~~
-**2.13** Monitor the pods for failures:
+**2.14** Monitor the pods for failures:
 ~~~
 $ kubectl get pods -w
 NAME                                 READY   STATUS             RESTARTS   AGE
 private-hello-app-7844dc7479-bl7jn   0/1     ImagePullBackOff   0          22s
 ~~~
-**2.14** It appears as if the Kubernetes API can not pull the image referenced in the deployment configuration file. Let's examine the pod to find out why (please use the pod name from the previous command as they will be different per deployment). Look for clues in the `Events` section at the end of the output:
+**2.15** It appears as if the Kubernetes API can not pull the image referenced in the deployment configuration file. Let's examine the pod to find out why (please use the pod name from the previous command as they will be different per deployment). Look for clues in the `Events` section at the end of the output:
 ~~~
 $ kubectl describe po private-hello-app-7844dc7479-bl7jn
 ---output omitted---
@@ -230,20 +252,20 @@ rpc error: code = Unknown desc = Error response from daemon: unknown: The severi
 ~~~
 Our image vulnerability policy is in effect. Harbor prevented us from pulling the container down to our Kubernetes cluster because it had mulitple vulnerabilites of `Medium` and `High` level which is above the threshold we set for our private project.
 
-**2.15** Navigate back to the Harbor web UI and disable the `Prevent vulnerable images from running` option to proceed with demo. After making the change, delete the failed deployment and try to deploy the app again:
+**2.16** Navigate back to the Harbor web UI and disable the `Prevent vulnerable images from running` option to proceed with demo. After making the change, delete the failed deployment and try to deploy the app again:
 ~~~
 $ kubectl delete -f private-nginx-hello.yaml 
 ~~~
 ~~~
 $ kubectl create -f private-nginx-hello.yaml 
 ~~~
-**2.16** Monitor the pods for failure
+**2.17** Monitor the pods for failure
 ~~~
 $ kubectl get po
 NAME                                 READY   STATUS         RESTARTS   AGE
 private-hello-app-7844dc7479-ljrrc   0/1     ErrImagePull   0          34s
 ~~~
-**2.17** Kubernetes is still unable to pull the image from our Harbor registry. Let's examine the pod to figure out why. Look for clues in the `Events` section at the end of the output:
+**2.18** Kubernetes is still unable to pull the image from our Harbor registry. Let's examine the pod to figure out why. Look for clues in the `Events` section at the end of the output:
 ~~~
 $ kubectl describe po private-hello-app-7844dc7479-ljrrc
 ---output omitted---
@@ -252,7 +274,7 @@ Failed to pull image "harbor.pks.zpod.io/private-demo/hello:v1": rpc error: code
 ~~~
 It looks like the docker daemon running the Kubernetes worker node is not able to pull the image as it can not authenticate to our private project. In order to allow the daemon to authenticate with the project, we need to create a Kubernetes secret. See the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) for more details on using secrets to access private image registries. 
 
-**2.18** When we logged in to the repo on the `cse-client`, docker automatically created an authentication file at `/home/cse/.docker/config.json` which we can use to create a secret. Run the following command to create the `private-demo-secret`:
+**2.19** When we logged in to the repo on the `cse-client`, docker automatically created an authentication file at `/home/cse/.docker/config.json` which we can use to create a secret. Run the following command to create the `private-demo-secret`:
 ~~~
 $ kubectl create secret generic private-demo-secret \
 > --from-file=.dockerconfigjson=/home/joe/.docker/config.json \
@@ -260,7 +282,7 @@ $ kubectl create secret generic private-demo-secret \
 ~~~
 Now that we've created the secret, we need to add a reference to said secret to our deployment file. This will allow the docker daemon running on the Kubernetes cluster nodes to authenticate against Harbor to gain access to pull the image from the private project.
 
-**2.19** Use `vi` (or `nano`, not trying to start a fight here...) to edit the `~/UsingHarbor/private-nginx-hello.yaml` file and add the `imagePullSecrets` stanza to the pod spec of the deployment config:
+**2.20** Use `vi` (or `nano`, not trying to start a fight here...) to edit the `~/UsingHarbor/private-nginx-hello.yaml` file and add the `imagePullSecrets` stanza to the pod spec of the deployment config:
 ~~~
 ---output omitted---
     spec:
@@ -273,19 +295,19 @@ Now that we've created the secret, we need to add a reference to said secret to 
       - name: private-demo-secret
 ---output omitted---
 ~~~
-**2.20** Now delete the failed deployment and try to deploy the application again
+**2.21** Now delete the failed deployment and try to deploy the application again
 ~~~
 $ kubectl delete -f private-nginx-hello.yaml 
 ~~~
 ~~~
 $ kubectl create -f private-nginx-hello.yaml 
 ~~~
-**2.21** Monitor the pod for failures (or success...)
+**2.22** Monitor the pod for failures (or success...)
 ~~~
 $ kubectl get pods -w
 private-hello-app-77564f9459-w2hz8   1/1     Running   0          8s
 ~~~
-**2.22** Success!! Let's check the ingress resource and make sure we can access the app via FQDN:
+**2.23** Success!! Let's check the ingress resource and make sure we can access the app via FQDN:
 ~~~
 $ kubectl get ingress
 NAME            HOSTS                            ADDRESS                     PORTS   AGE
