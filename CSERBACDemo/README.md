@@ -89,8 +89,9 @@ $ vcd role add-right "k8deploy" "{cse}:PKS DEPLOY RIGHT"
 ~~~
 $ vcd login director.vcd.zpod.io enterprise-dev-org dev1 -iwp VMware1!
 ~~~
+**Note:** There is currently a bug in CSE 2.5.1 where `--nodes` has to be defined for CSE Enterprise clusters, see command below
 ~~~
-$ vcd cse cluster create dev1-cluster
+$ vcd cse cluster create dev1-cluster --nodes=1
 property                     value
 ---------------------------  ------------------------
 kubernetes_master_host       dev1-cluster.pks.zpod.io
