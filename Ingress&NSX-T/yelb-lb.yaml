@@ -64,6 +64,9 @@ metadata:
   name: yelb-ui
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: yelb-ui
   template:
     metadata:
       labels:
@@ -82,6 +85,9 @@ metadata:
   name: redis-server
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: redis-server
   template:
     metadata:
       labels:
@@ -100,6 +106,9 @@ metadata:
   name: yelb-db
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: yelb-db
   template:
     metadata:
       labels:
@@ -118,6 +127,9 @@ metadata:
   name: yelb-appserver
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: yelb-appserver
   template:
     metadata:
       labels:
