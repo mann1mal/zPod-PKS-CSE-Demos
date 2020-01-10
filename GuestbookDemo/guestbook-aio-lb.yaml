@@ -8,7 +8,6 @@ metadata:
     role: master
 spec:
   ports:
-    # the port that this service should serve on
   - port: 6379
     targetPort: 6379
   selector:
@@ -16,27 +15,17 @@ spec:
     tier: backend
     role: master
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
   name: redis-master
-  # these labels can be applied automatically
-  # from the labels in the pod template if not set
-  # labels:
-  #   app: redis
-  #   role: master
-  #   tier: backend
 spec:
-  # this replicas value is default
-  # modify it according to your case
+  selector:
+    matchLabels:
+      app: redis
+      role: master
+      tier: backend
   replicas: 1
-  # selector can be applied automatically
-  # from the labels in the pod template if not set
-  # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     role: master
-  #     tier: backend
   template:
     metadata:
       labels:
@@ -46,20 +35,13 @@ spec:
     spec:
       containers:
       - name: master
-        image: k8s.gcr.io/redis:e2e
+        image: k8s.gcr.io/redis:e2e  # or just image: redis
         resources:
           requests:
             cpu: 100m
             memory: 100Mi
         ports:
         - containerPort: 6379
-        volumeMounts:
-        - name: redis-master-data
-          mountPath: /data
-      volumes: 
-      - name: redis-master-data
-        persistentVolumeClaim:
-          claimName: redis-master-claim
 ---
 apiVersion: v1
 kind: Service
@@ -71,34 +53,23 @@ metadata:
     role: slave
 spec:
   ports:
-    # the port that this service should serve on
   - port: 6379
   selector:
     app: redis
     tier: backend
     role: slave
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
   name: redis-slave
-  # these labels can be applied automatically
-  # from the labels in the pod template if not set
-  # labels:
-  #   app: redis
-  #   role: slave
-  #   tier: backend
 spec:
-  # this replicas value is default
-  # modify it according to your case
-  replicas: 1
-  # selector can be applied automatically
-  # from the labels in the pod template if not set
-  # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     role: slave
-  #     tier: backend
+  selector:
+    matchLabels:
+      app: redis
+      role: slave
+      tier: backend
+  replicas: 2
   template:
     metadata:
       labels:
@@ -119,17 +90,10 @@ spec:
           # If your cluster config does not include a dns service, then to
           # instead access an environment variable to find the master
           # service's host, comment out the 'value: dns' line above, and
-          # uncomment the line below.
+          # uncomment the line below:
           # value: env
         ports:
         - containerPort: 6379
-        volumeMounts:
-        - name: redis-slave-data
-          mountPath: /data
-      volumes: 
-      - name: redis-slave-data
-        persistentVolumeClaim:
-          claimName: redis-slave-claim
 ---
 apiVersion: v1
 kind: Service
@@ -141,33 +105,24 @@ metadata:
 spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
+  # type: LoadBalancer
   ports:
-    # the port that this service should serve on
   - port: 80
   selector:
     app: guestbook
     tier: frontend
   type: LoadBalancer
 ---
-apiVersion: apps/v1
+apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
   name: frontend
-  # these labels can be applied automatically
-  # from the labels in the pod template if not set
-  # labels:
-  #   app: guestbook
-  #   tier: frontend
 spec:
-  # this replicas value is default
-  # modify it according to your case
+  selector:
+    matchLabels:
+      app: guestbook
+      tier: frontend
   replicas: 3
-  # selector can be applied automatically
-  # from the labels in the pod template if not set
-  # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     tier: frontend
   template:
     metadata:
       labels:
@@ -187,7 +142,7 @@ spec:
           # If your cluster config does not include a dns service, then to
           # instead access environment variables to find service host
           # info, comment out the 'value: dns' line above, and uncomment the
-          # line below.
+          # line below:
           # value: env
         ports:
         - containerPort: 80
