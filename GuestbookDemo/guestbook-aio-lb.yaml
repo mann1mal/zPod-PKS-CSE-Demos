@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: harbor.pks.zpod.io/library/gb-redis:v1
+        image: k8s.gcr.io/redis:e2e
         resources:
           requests:
             cpu: 100m
@@ -108,7 +108,7 @@ spec:
     spec:
       containers:
       - name: slave
-        image: harbor.pks.zpod.io/library/gb-redisslave:v1
+        image: gcr.io/google_samples/gb-redisslave:v1
         resources:
           requests:
             cpu: 100m
@@ -176,7 +176,7 @@ spec:
     spec:
       containers:
       - name: php-redis
-        image: harbor.pks.zpod.io/library/gb-frontend:v2
+        image: gcr.io/google-samples/gb-frontend:v4
         resources:
           requests:
             cpu: 100m
